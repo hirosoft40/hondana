@@ -1,8 +1,6 @@
-export default (state = [], action) => {
-  switch (action.type) {
-    case "FETCH_POSTS":
-      return aciton.payload;
-    default:
-      return state;
-  }
-};
+import { combineReducers } from "redux";
+import postReducer from "./postReducer";
+
+export default combineReducers({
+  posts: postReducer
+});

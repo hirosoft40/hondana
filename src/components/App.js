@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import AppBar from "./AppBar";
 import SignIn from "./SignIn";
 import Tables from "./Tables";
-import Search from "./Search";
-import Grid from "@material-ui/core/Grid";
+import { Grid } from "@material-ui/core";
+import Results from "./Results";
 
 class App extends Component {
   render() {
@@ -12,7 +12,7 @@ class App extends Component {
         <AppBar />
         <Grid container spacint={24}>
           <Grid item xs={12} sm={6}>
-            <Search />
+            <Results />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Tables />
