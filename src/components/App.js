@@ -1,24 +1,53 @@
 import React, { Component } from "react";
-import AppBar from "./AppBar";
-import SignIn from "./SignIn";
-import Tables from "./Tables";
+import SearchResultsList from "./search/SearchResultsList";
+import googleBooks from "./apis/googleBooks";
+import Search from "./search/Search";
 import { Grid } from "@material-ui/core";
-import Results from "./Results";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      books: [],
+      isLoading: true,
+      error: false,
+      bookSelected: null
+    };
+  }
+
+  componentDidMount() {
+    this.onSearchStart("");
+  }
+
+  onSearchStart = async searchQuery => {
+    if (searchQuery.length > 0) {
+      const response = await googleBooks.get("/volumes", {
+        params: {
+          q: searchQuery
+        }
+      });
+      this.setState({
+        books: response.data.items
+      });
+    }
+    // console.log(this.state.books);
+  };
+
+  onBookSelect = book => {
+    this.setState({ bookSelected: book });
+  };
+
   render() {
     return (
-      <div>
-        <AppBar />
-        <Grid container spacint={24}>
-          <Grid item xs={12} sm={6}>
-            <Results />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <Tables />
-          </Grid>
-        </Grid>
-      </div>
+      <Grid container direction="column" justify="flex-start" alignItems="center">
+        <Search handleSubmit={this.onSearchStart} />
+
+        <SearchResultsList
+          books={this.state.books}
+          onBookSelect={this.onBookSelect}
+        />
+      </Grid>
     );
   }
 }

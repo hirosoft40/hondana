@@ -1,0 +1,21 @@
+.card {
+  display: flex;
+  height: 150px;
+  width: 100%;
+  margin:10px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+}
+.cardBody{
+    padding-left:5px;
+    margin:0;
+}
+h4{
+    margin:0;
+    padding-top:10px;
+}
+p{
+    font-size: 14px;
+}
