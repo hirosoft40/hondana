@@ -1,16 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Provider } from "react-redux";
 import App from "./components/App";
-import AppBar from "./components/nav/AppBar";
 import SearchMain from "./components/search/SearchMain";
 import Home from "./components/bookLog/Home";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { createStore, applyMiddleware } from "redux";
+import logReducer from "./components/reducers/logReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import thunk from "redux-thunk";
 
-// const store = createStore(
-//   combineReducers,
-//   composeWithDevTools(applyMiddleware(thunk))
-// );
+const store = createStore(
+  logReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 const theme = createMuiTheme({
   typography: {
@@ -30,17 +34,16 @@ const theme = createMuiTheme({
   }
 });
 ReactDOM.render(
-  // <Provider store={store}>
-  <MuiThemeProvider theme={theme}>
-    <AppBar />
-    <Router>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/search" component={SearchMain} />
-      </div>
-    </Router>
-    {/* <App /> */}
-  </MuiThemeProvider>,
-  // </Provider>,
+  <Provider store={store}>
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/search" component={SearchMain} />
+        </Switch>
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </Provider>,
   document.getElementById("root")
 );

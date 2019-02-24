@@ -5,6 +5,7 @@ import { IconButton } from "@material-ui/core";
 import { AddCircle, Search } from "@material-ui/icons";
 import { Menu, MenuItem } from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
+import addBook from "./AddBook";
 import { Link } from "react-router-dom";
 
 class Home extends Component {
@@ -51,6 +52,7 @@ class Home extends Component {
               </MenuItem>
             </Menu>
           </div>
+          <addBook />
         </Row>
       </Grid>
     );

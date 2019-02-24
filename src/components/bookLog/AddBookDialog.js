@@ -8,11 +8,12 @@ import "./AddBookDialog.css";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
 import LibraryAdd from "@material-ui/icons/LibraryAdd";
+import addBook from "./AddBook";
+import { connect } from "net";
 
 class AddBookDialog extends React.Component {
   state = {
     open: false,
-    maxWidth: "sm",
     today: "",
     newLog: {}
   };
@@ -37,6 +38,7 @@ class AddBookDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    addBook(this.state.newLog);
   };
 
   render() {
@@ -63,7 +65,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="title"
                 label="Title"
-                onChange={this.handleChange(title)}
+                onChange={this.handleChange("title")}
                 value={this.state.title}
                 fullWidth
               />
@@ -72,7 +74,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="author"
                 label="Author"
-                onChange={this.handleChange(author)}
+                onChange={this.handleChange("author")}
                 value={this.state.author}
                 fullWidth
               />
@@ -81,7 +83,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="journal"
                 label="Journal"
-                onChange={this.handleChange(journal)}
+                onChange={this.handleChange("journal")}
                 value={this.state.journal}
                 fullWidth
               />
@@ -90,7 +92,7 @@ class AddBookDialog extends React.Component {
                   required
                   id="startdate"
                   label="Start Date"
-                  onChange={this.handleChange(startDate)}
+                  onChange={this.handleChange("startDate")}
                   value={this.state.startDate}
                   defaultValue={this.state.today}
                   InputLabelProps={{
@@ -100,7 +102,7 @@ class AddBookDialog extends React.Component {
                 <TextField
                   id="enddate"
                   label="End Date"
-                  onChange={this.handleChange(endDate)}
+                  onChange={this.handleChange("endDate")}
                   value={this.state.endDate}
                   defaultValue={this.state.today}
                   InputLabelProps={{
@@ -113,7 +115,7 @@ class AddBookDialog extends React.Component {
                   id="pages"
                   label="No of Pages"
                   type="number"
-                  onChange={this.handleChange(pages)}
+                  onChange={this.handleChange("pages")}
                   value={this.state.pages}
                   InputProps={{ inputProps: { min: 0 } }}
                 />
@@ -123,9 +125,17 @@ class AddBookDialog extends React.Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={this.handleClose} color="primary">
+              <Button
+                onClick={() =>
+                  this.props.onAddBook({
+                    newLog: this.state.newLog
+                  })
+                }
+                color="primary"
+              >
                 Add to Book Log
               </Button>
+              {/* <AddBook newBook={this.state.newLog} /> */}
             </DialogActions>
           </Dialog>
         </form>
@@ -134,8 +144,20 @@ class AddBookDialog extends React.Component {
   }
 }
 
-function mapStateToProps (){
-  
+function mapStateToProps(state) {
+  return {
+    newLog: state.newLog
+  };
 }
 
-export default AddBookDialog;
+  function mapDispatchToProps(dispatch) {
+    return {
+      onAddBook: newLog => dispatch(addBook(newLog))
+    };
+  }
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddBookDialog);
