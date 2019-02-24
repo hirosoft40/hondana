@@ -1,0 +1,22 @@
+.row {
+  border-bottom: 1px black solid;
+  margin-top: 30px;
+}
+.sample {
+  border: 1px dotted gray;
+  height: 190px;
+  width: 151px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: azure;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.popText {
+  font-size: 14px !important;
+}
+
+.popIcon {
+  margin-right: 4px !important;
+}

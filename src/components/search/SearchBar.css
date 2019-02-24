@@ -2,6 +2,7 @@
   margin-top: 5px;
   text-align: center;
   width: 100%;
+  margin-bottom: 10px;
 }
 .searchBar {
   width: 300px;
@@ -18,3 +19,6 @@
 /* input:nth-of-type(2) {
   width: 15vw;
 } */
+.MuiFormLabel:focused {
+  color: none !important;
+}

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
-import "./Search.css";
+import "./SearchBar.css";
 import Fab from "@material-ui/core/Fab";
 
-class Search extends Component {
+class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = { searchQuery: "" };
@@ -13,13 +13,7 @@ class Search extends Component {
   // === searchQuery
   handleChange = event => {
     this.setState({ searchQuery: event.target.value });
-    // console.log(this.state.searchQuery);
-    // const qWithoutSpace =
-    //   event.target.value.indexOf(" ") >= 0
-    //     ? event.target.value.split(" ").join("+")
-    //     : event.target.value;
-    // this.setState({ searchQuery: qWithoutSpace });
-  };
+    };
 
   handleSubmit = event => {
     //== ok
@@ -53,4 +47,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default SearchBar;

@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import App from "./components/App";
 import AppBar from "./components/nav/AppBar";
-import Tables from "./components/bookLog/Tables";
-// import combineReducers from "./reducers";
-
-import thunk from "redux-thunk";
-// import { createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-import { Grid } from "@material-ui/core";
+import SearchMain from "./components/search/SearchMain";
+import Home from "./components/bookLog/Home";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 
 // const store = createStore(
@@ -40,14 +33,13 @@ ReactDOM.render(
   // <Provider store={store}>
   <MuiThemeProvider theme={theme}>
     <AppBar />
-    <Grid container spacing={24}>
-      <Grid container item xs={12} md={6}>
-        <App />
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <Tables />
-      </Grid>
-    </Grid>
+    <Router>
+      <div>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/search" component={SearchMain} />
+      </div>
+    </Router>
+    {/* <App /> */}
   </MuiThemeProvider>,
   // </Provider>,
   document.getElementById("root")

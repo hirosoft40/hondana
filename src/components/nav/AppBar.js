@@ -7,11 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withStyles } from "@material-ui/core/styles";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import "./AppBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import { faBookOpen, faBookReader } from "@fortawesome/free-solid-svg-icons";
+import {
+  SearchRounded,
+  Favorite,
+  Search,
+  AccountCircle
+} from "@material-ui/icons";
 
 const styles = theme => ({
   root: {
@@ -96,6 +102,14 @@ class PrimarySearchAppBar extends React.Component {
       >
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
+            <SearchRounded />
+            <p>Search Books</p>
+          </IconButton>
+          <IconButton color="inherit">
+            <FontAwesomeIcon icon={faBookReader} />
+            <p>My Book List</p>
+          </IconButton>
+          <IconButton color="inherit">
             <AccountCircle />
           </IconButton>
           <p>Profile</p>
@@ -108,23 +122,25 @@ class PrimarySearchAppBar extends React.Component {
         <AppBar position="static" className="appbar">
           <Toolbar>
             <Typography className="title" variant="h6" color="inherit" noWrap>
-              <FontAwesomeIcon
-                icon={faBookOpen}
-                style={{ fontSize: 30, fontWeigt: "bold", color: "black" }}
-              />
-              <span
-                style={{
-                  marginLeft: 10,
-                  fontSize: 30,
-                  fontWeight: "bold",
-                  color: "black"
-                }}
-              >
-                Hondana
-              </span>
+              <FontAwesomeIcon className="logo" icon={faBookOpen} />
+              <span className="brand">Hondana</span>
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
+              <IconButton
+                color="inherit"
+                containerElement={<Link to="/search" />}
+              >
+                <Search />
+              </IconButton>
+
+              <IconButton color="inherit">
+                <Favorite />
+              </IconButton>
+
+              <IconButton color="inherit">
+                <FontAwesomeIcon icon={faBookReader} />
+              </IconButton>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"

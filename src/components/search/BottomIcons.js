@@ -1,66 +1,72 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import { ShoppingBasket, Book, LibraryAdd, Block } from "@material-ui/icons";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import IconButton from "@material-ui/core/IconButton";
+import { Menu, MenuItem } from "@material-ui/core";
+import { Book, LibraryAdd, Add, Favorite } from "@material-ui/icons";
 import "./BottomIcons.css";
+import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 class BottomIcons extends React.Component {
   state = {
-    value: 'booklog',
+    anchorEl: null
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
   };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
+    const { anchorEl } = this.state;
 
     return (
       <div className="buttomnav">
-        <BottomNavigation value={value} onChange={this.handleChange} showLabels>
-          <BottomNavigationAction
-            size="small"
-            label="BookLog"
-            value="booklog"
-            icon={<LibraryAdd />}
-          />
-          <BottomNavigationAction
-            size="small"
-            label="Favorites"
-            value="favorites"
-            icon={<FavoriteIcon />}
-          />
+        <IconButton
+          arial-label="Action"
+          aria-owns={anchorEl ? "simple-menu" : undefined}
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          <Add />
+        </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={this.handleClose}
+        >
+          
+          <MenuItem onClick={this.handleClose} className="popText">
+            <Favorite className="popIcon" />
+            Add to Favorite
+          </MenuItem>
           {typeof this.props.book.previewLink !== "undefined" ? (
-            // <a href={this.props.book.previewLink} target="_blank">
-              <BottomNavigationAction
-                label="Preview"
-                size="small"
-                value="preview"
-                icon={<Book />}
-              />
-            // </a>
+            <MenuItem
+              href={this.props.book.previewLink}
+              target="_blank"
+              className="popText"
+            >
+              <Book className="popIcon" />
+              Preview the Book
+            </MenuItem>
           ) : (
             ""
           )}
           {this.props.sale.saleability === "FOR_SALE" ? (
-            // <a href={this.props.sale.salesInfo.buyLink} target="_blank">
-              <BottomNavigationAction
-                label="Purchase"
-                size="small"
-                value="purchase"
-                color="inherit"
-                icon={<ShoppingBasket />}
-              />
-            // </a>
+            <MenuItem
+              href={this.props.sale.buyLink}
+              target="_blank"
+              className="popText"
+            >
+              <AddShoppingCartIcon className="popIcon" />
+              Buy on GooglePlay
+            </MenuItem>
           ) : (
             ""
           )}
-        </BottomNavigation>
+        </Menu>
       </div>
     );
   }

@@ -1,0 +1,15 @@
+.dialog {
+  min-width: 500px;
+}
+
+.dialogtitle {
+  padding-bottom: 0 !important;
+}
+.mainDialog {
+  height: 800px;
+}
+.short {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}

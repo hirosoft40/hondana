@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import BookItem from "./BookItem";
+import React from "react";
+import SearchResultsEach from "./SearchResultsEach";
 import { Grid } from "@material-ui/core";
 
 const style = () => ({
@@ -21,7 +21,7 @@ const SearchResultsList = ({ books, onBookSelect }) => {
         alignItems="center"
       >
         <Grid item xs={12}>
-          <BookItem
+          <SearchResultsEach
             className={style.booklist}
             key={book.id}
             onBookSelect={onBookSelect}
