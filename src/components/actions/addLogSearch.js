@@ -1,7 +1,7 @@
 function addBookSearch(item) {
   return {
     type: "ADD_BOOK_SEARCH",
-    log: {
+    bookLog: {
       bookid: item.bookid,
       title: item.title,
       author: item.author,

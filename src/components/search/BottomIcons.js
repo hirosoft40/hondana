@@ -37,7 +37,10 @@ class BottomIcons extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          
+          <MenuItem onClick={this.handleClose} className="popText">
+            <LibraryAdd className="popIcon" />
+            Add to Book Log
+          </MenuItem>
           <MenuItem onClick={this.handleClose} className="popText">
             <Favorite className="popIcon" />
             Add to Favorite

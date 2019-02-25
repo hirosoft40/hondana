@@ -3,18 +3,19 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import SearchMain from "./components/search/SearchMain";
-import Home from "./components/bookLog/Home";
+import BookLogMain from "./components/bookLog/BookLogMain";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
-import logReducer from "./components/reducers/logReducer";
+import bookLogReducer from "./components/reducers/bookLogReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 
 const store = createStore(
-  logReducer,
+  bookLogReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+console.log(store);
 
 const theme = createMuiTheme({
   typography: {
@@ -36,13 +37,13 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-      <BrowserRouter>
-        <App />
-        <Switch>
-          <Route exact path="/" component={Home} />
+      {/* <BrowserRouter> */}
+      <App />
+      {/* <Switch>
+          <Route exact path="/" component={BookLogMain} />
           <Route path="/search" component={SearchMain} />
         </Switch>
-      </BrowserRouter>
+      </BrowserRouter> */}
     </MuiThemeProvider>
   </Provider>,
   document.getElementById("root")

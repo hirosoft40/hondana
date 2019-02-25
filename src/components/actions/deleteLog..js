@@ -1,7 +1,7 @@
-const deleteLog = item => {
+const deleteBookLog = item => {
   return {
     type: "DELETE_LOG",
-    log: {
+    bookLog: {
       bookid: item.bookid,
       title: item.title,
       author: item.author,
@@ -18,4 +18,4 @@ const deleteLog = item => {
   };
 };
 
-export default deleteLog;
+export default deleteBookLog;

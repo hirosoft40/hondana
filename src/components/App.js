@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Home from "./bookLog/Home";
+import BookLogMain from "./bookLog/BookLogMain";
 import AppBar from "./nav/AppBar";
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
       <div>
         <AppBar />
         <div style={{ padding: 2 }}>
-          <Home />
+          <BookLogMain />
         </div>
       </div>
     );

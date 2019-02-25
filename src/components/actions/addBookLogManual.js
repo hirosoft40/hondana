@@ -1,7 +1,7 @@
-function addLogManual(item) {
+function addBookLogManual(item) {
   return {
-    type: "ADD_LOG_MANUAL",
-    log: {
+    type: "ADD_BOOKLOG_MANUAL",
+    bookLog: {
       title: item.title,
       author: item.author,
       journal: item.journal,
@@ -12,4 +12,4 @@ function addLogManual(item) {
     }
   };
 }
-export default addLogManual;
+export default addBookLogManual;

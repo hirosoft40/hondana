@@ -1,7 +1,7 @@
-function logReducer(state, action) {
+function bookLogReducer(state, action) {
   if (state === undefined) {
     return {
-      log: []
+      bookLog: []
     };
   }
 
@@ -18,13 +18,13 @@ function logReducer(state, action) {
     currency,
     journal,
     price
-  } = action.log;
+  } = action.bookLog;
 
   switch (action.type) {
     case "ADD_BOOK_SEARCH":
       return {
         ...state,
-        log: state.log.concat({
+        bookLog: state.bookLog.concat({
           id,
           title,
           author,
@@ -39,22 +39,24 @@ function logReducer(state, action) {
           price
         })
       };
-    case "ADD_BOOK_MANUAL":
+    case "ADD_BOOKLOG_MANUAL":
       return {
         ...state,
-        log: state.log.concat({
+        bookLog: state.bookLog.concat({
           title,
           author,
-          pages,
+          journal,
           startDate,
           endDate,
           completed,
-          journal
+          pages
         })
       };
+    // case "SEARCH_RESULTS":
+    //   return action.books;
     default:
       return state;
   }
 }
 
-export default logReducer;
+export default bookLogReducer;
