@@ -6,7 +6,6 @@ export const searchResults = searchQuery => async (dispatch, getState) => {
       q: searchQuery
     }
   });
-console.log(response)
   dispatch({ type: "SEARCH_BOOKS", books: response.data.items });
 };
 

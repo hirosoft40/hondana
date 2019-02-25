@@ -14,3 +14,9 @@
 .popIcon {
   margin-right: 4px !important;
 }
+.link {
+  text-decoration: none !important;
+}
+.link:visited {
+  text-decoration: none !important;
+}

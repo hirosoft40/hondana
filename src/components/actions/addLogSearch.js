@@ -2,18 +2,18 @@ function addBookSearch(item) {
   return {
     type: "ADD_BOOK_SEARCH",
     bookLog: {
-      bookid: item.bookid,
-      title: item.title,
-      author: item.author,
-      category: item.category,
-      pages: item.pages,
+      bookid: item.bookLog.bookid,
+      title: item.bookLog.title,
+      author: item.bookLog.author,
+      category: item.bookLog.category,
+      pages: item.bookLog.pages,
+      journal: item.bookLog.journal,
       startDate: item.startDate,
-      endDate: item.endDate,
-      completed: item.completed,
-      imageURL: item.imageURL,
-      currency: item.currency,
-      price: item.price,
-      journal: item.journal
+      endDate: item.bookLog.endDate,
+      completed: item.bookLog.completed,
+      imageURL: item.bookLog.imageURL,
+      currency: item.bookLog.currency,
+      price: item.bookLog.price,
     }
   };
 }

@@ -6,7 +6,7 @@ function bookLogReducer(state, action) {
   }
 
   const {
-    id,
+    bookid,
     title,
     author,
     category,
@@ -14,10 +14,11 @@ function bookLogReducer(state, action) {
     startDate,
     endDate,
     completed,
-    image,
+    imageURL,
     currency,
+    price,
     journal,
-    price
+    totalRead
   } = action.bookLog;
 
   switch (action.type) {
@@ -25,7 +26,7 @@ function bookLogReducer(state, action) {
       return {
         ...state,
         bookLog: state.bookLog.concat({
-          id,
+          bookid,
           title,
           author,
           category,
@@ -33,23 +34,30 @@ function bookLogReducer(state, action) {
           startDate,
           endDate,
           completed,
-          image,
+          imageURL,
           currency,
+          price,
           journal,
-          price
+          totalRead
         })
       };
     case "ADD_BOOKLOG_MANUAL":
       return {
         ...state,
         bookLog: state.bookLog.concat({
+          bookid,
           title,
           author,
-          journal,
+          category,
+          pages,
           startDate,
           endDate,
           completed,
-          pages
+          imageURL,
+          currency,
+          price,
+          journal,
+          totalRead
         })
       };
     // case "SEARCH_RESULTS":

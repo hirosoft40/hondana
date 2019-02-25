@@ -16,7 +16,6 @@ const store = createStore(
   bookLogReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-console.log(store);
 
 const theme = createMuiTheme({
   typography: {

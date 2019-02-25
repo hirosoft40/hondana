@@ -4,7 +4,9 @@ import { Menu, MenuItem } from "@material-ui/core";
 import { Book, LibraryAdd, Add, Favorite } from "@material-ui/icons";
 import "./BottomIcons.css";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-
+import { connect } from "react-redux";
+import addBookLogManual from "../actions/addBookLogManual";
+import { Link } from "react-router-dom";
 class BottomIcons extends React.Component {
   state = {
     anchorEl: null
@@ -20,6 +22,16 @@ class BottomIcons extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { book, sale } = this.props;
+    const img = book.hasOwnProperty("imageLinks")
+      ? book.imageLinks.smallThumbnail
+      : "";
+    const cat = book.categories ? book.categories : "";
+    const pgCount = book.pageCount ? book.pageCount : "";
+    const { currencyCode, amount } =
+      sale.saleability === "FOR_SALE" ? sale.listPrice : "";
+    const d = new Date();
+    const today = `${d.toJSON().slice(0, 10)}`;
 
     return (
       <div className="buttomnav">
@@ -37,9 +49,34 @@ class BottomIcons extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem onClick={this.handleClose} className="popText">
-            <LibraryAdd className="popIcon" />
-            Add to Book Log
+          <MenuItem
+            className="popText"
+            onClick={() =>
+              this.props.onAddBook(
+                {
+                  bookLog: {
+                    bookid: this.props.key,
+                    title: this.props.book.title,
+                    author: this.props.book.authors,
+                    category: cat,
+                    pages: pgCount,
+                    journal: "",
+                    startDate: today,
+                    endDate: "",
+                    completed: false,
+                    imageURL: img,
+                    currency: currencyCode,
+                    price: amount
+                  }
+                }
+                // console.log("addFromSearch", bookLog)
+              )
+            }
+          >
+            <Link to={"/"} className="link">
+              <LibraryAdd className="popIcon" />
+              Add to Book Log
+            </Link>
           </MenuItem>
           <MenuItem onClick={this.handleClose} className="popText">
             <Favorite className="popIcon" />
@@ -74,5 +111,15 @@ class BottomIcons extends React.Component {
     );
   }
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    onAddBook: bookLog => dispatch(addBookLogManual(bookLog))
+  };
+}
 
-export default BottomIcons;
+export default connect(
+  null,
+  mapDispatchToProps
+)(BottomIcons);
+
+// export default BottomIcons;

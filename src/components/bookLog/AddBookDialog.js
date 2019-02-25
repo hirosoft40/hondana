@@ -12,9 +12,8 @@ import {
 } from "@material-ui/core";
 import "./AddBookDialog.css";
 import LibraryAdd from "@material-ui/icons/LibraryAdd";
-import AddBookToMainDiv from "./AddBookToMainDiv";
 import addBookLogManual from "../actions/addBookLogManual";
-import { connect } from "net";
+import { connect } from "react-redux";
 
 class AddBookDialog extends React.Component {
   constructor(props) {
@@ -27,6 +26,7 @@ class AddBookDialog extends React.Component {
       journal: "",
       startDate: "",
       endDate: "",
+      imageURL: "",
       completed: false,
       pages: 0
     };
@@ -64,7 +64,21 @@ class AddBookDialog extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     // console.log(this.state.bookLog);
-    this.props.onAddBook(this.state.bookLog);
+    this.props.onAddBook({
+      bookLog: {
+        title: this.state.title,
+        author: this.state.author,
+        category: "",
+        pages: this.state.pages,
+        journal: this.state.journal,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        completed: this.state.completed,
+        imageURL: "",
+        currency: "USD",
+        price: 0
+      }
+    });
     this.setState({
       open: false
     });
@@ -77,7 +91,7 @@ class AddBookDialog extends React.Component {
           <LibraryAdd className="popIcon" />
           Add to Book Log
         </MenuItem>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
@@ -147,7 +161,7 @@ class AddBookDialog extends React.Component {
                   autoFocus
                   margin="dense"
                   id="pages"
-                  label="No of Pages"
+                  label="Total Pages of the Book"
                   type="number"
                   // onChange={this.handlePagesChange.bind(this)}
                   onChange={this.handleChange("pages")}
@@ -171,25 +185,12 @@ class AddBookDialog extends React.Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button 
-                // onClick={() =>
-                //   this.props.onAddBook({
-                //     bookLog: {
-                //       title: this.state.title,
-                //       author: this.state.author,
-                //       journal: this.state.journal,
-                //       startDate: this.state.startDate,
-                //       endDate: this.state.endDate,
-                //       completed: this.state.completed,
-                //       pages: this.state.pages
-                //     }
-                //   })
-                // }
+              <Button
+                onClick={this.handleSubmit}
                 color="primary"
               >
                 Add to Book Log
               </Button>
-              {/* <AddBook newBook={this.state.bookLog} /> */}
             </DialogActions>
           </Dialog>
         </form>
@@ -197,18 +198,6 @@ class AddBookDialog extends React.Component {
     );
   }
 }
-
-// function mapStateToProps(state) {
-//   return {
-//     title: state.title,
-//     author: state.author,
-//     journal: state.journal,
-//     startDate: state.startDate,
-//     endDate: state.endDate,
-//     completed: state.completed,
-//     pages: state.pages
-//   };
-// }
 
 function mapDispatchToProps(dispatch) {
   return {

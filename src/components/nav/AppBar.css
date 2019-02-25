@@ -4,8 +4,15 @@
   font-size: 30px;
   font-weight: bold;
   color: black;
+  text-decoration: none !important;
+}
+.brand:visited {
+  color: black !important;
+  text-decoration: none !important;
 }
 .appbar {
+  text-decoration: none !important;
+
   margin: 0;
   /* color:"#263238";
   background: #fffc00; 
@@ -26,8 +33,18 @@
     #9cecfb
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 .logo {
   font-size: 30px;
   font-weight: bold;
   color: black;
+}
+.link {
+  text-decoration: none !important;
+}
+.link:visited {
+  text-decoration: none !important;
+}
+.white {
+  color: white!important;
 }

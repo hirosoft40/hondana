@@ -103,7 +103,9 @@ class PrimarySearchAppBar extends React.Component {
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
             <SearchRounded />
-            <p>Search Books</p>
+            <Link to="/search">
+              <p>Search Books</p>
+            </Link>
           </IconButton>
           <IconButton color="inherit">
             <FontAwesomeIcon icon={faBookReader} />
@@ -123,16 +125,19 @@ class PrimarySearchAppBar extends React.Component {
           <Toolbar>
             <Typography className="title" variant="h6" color="inherit" noWrap>
               <FontAwesomeIcon className="logo" icon={faBookOpen} />
-              <span className="brand">Hondana</span>
+              <span>
+                <Link to={"/"} className="brand">
+                  Hondana
+                </Link>
+              </span>
             </Typography>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton
-                color="inherit"
-                containerElement={<Link to="/search" />}
-              >
-                <Search />
-              </IconButton>
+              <Link to={"/search"} className="link white">
+                <IconButton color="inherit">
+                  <Search />
+                </IconButton>
+              </Link>
 
               <IconButton color="inherit">
                 <Favorite />
