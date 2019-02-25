@@ -3,13 +3,14 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import SearchMain from "./components/search/SearchMain";
-import BookLogMain from "./components/bookLog/BookLogMain";
+// import FavoriteList from "./components/bookLog/favorite";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
 import bookLogReducer from "./components/reducers/bookLogReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
+import BaseLayout from "./components/BaseLayout";
 
 const store = createStore(
   bookLogReducer,
@@ -36,15 +37,18 @@ const theme = createMuiTheme({
 });
 ReactDOM.render(
   <Provider store={store}>
-    <MuiThemeProvider theme={theme}>
-      {/* <BrowserRouter> */}
-      <App />
-      {/* <Switch>
-          <Route exact path="/" component={BookLogMain} />
-          <Route path="/search" component={SearchMain} />
-        </Switch>
-      </BrowserRouter> */}
-    </MuiThemeProvider>
+    <BrowserRouter>
+      <MuiThemeProvider theme={theme}>
+        <BaseLayout>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/search" component={SearchMain} />
+            {/* <Route path="/favorite" component={Favorite} /> */}
+            {/* <Route path="/profile" component={Profile} /> */}
+          </Switch>
+        </BaseLayout>
+      </MuiThemeProvider>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );

@@ -64,7 +64,7 @@ class AddBookDialog extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     // console.log(this.state.bookLog);
-    this.props.AddBook(this.state.bookLog);
+    this.props.onAddBook(this.state.bookLog);
     this.setState({
       open: false
     });
@@ -171,20 +171,20 @@ class AddBookDialog extends React.Component {
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button
-                onClick={() =>
-                  this.props.onAddBook({
-                    bookLog: {
-                      title: this.state.title,
-                      author: this.state.author,
-                      journal: this.state.journal,
-                      startDate: this.state.startDate,
-                      endDate: this.state.endDate,
-                      completed: this.state.completed,
-                      pages: this.state.pages
-                    }
-                  })
-                }
+              <Button 
+                // onClick={() =>
+                //   this.props.onAddBook({
+                //     bookLog: {
+                //       title: this.state.title,
+                //       author: this.state.author,
+                //       journal: this.state.journal,
+                //       startDate: this.state.startDate,
+                //       endDate: this.state.endDate,
+                //       completed: this.state.completed,
+                //       pages: this.state.pages
+                //     }
+                //   })
+                // }
                 color="primary"
               >
                 Add to Book Log
@@ -216,9 +216,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(AddBookDialog);
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddBookDialog);
 
-export default AddBookDialog;
+// export default AddBookDialog;

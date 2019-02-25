@@ -5,7 +5,7 @@ import { IconButton } from "@material-ui/core";
 import { AddCircle, Search } from "@material-ui/icons";
 import { Menu, MenuItem } from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
-import AddBookToMainDiv from "./AddBookToMainDiv";
+import { Link } from "react-router-dom";
 
 class BookLogMain extends Component {
   state = {
@@ -27,7 +27,6 @@ class BookLogMain extends Component {
 
     return (
       <Grid container>
-        {/* <SearchMain /> */}
         <Row className="row">
           <div className="sample">
             <IconButton
@@ -44,10 +43,12 @@ class BookLogMain extends Component {
               onClose={this.handleClose}
             >
               <AddBookDialog />
-              <MenuItem onClick={this.handleClose} className="popText">
-                <Search className="popIcon" />
-                Search New Book
-              </MenuItem>
+              <Link to="/search">
+                <MenuItem onClick={this.handleClose} className="popText">
+                  <Search className="popIcon" />
+                  Search New Book
+                </MenuItem>
+              </Link>
             </Menu>
           </div>
           {/* <AddBookToMainDiv /> */}
