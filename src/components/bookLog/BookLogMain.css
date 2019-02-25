@@ -54,10 +54,12 @@
   background-color: #9cecfb;
 }
 .iconDiv {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   float: right;
+  
 }
 .addBookSearch {
   border: 1px dotted rgb(175, 175, 175);

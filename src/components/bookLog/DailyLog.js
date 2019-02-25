@@ -5,30 +5,28 @@ import {
   DialogActions,
   DialogTitle,
   Button,
-  MenuItem,
   TextField,
   FormControlLabel,
-  Switch
+  Switch,
+  IconButton
 } from "@material-ui/core";
-import "./AddBookDialog.css";
-import LibraryAdd from "@material-ui/icons/LibraryAdd";
-import addBookLogManual from "../actions/addBookLogManual";
+import addDailyLog from "../actions/addDailyLog";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBook } from "@fortawesome/free-solid-svg-icons";
 
-class AddBookDialog extends React.Component {
+class DailyLog extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      today: "",
-      title: "",
-      author: "",
-      journal: "",
-      startDate: "",
-      endDate: "",
-      imageURL: "",
-      completed: false,
-      pages: 0
+      dltitle: "",
+      dlauthor: "",
+      logDay: "",
+      pgRead: 0,
+      minutesRead: 0,
+      totalRead: 0,
+      totalTime: 0
     };
   }
 
@@ -37,9 +35,9 @@ class AddBookDialog extends React.Component {
     const today = `${d.toJSON().slice(0, 10)}`;
     this.setState({
       open: true,
-      today: today,
-      startDate: today,
-      endDate: today
+      logDay: today,
+      dltitle: this.props.title,
+      dlauthor: this.props.author
     });
   };
 
@@ -51,33 +49,28 @@ class AddBookDialog extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
-  handleCompleted(e) {
-    const comp = !this.state.completed ? true : false;
-    this.setState({
-      completed: comp
-    });
-  }
+  // handleCompleted(e) {
+  //   const comp = !this.state.completed ? true : false;
+  //   this.setState({
+  //     completed: comp
+  //   });
+  // }
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.bookLog);
-    this.props.onAddBook({
-      bookLog: {
-        title: this.state.title,
-        author: this.state.author,
-        category: "",
-        pages: this.state.pages,
+    this.props.onDailyLogAdd({
+      dailyLog: {
+        dltitle: this.state.dltitle,
+        dlauthor: this.state.dlauthor,
+        pgRead: this.state.pgRead,
         journal: this.state.journal,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
-        completed: this.state.completed,
-        imageURL:
-          "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
-        currency: "USD",
-        price: 0
+        logDay: this.state.logDay,
+        minutesRead: this.state.minutesRead,
+        totalRead: this.state.totalRead,
+        totalTime: this.state.totalTime
       }
     });
     this.setState({
@@ -88,10 +81,9 @@ class AddBookDialog extends React.Component {
   render() {
     return (
       <div>
-        <MenuItem onClick={this.handleClickOpen} className="popText">
-          <LibraryAdd className="popIcon" />
-          Add to Book Log
-        </MenuItem>
+        <IconButton>
+          <FontAwesomeIcon icon={faBook} />
+        </IconButton>
         <form>
           <Dialog
             open={this.state.open}
@@ -100,60 +92,36 @@ class AddBookDialog extends React.Component {
             aria-labelledby="form-dialog-title"
           >
             <DialogTitle className="dialogtitle" id="form-dialog-title">
-              Add Book Information
+              Today, I read...
             </DialogTitle>
             <DialogContent className="dialog">
               <TextField
-                required
+                disabled
                 autoFocus
                 margin="dense"
                 id="title"
                 label="Title"
-                // onChange={this.handleTitleChange.bind(this)}
-                onChange={this.handleChange("title")}
-                // value={this.state.bookLog.title}
+                defaultValue={this.state.dailyLog.title}
                 fullWidth
               />
               <TextField
-                autoFocus
+                disabled
                 margin="dense"
                 id="author"
                 label="Author"
-                // onChange={this.handleAuthorChange.bind(this)}
-                onChange={this.handleChange("author")}
-                // value={this.state.bookLog.author}
+                defaultValue={this.state.dailyLog.authors}
                 fullWidth
               />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="journal"
-                label="Journal"
-                // onChange={this.handleJournalChange.bind(this)}
-                onChange={this.handleChange("journal")}
-                // value={this.state.bookLog.journal}
-                fullWidth
-              />
+
               <div className="short">
                 <TextField
                   required
-                  id="startdate"
-                  label="Start Date"
+                  id="logDay"
+                  label="Log Date"
                   // onChange={this.handleStartDateChange.bind(this)}
-                  onChange={this.handleChange("startDate")}
-                  // value={this.state.bookLog.startDate}
-                  defaultValue={this.state.today}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  id="enddate"
-                  label="End Date"
-                  // onChange={this.handleEndDateChange.bind(this)}
-                  onChange={this.handleChange("endDate")}
-                  // value={this.state.bookLog.endDate}
-                  defaultValue={this.state.today}
+                  onChange={this.handleChange("logDay")}
+                  // value={this.state.dailyLog.startDate}
+                  defaultValue={this.state.logDay}
                   InputLabelProps={{
                     shrink: true
                   }}
@@ -162,11 +130,22 @@ class AddBookDialog extends React.Component {
                   autoFocus
                   margin="dense"
                   id="pages"
-                  label="Total Pages of the Book"
+                  label="Pages read today"
                   type="number"
                   // onChange={this.handlePagesChange.bind(this)}
                   onChange={this.handleChange("pages")}
-                  // value={this.state.bookLog.pages}
+                  // value={this.state.dailyLog.pages}
+                  InputProps={{ inputProps: { min: 0 } }}
+                />
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="minutes"
+                  label="Minutes you read today"
+                  type="number"
+                  // onChange={this.handlePagesChange.bind(this)}
+                  onChange={this.handleChange("pages")}
+                  // value={this.state.dailyLog.pages}
                   InputProps={{ inputProps: { min: 0 } }}
                 />
               </div>
@@ -187,7 +166,7 @@ class AddBookDialog extends React.Component {
                 Cancel
               </Button>
               <Button onClick={this.handleSubmit} color="primary">
-                Add to Book Log
+                Add to Daily Log
               </Button>
             </DialogActions>
           </Dialog>
@@ -199,13 +178,13 @@ class AddBookDialog extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onAddBook: bookLog => dispatch(addBookLogManual(bookLog))
+    onDailyLogAdd: dailyLog => dispatch(addDailyLog(dailyLog))
   };
 }
 
 export default connect(
   null,
   mapDispatchToProps
-)(AddBookDialog);
+)(DailyLog);
 
-// export default AddBookDialog;
+// export default DailyLog;

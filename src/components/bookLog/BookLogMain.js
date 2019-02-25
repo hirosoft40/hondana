@@ -7,6 +7,7 @@ import AddBookDialog from "./AddBookDialog";
 import { Link } from "react-router-dom";
 import addBookLogManual from "../actions/addBookLogManual";
 import { connect } from "react-redux";
+import Dailylog from "./DailyLog";
 
 class BookLogMain extends Component {
   state = {
@@ -33,6 +34,7 @@ class BookLogMain extends Component {
               <IconButton>
                 <EditRounded />
               </IconButton>
+              <Dailylog title={book.title} author={book.author} />
             </div>
           </div>
           <div className="bodyDiv">
@@ -83,7 +85,6 @@ class BookLogMain extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state.bookLog", state.bookLog);
   return {
     bookLog: state.bookLog
   };

@@ -17,9 +17,18 @@ function bookLogReducer(state, action) {
     imageURL,
     currency,
     price,
-    journal,
-    totalRead
+    journal
   } = action.bookLog;
+
+  const {
+    dltitle,
+    dlauthor,
+    logday,
+    pgRead,
+    minutesRead,
+    totalRead,
+    totalTime
+  } = action.dailyLog;
 
   switch (action.type) {
     case "ADD_BOOK_SEARCH":
@@ -37,15 +46,14 @@ function bookLogReducer(state, action) {
           imageURL,
           currency,
           price,
-          journal,
-          totalRead
+          journal
         })
       };
     case "ADD_BOOKLOG_MANUAL":
       return {
         ...state,
         bookLog: state.bookLog.concat({
-          bookid,
+          logday,
           title,
           author,
           category,
@@ -60,8 +68,19 @@ function bookLogReducer(state, action) {
           totalRead
         })
       };
-    // case "SEARCH_RESULTS":
-    //   return action.books;
+    case "ADD_DAILY_LOG":
+      return {
+        ...state,
+        dailyLog: state.dailyLog.concat({
+          dltitle,
+          dlauthor,
+          logday,
+          pgRead,
+          minutesRead,
+          totalRead,
+          totalTime
+        })
+      };
     default:
       return state;
   }

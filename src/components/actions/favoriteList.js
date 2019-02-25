@@ -1,6 +1,6 @@
-function addBookSearch(item) {
+function favoriteList(item) {
   return {
-    type: "ADD_BOOK_SEARCH",
+    type: "FAVORITE_LIST",
     bookLog: {
       bookid: item.bookLog.bookid,
       title: item.bookLog.title,
@@ -18,4 +18,4 @@ function addBookSearch(item) {
   };
 }
 
-export default addBookSearch;
+export default favoriteList;

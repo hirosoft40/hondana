@@ -14,7 +14,6 @@ function addBookLogManual(item) {
       imageURL: item.bookLog.imageURL,
       currency: item.bookLog.currency,
       price: item.bookLog.price,
-      totalRead: item.bookLog.totalRead
     }
   };
 }
