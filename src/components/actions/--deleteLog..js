@@ -2,7 +2,7 @@ const deleteBookLog = item => {
   return {
     type: "DELETE_LOG",
     bookLog: {
-      bookid: item.bookid,
+      // bookid: item.bookid,
       title: item.title,
       author: item.author,
       category: item.category,

@@ -2,7 +2,7 @@ function favoriteList(item) {
   return {
     type: "FAVORITE_LIST",
     bookLog: {
-      bookid: item.bookLog.bookid,
+      // bookid: item.bookLog.bookid,
       title: item.bookLog.title,
       author: item.bookLog.author,
       category: item.bookLog.category,

@@ -62,7 +62,7 @@ class AddBookDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(this.state.bookLog);
+    console.log(this.state.bookLog);
     this.props.onAddBook({
       bookLog: {
         title: this.state.title,
@@ -87,7 +87,11 @@ class AddBookDialog extends React.Component {
   render() {
     return (
       <div>
-        <MenuItem onClick={this.handleClickOpen} className="popText">
+        <MenuItem
+          onClick={this.handleClickOpen}
+          onClose={this.handleClose}
+          className="popText"
+        >
           <LibraryAdd className="popIcon" />
           Add to Book Log
         </MenuItem>

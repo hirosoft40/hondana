@@ -55,7 +55,7 @@ class BottomIcons extends React.Component {
               this.props.onAddBook(
                 {
                   bookLog: {
-                    bookid: this.props.key,
+                    // bookid: this.props.key,
                     title: this.props.book.title,
                     author: this.props.book.authors,
                     category: cat,

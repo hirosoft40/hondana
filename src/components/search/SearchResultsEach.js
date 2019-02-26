@@ -42,7 +42,8 @@ const SearchResultsEach = ({ book, sale, onBookSelect }) => {
             </p>
           </Grid>
           <Grid item xs={1}>
-            <BottomIcons book={book} sale={sale} bookId={keys}/>
+            <BottomIcons book={book} sale={sale} />
+            {/* <BottomIcons book={book} sale={sale} bookId={keys}/> */}
             {/* <SearchResultsEachIcon book={book} sale={sale} /> */}
           </Grid>
         </Grid>

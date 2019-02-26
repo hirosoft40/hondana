@@ -19,6 +19,8 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+console.log(store.getState())
+
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true

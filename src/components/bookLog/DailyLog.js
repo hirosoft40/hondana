@@ -63,6 +63,7 @@ class DailyLog extends React.Component {
 
   onSubmitDailyLog = event => {
     event.preventDefault();
+    console.log("onSubmigDailyLog", this.state.dltitle);
     this.props.onDailyLogAdd({
       dailyLog: {
         dltitle: this.state.dltitle,
@@ -129,7 +130,7 @@ class DailyLog extends React.Component {
                 label="Minutes you read today"
                 type="number"
                 // onChange={this.handlePagesChange.bind(this)}
-                onChange={this.handleChange("pages")}
+                onChange={this.handleChange("minutesRead")}
                 // value={this.state.dailyLog.pages}
                 InputProps={{ inputProps: { min: 0 } }}
               />
@@ -166,9 +167,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-// export default connect(
-//   null,
-//   mapDispatchToProps
-// )(DailyLog);
+export default connect(
+  null,
+  mapDispatchToProps
+)(DailyLog);
 
-export default DailyLog;
+// export default DailyLog;

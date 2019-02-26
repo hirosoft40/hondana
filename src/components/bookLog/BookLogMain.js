@@ -23,30 +23,28 @@ class BookLogMain extends Component {
   };
 
   renderList() {
-    console.log("bookLog",this.props.bookLog)
-  //   return this.props.bookLog.map(book => {
-  //     console.log("book",book);
-  //     return (
-  //       <div className="mainDiv">
-  //         <div className="headerDiv">
-  //           <img src={book.imageURL} alt={book.title} />
+    return this.props.bookLog.map(book => {
+      return (
+        <div className="mainDiv">
+          <div className="headerDiv">
+            <img src={book.imageURL} alt={book.title} />
 
-  //           <div className="iconDiv">
-  //             <IconButton>
-  //               <EditRounded />
-  //             </IconButton>
-  //             <Dailylog title={book.title} author={book.author} />
-  //           </div>
-  //         </div>
-  //         <div className="bodyDiv">
-  //           <div className="title">{book.title}</div>
-  //           <div>{book.author}</div>
-  //           <div>{book.pages} Pages</div>
-  //           <div>Started Reading on {book.startDate} </div>
-  //         </div>
-  //       </div>
-  //     );
-  //  });
+            <div className="iconDiv">
+              <IconButton>
+                <EditRounded />
+              </IconButton>
+              <Dailylog title={book.title} author={book.author} />
+            </div>
+          </div>
+          <div className="bodyDiv">
+            <div className="title">{book.title}</div>
+            <div>{book.author}</div>
+            <div>{book.pages} Pages</div>
+            <div>Started Reading on {book.startDate} </div>
+          </div>
+        </div>
+      );
+    });
   }
 
   render() {
@@ -88,7 +86,7 @@ class BookLogMain extends Component {
 function mapStateToProps(state) {
   console.log("state", state.bookLog);
   return {
-    bookLog: state.bookLog
+    bookLog: state.bookLog.bookLog
   };
 }
 
