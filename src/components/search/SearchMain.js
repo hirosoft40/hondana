@@ -3,7 +3,6 @@ import SearchResultsList from "./SearchResultsList";
 import googleBooks from "../apis/googleBooks";
 import SearchBar from "./SearchBar";
 import { Grid } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
 import AddBookDialog from "../bookLog/AddBookDialog";
 
 const err = {
@@ -111,10 +110,6 @@ class SearchMain extends Component {
       >
         <SearchBar handleSubmit={this.onSearchStart} />
         {this.renderList()}
-        {/* </Grid>
-        <Grid item xs>
-        <p>Cound not find the book? Register manually.</p>
-        </Grid> */}
       </Grid>
     );
   }

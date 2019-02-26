@@ -1,9 +1,7 @@
 function addBookLogManual(item) {
-  console.log(item)
   return {
     type: "ADD_BOOKLOG_MANUAL",
     bookLog: {
-      // bookid: item.bookLog.bookid,
       title: item.bookLog.title,
       author: item.bookLog.author,
       category: item.bookLog.category,

@@ -51,7 +51,6 @@ class DailyLog extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-    // console.log(this.state);
   };
 
   // handleCompleted(e) {
@@ -63,7 +62,6 @@ class DailyLog extends React.Component {
 
   onSubmitDailyLog = event => {
     event.preventDefault();
-    console.log("onSubmigDailyLog", this.state.dltitle);
     this.props.onDailyLogAdd({
       dailyLog: {
         dltitle: this.state.dltitle,
@@ -171,5 +169,3 @@ export default connect(
   null,
   mapDispatchToProps
 )(DailyLog);
-
-// export default DailyLog;

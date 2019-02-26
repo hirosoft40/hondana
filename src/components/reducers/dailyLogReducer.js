@@ -1,8 +1,4 @@
 function dailyLogReducer(state, action) {
-  console.log("dailyLogReducer, action", action);
-  console.log("dailyLogReducer", state)
-
-
   if (state === undefined) {
     return {
       dailyLog: []
@@ -23,13 +19,13 @@ function dailyLogReducer(state, action) {
       return {
         ...state,
         dailyLog: state.dailyLog.concat({
-          dltitle:action.dailyLog.dltitle,
-          dlauthor:action.dailyLog.dlauthor,
-          logDay:action.dailyLog.logDay,
-          pgRead:action.dailyLog.pgRead,
-          minutesRead:action.dailyLog.minutesRead,
-          totalRead:action.dailyLog.totalRead,
-          totalTime:action.dailyLog.totalTime
+          dltitle: action.dailyLog.dltitle,
+          dlauthor: action.dailyLog.dlauthor,
+          logDay: action.dailyLog.logDay,
+          pgRead: action.dailyLog.pgRead,
+          minutesRead: action.dailyLog.minutesRead,
+          totalRead: action.dailyLog.totalRead,
+          totalTime: action.dailyLog.totalTime
         })
       };
     default:

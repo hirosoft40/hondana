@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import SearchMain from "./components/search/SearchMain";
-// import FavoriteList from "./components/bookLog/favorite";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./components/reducers";
@@ -11,15 +10,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 import BaseLayout from "./components/BaseLayout";
-import bookLogReducer from "./components/reducers/bookLogReducer";
+import HistoryMain from "./components/history/HistoryMain";
 
 const store = createStore(
   rootReducer,
-  // bookLogReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
-
-console.log(store.getState())
 
 const theme = createMuiTheme({
   typography: {
@@ -46,8 +42,7 @@ ReactDOM.render(
           <Switch>
             <Route exact path="/" component={App} />
             <Route path="/search" component={SearchMain} />
-            {/* <Route path="/favorite" component={Favorite} /> */}
-            {/* <Route path="/profile" component={Profile} /> */}
+            <Route path="/history" component={HistoryMain} />
           </Switch>
         </BaseLayout>
       </MuiThemeProvider>

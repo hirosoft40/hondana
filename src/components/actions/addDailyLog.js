@@ -1,5 +1,4 @@
 function addDailyLog(item) {
-  console.log("item", item);
   return {
     type: "ADD_DAILY_LOG",
     dailyLog: {

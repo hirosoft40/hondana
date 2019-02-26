@@ -3,7 +3,6 @@ import Card from "@material-ui/core/Card";
 import { Grid } from "@material-ui/core";
 import BottomIcons from "./BottomIcons";
 import "./SearchResultsEach.css";
-import { keys } from "@material-ui/core/styles/createBreakpoints";
 
 const SearchResultsEach = ({ book, sale, onBookSelect }) => {
   if (!book) {
@@ -43,8 +42,7 @@ const SearchResultsEach = ({ book, sale, onBookSelect }) => {
           </Grid>
           <Grid item xs={1}>
             <BottomIcons book={book} sale={sale} />
-            {/* <BottomIcons book={book} sale={sale} bookId={keys}/> */}
-            {/* <SearchResultsEachIcon book={book} sale={sale} /> */}
+
           </Grid>
         </Grid>
       </Card>

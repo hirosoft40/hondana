@@ -84,7 +84,6 @@ class BookLogMain extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("state", state.bookLog);
   return {
     bookLog: state.bookLog.bookLog
   };

@@ -103,9 +103,7 @@ class PrimarySearchAppBar extends React.Component {
         <MenuItem onClick={this.handleProfileMenuOpen}>
           <IconButton color="inherit">
             <SearchRounded />
-            <Link to="/search">
-              <p>Search Books</p>
-            </Link>
+            <p>Search Books</p>
           </IconButton>
           <IconButton color="inherit">
             <FontAwesomeIcon icon={faBookReader} />
@@ -142,10 +140,11 @@ class PrimarySearchAppBar extends React.Component {
               <IconButton color="inherit">
                 <Favorite />
               </IconButton>
-
-              <IconButton color="inherit">
-                <FontAwesomeIcon icon={faBookReader} />
-              </IconButton>
+              <Link to={"/history"} className="link white">
+                <IconButton color="inherit">
+                  <FontAwesomeIcon icon={faBookReader} />
+                </IconButton>
+              </Link>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
