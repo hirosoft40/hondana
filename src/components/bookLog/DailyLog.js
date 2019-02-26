@@ -6,18 +6,20 @@ import {
   DialogTitle,
   Button,
   TextField,
-  FormControlLabel,
-  Switch,
+  // FormControlLabel,
+  // Switch,
   IconButton
 } from "@material-ui/core";
 import addDailyLog from "../actions/addDailyLog";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
+import "./DailyLog.css";
 
 class DailyLog extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       open: false,
       dltitle: "",
@@ -30,7 +32,7 @@ class DailyLog extends React.Component {
     };
   }
 
-  handleClickOpen = () => {
+  onClickOpen = () => {
     const d = new Date();
     const today = `${d.toJSON().slice(0, 10)}`;
     this.setState({
@@ -41,7 +43,7 @@ class DailyLog extends React.Component {
     });
   };
 
-  handleClose = () => {
+  onClose = () => {
     this.setState({ open: false });
   };
 
@@ -59,7 +61,7 @@ class DailyLog extends React.Component {
   //   });
   // }
 
-  handleSubmit = event => {
+  onSubmitDailyLog = event => {
     event.preventDefault();
     this.props.onDailyLogAdd({
       dailyLog: {
@@ -81,75 +83,57 @@ class DailyLog extends React.Component {
   render() {
     return (
       <div>
-        <IconButton>
+        <IconButton onClick={this.onClickOpen}>
           <FontAwesomeIcon icon={faBook} />
         </IconButton>
         <form>
           <Dialog
             open={this.state.open}
-            onClose={this.handleClose}
-            className="mainDialog"
-            aria-labelledby="form-dialog-title"
+            onClose={this.onClose}
+            className="mainDialog_daily"
+            aria-labelledby="form-dialog-dltitle"
           >
-            <DialogTitle className="dialogtitle" id="form-dialog-title">
-              Today, I read...
+            <DialogTitle className="dialogtitle" id="form-dialog-dltitle">
+              {this.state.dltitle}
+              <br />
+              by {this.state.dlauthor}
             </DialogTitle>
-            <DialogContent className="dialog">
+            <DialogContent className="dialog_daily">
               <TextField
-                disabled
+                required
+                id="logDay"
+                label="Log Date"
+                // onChange={this.handleStartDateChange.bind(this)}
+                onChange={this.handleChange("logDay")}
+                // value={this.state.dailyLog.startDate}
+                defaultValue={this.state.logDay}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <TextField
                 autoFocus
                 margin="dense"
-                id="title"
-                label="Title"
-                defaultValue={this.state.dailyLog.title}
-                fullWidth
+                id="pgRead"
+                label="Pages you read today"
+                type="number"
+                // onChange={this.handlePagesChange.bind(this)}
+                onChange={this.handleChange("pgRead")}
+                // value={this.state.dailyLog.pages}
+                InputProps={{ inputProps: { min: 0 } }}
               />
               <TextField
-                disabled
+                autoFocus
                 margin="dense"
-                id="author"
-                label="Author"
-                defaultValue={this.state.dailyLog.authors}
-                fullWidth
+                id="minutes"
+                label="Minutes you read today"
+                type="number"
+                // onChange={this.handlePagesChange.bind(this)}
+                onChange={this.handleChange("pages")}
+                // value={this.state.dailyLog.pages}
+                InputProps={{ inputProps: { min: 0 } }}
               />
-
-              <div className="short">
-                <TextField
-                  required
-                  id="logDay"
-                  label="Log Date"
-                  // onChange={this.handleStartDateChange.bind(this)}
-                  onChange={this.handleChange("logDay")}
-                  // value={this.state.dailyLog.startDate}
-                  defaultValue={this.state.logDay}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="pages"
-                  label="Pages read today"
-                  type="number"
-                  // onChange={this.handlePagesChange.bind(this)}
-                  onChange={this.handleChange("pages")}
-                  // value={this.state.dailyLog.pages}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="minutes"
-                  label="Minutes you read today"
-                  type="number"
-                  // onChange={this.handlePagesChange.bind(this)}
-                  onChange={this.handleChange("pages")}
-                  // value={this.state.dailyLog.pages}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-              </div>
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={
                   <Switch
                     checked={this.state.completed}
@@ -159,13 +143,13 @@ class DailyLog extends React.Component {
                   />
                 }
                 label="Finished Reading"
-              />
+              /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={this.handleSubmit} color="primary">
+              <Button onClick={this.onSubmitDailyLog} color="primary">
                 Add to Daily Log
               </Button>
             </DialogActions>
@@ -182,9 +166,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DailyLog);
+// export default connect(
+//   null,
+//   mapDispatchToProps
+// )(DailyLog);
 
-// export default DailyLog;
+export default DailyLog;

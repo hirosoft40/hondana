@@ -1,0 +1,16 @@
+.mainDialog_daily {
+  max-width: 500px;
+}
+.dialog_daily {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialogtitle {
+  padding-bottom: 0 !important;
+}
+.mainDialog {
+  height: 800px;
+}

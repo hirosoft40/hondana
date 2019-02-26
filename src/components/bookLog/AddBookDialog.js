@@ -51,7 +51,6 @@ class AddBookDialog extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-    console.log(this.state);
   };
 
   handleCompleted(e) {
@@ -162,7 +161,7 @@ class AddBookDialog extends React.Component {
                   autoFocus
                   margin="dense"
                   id="pages"
-                  label="Total Pages of the Book"
+                  label="Total Pages"
                   type="number"
                   // onChange={this.handlePagesChange.bind(this)}
                   onChange={this.handleChange("pages")}

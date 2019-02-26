@@ -9,7 +9,6 @@ const style = () => ({
 });
 
 const SearchResultsList = ({ books, onBookSelect }) => {
-  // console.log("searchResults",books)
   const bookList = books.map(book => {
     return (
       <Grid

@@ -1,8 +1,5 @@
 function bookLogReducer(state, action) {
-  console.log("action", action);
-  console.log("reducer:state", state);
-
-  if (typeof state === "undefined") {
+  if (state === undefined) {
     return {
       bookLog: []
     };
@@ -14,36 +11,35 @@ function bookLogReducer(state, action) {
     author,
     category,
     pages,
-    journal,
     startDate,
     endDate,
     completed,
     imageURL,
     currency,
-    price
+    price,
+    journal
   } = action.bookLog;
 
   switch (action.type) {
     case "ADD_BOOKLOG_MANUAL":
-      console.log("reducer inside", state.bookLog);
       return {
         ...state,
-        bookLog: state.bookLog.bookLog.concat({
+        bookLog: state.bookLog.concat({
           bookid,
           title,
           author,
           category,
           pages,
-          journal,
           startDate,
           endDate,
           completed,
           imageURL,
           currency,
-          price
+          price,
+          journal
         })
       };
-
+   
     default:
       return state;
   }

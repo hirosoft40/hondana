@@ -6,14 +6,16 @@ import SearchMain from "./components/search/SearchMain";
 // import FavoriteList from "./components/bookLog/favorite";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
-import bookLogReducer from "./components/reducers/bookLogReducer";
+import rootReducer from "./components/reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 import BaseLayout from "./components/BaseLayout";
+import bookLogReducer from "./components/reducers/bookLogReducer";
 
 const store = createStore(
-  bookLogReducer,
+  rootReducer,
+  // bookLogReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 

@@ -13,7 +13,7 @@ function addBookLogManual(item) {
       completed: item.bookLog.completed,
       imageURL: item.bookLog.imageURL,
       currency: item.bookLog.currency,
-      price: item.bookLog.price,
+      price: item.bookLog.price
     }
   };
 }
