@@ -11,10 +11,18 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import thunk from "redux-thunk";
 import BaseLayout from "./components/BaseLayout";
 import HistoryMain from "./components/history/HistoryMain";
+import { getFirestore, reduxFirestore } from "redux-firestore";
+import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
+import fbConfig from "../src/config/fbConfig";
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  // composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(
+    applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
+  )
 );
 
 const theme = createMuiTheme({

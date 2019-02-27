@@ -11,6 +11,8 @@ import "./HistoryMain.css";
 import { connect } from "react-redux";
 import ReactChartkick, { LineChart } from "react-chartkick";
 import Chart from "chart.js";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 const mainGrid = "mainGrid";
 const leftTable = "leftTable";
@@ -20,7 +22,7 @@ ReactChartkick.addAdapter(Chart);
 class HistoryMain extends Component {
   renderList() {
     return (
-      <Table>
+      <Table className={leftTable}>
         <colgroup>
           <col style={{ width: "25%" }} />
           <col style={{ width: "2%" }} />
@@ -39,17 +41,23 @@ class HistoryMain extends Component {
           </TableRow>
         </TableHead>
         <TableBody>
-          {this.props.dailyLog.map((item, idx) => (
-            <TableRow key={idx}>
-              <TableCell component="th" scope="row">
-                {item.logDay}
-              </TableCell>
-              <TableCell align="right">{item.pgRead}</TableCell>
-              <TableCell align="right">{item.minutesRead}</TableCell>
-              <TableCell align="right">{item.dltitle}</TableCell>
-              <TableCell align="right">{item.dlauthor}</TableCell>
-            </TableRow>
-          ))}
+          {!this.props.dailyLog
+            ? ""
+            : this.props.dailyLog.map((item, idx) => (
+                <TableRow key={idx}>
+                  <TableCell component="th" scope="row">
+                    {item.dailyLog.logDay}
+                  </TableCell>
+                  <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
+                  <TableCell align="right">
+                    {item.dailyLog.minutesRead}
+                  </TableCell>
+                  <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
+                  <TableCell align="right">
+                    {item.dailyLog.dlauthor[0]}
+                  </TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
     );
@@ -58,13 +66,15 @@ class HistoryMain extends Component {
   renderChart() {
     let readTime = new Object(),
       readPage = new Object();
-    this.props.dailyLog.forEach(item => {
-      readTime[item.logDay] = item.minutesRead;
-      readPage[item.logDay] = item.pgRead;
-    });
+    const chartdata = !this.props.dailyLog
+      ? ""
+      : this.props.dailyLog.map(item => {
+          // console.log("renderChartItem", item);
+          readTime[item.dailyLog.logDay] = item.dailyLog.minutesRead;
+          readPage[item.dailyLog.logDay] = item.dailyLog.pgRead;
+        });
 
-    console.log("readTime", readTime);
-    console.log("readPage", readPage);
+
     const data = [
       { name: "Minutes Read", data: readTime },
       { name: "Pages Read", data: readPage }
@@ -84,7 +94,9 @@ class HistoryMain extends Component {
           <div>{this.renderList()}</div>
         </Grid>
         <Grid item xs={5} className={rightChart}>
-          <div>In here Line Charts</div>
+          <div>
+            <h3>Daily Chart</h3>
+          </div>
           {this.renderChart()}
         </Grid>
       </Grid>
@@ -93,12 +105,20 @@ class HistoryMain extends Component {
 }
 
 function mapStateToProps(state) {
+  // console.log("state", state);
+  // console.log("state.firebase", state.firestore.ordered.dailyLog);
   return {
-    dailyLog: state.dailyLog.dailyLog
+    // dailyLog: state.dailyLog.dailyLog
+    dailyLog: state.firestore.ordered.dailyLog
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
+// export default connect(
+//   mapStateToProps,
+//   null
+// )(HistoryMain);
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "dailyLog" }])
 )(HistoryMain);

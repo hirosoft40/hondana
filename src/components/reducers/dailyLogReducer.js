@@ -4,15 +4,6 @@ function dailyLogReducer(state, action) {
       dailyLog: []
     };
   }
-  // const {
-  //   dltitle,
-  //   dlauthor,
-  //   logDay,
-  //   pgRead,
-  //   minutesRead,
-  //   totalRead,
-  //   totalTime
-  // } = action.dailyLog;
 
   switch (action.type) {
     case "ADD_DAILY_LOG":
@@ -28,6 +19,9 @@ function dailyLogReducer(state, action) {
           totalTime: action.dailyLog.totalTime
         })
       };
+    case "ADD_DAILY_LOG_ERROR":
+      console.log("create project error");
+      return state;
     default:
       return state;
   }

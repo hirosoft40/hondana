@@ -10,7 +10,7 @@ import {
   // Switch,
   IconButton
 } from "@material-ui/core";
-import addDailyLog from "../actions/addDailyLog";
+import {addDailyLog} from "../actions/addDailyLog";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
@@ -67,7 +67,7 @@ class DailyLog extends React.Component {
         dltitle: this.state.dltitle,
         dlauthor: this.state.dlauthor,
         pgRead: this.state.pgRead,
-        journal: this.state.journal,
+        // journal: this.state.journal,
         logDay: this.state.logDay,
         minutesRead: this.state.minutesRead,
         totalRead: this.state.totalRead,

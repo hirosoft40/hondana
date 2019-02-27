@@ -62,7 +62,7 @@ class AddBookDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    
+
     this.props.onAddBook({
       bookLog: {
         title: this.state.title,
