@@ -29,7 +29,6 @@ class BookLogMain extends Component {
       return "";
     } else {
       return this.props.bookLog.map(book => {
-
         console.log(book.item.bookLog.startDate.toDate());
         const d = book.item.bookLog.startDate.toDate();
         const newStartDay = d.toJSON().slice(0, 10);

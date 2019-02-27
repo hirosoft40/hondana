@@ -53,11 +53,11 @@ class HistoryMain extends Component {
           readPage[newLogDay] = item.dailyLog.pgRead;
         });
 
-    // const data = [
-    //   { name: "Minutes Read", data: readTime },
-    //   { name: "Pages Read", data: readPage }
-    // ];
-    // return <LineChart data={data} />;
+    const data = [
+      { name: "Minutes Read", data: readTime },
+      { name: "Pages Read", data: readPage }
+    ];
+    return <LineChart data={data} />;
   }
 
   render() {

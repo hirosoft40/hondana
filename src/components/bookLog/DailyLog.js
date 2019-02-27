@@ -68,7 +68,7 @@ class DailyLog extends React.Component {
         dlauthor: this.state.dlauthor,
         pgRead: this.state.pgRead,
         // journal: this.state.journal,
-        logDay: Date.parse(this.state.logDay),
+        logDay: new Date(this.state.logDay),
         minutesRead: this.state.minutesRead,
         totalRead: this.state.totalRead,
         totalTime: this.state.totalTime
