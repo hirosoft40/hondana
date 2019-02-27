@@ -28,10 +28,11 @@ class BottomIcons extends React.Component {
       : "";
     const cat = book.categories ? book.categories : "";
     const pgCount = book.pageCount ? book.pageCount : "";
-    const { currencyCode, amount } =
-      sale.saleability === "FOR_SALE" ? sale.listPrice : "";
-    const d = new Date();
-    const today = `${d.toJSON().slice(0, 10)}`;
+    const currencyCode =
+      sale.saleability === "FOR_SALE" ? sale.listPrice : "USD";
+    const amount = sale.saleability === "FOR_SALE" ? sale.listPrice : 0;
+    // const d = new Date();
+    // const today = `${d.toJSON().slice(0, 10)}`;
 
     return (
       <div className="buttomnav">
@@ -61,7 +62,7 @@ class BottomIcons extends React.Component {
                     category: cat,
                     pages: pgCount,
                     journal: "",
-                    startDate: today,
+                    startDate: new Date(),
                     endDate: "",
                     completed: false,
                     imageURL: img,

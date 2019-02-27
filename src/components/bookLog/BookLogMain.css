@@ -1,6 +1,6 @@
 .row {
   border-bottom: 2px rgb(175, 175, 175) solid;
-  margin-top: 30px;
+  margin: 30px 0;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -10,6 +10,7 @@
   border: 1px dotted rgb(175, 175, 175);
   height: 190px;
   width: 151px;
+  margin:2vh;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -40,6 +41,7 @@
   display: block;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   margin-left: 3vw;
+  margin: 2vh;
 }
 .headerDiv {
   display: flex;
@@ -59,7 +61,6 @@
   margin: 0;
   padding: 0;
   float: right;
-  
 }
 .addBookSearch {
   border: 1px dotted rgb(175, 175, 175);

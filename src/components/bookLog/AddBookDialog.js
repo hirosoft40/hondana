@@ -15,6 +15,9 @@ import LibraryAdd from "@material-ui/icons/LibraryAdd";
 import addBookLogManual from "../actions/addBookLogManual";
 import { connect } from "react-redux";
 
+const d = new Date();
+const today = `${d.toJSON().slice(0, 10)}`;
+
 class AddBookDialog extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +36,6 @@ class AddBookDialog extends React.Component {
   }
 
   handleClickOpen = () => {
-    const d = new Date();
-    const today = `${d.toJSON().slice(0, 10)}`;
     this.setState({
       open: true,
       today: today,
@@ -62,7 +63,6 @@ class AddBookDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
     this.props.onAddBook({
       bookLog: {
         title: this.state.title,
@@ -70,8 +70,8 @@ class AddBookDialog extends React.Component {
         category: "",
         pages: this.state.pages,
         journal: this.state.journal,
-        startDate: this.state.startDate,
-        endDate: this.state.endDate,
+        startDate: new Date(this.state.startDate),
+        endDate: new Date(this.state.endDate),
         completed: this.state.completed,
         imageURL:
           "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
@@ -112,9 +112,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="title"
                 label="Title"
-                // onChange={this.handleTitleChange.bind(this)}
                 onChange={this.handleChange("title")}
-                // value={this.state.bookLog.title}
                 fullWidth
               />
               <TextField
@@ -122,9 +120,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="author"
                 label="Author"
-                // onChange={this.handleAuthorChange.bind(this)}
                 onChange={this.handleChange("author")}
-                // value={this.state.bookLog.author}
                 fullWidth
               />
               <TextField
@@ -132,9 +128,7 @@ class AddBookDialog extends React.Component {
                 margin="dense"
                 id="journal"
                 label="Journal"
-                // onChange={this.handleJournalChange.bind(this)}
                 onChange={this.handleChange("journal")}
-                // value={this.state.bookLog.journal}
                 fullWidth
               />
               <div className="short">
@@ -142,9 +136,7 @@ class AddBookDialog extends React.Component {
                   required
                   id="startdate"
                   label="Start Date"
-                  // onChange={this.handleStartDateChange.bind(this)}
                   onChange={this.handleChange("startDate")}
-                  // value={this.state.bookLog.startDate}
                   defaultValue={this.state.today}
                   InputLabelProps={{
                     shrink: true
@@ -153,9 +145,7 @@ class AddBookDialog extends React.Component {
                 <TextField
                   id="enddate"
                   label="End Date"
-                  // onChange={this.handleEndDateChange.bind(this)}
                   onChange={this.handleChange("endDate")}
-                  // value={this.state.bookLog.endDate}
                   defaultValue={this.state.today}
                   InputLabelProps={{
                     shrink: true
@@ -167,9 +157,7 @@ class AddBookDialog extends React.Component {
                   id="pages"
                   label="Total Pages"
                   type="number"
-                  // onChange={this.handlePagesChange.bind(this)}
                   onChange={this.handleChange("pages")}
-                  // value={this.state.bookLog.pages}
                   InputProps={{ inputProps: { min: 0 } }}
                 />
               </div>
@@ -199,6 +187,7 @@ class AddBookDialog extends React.Component {
     );
   }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return {

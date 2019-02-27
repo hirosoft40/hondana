@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import addBookLogManual from "../actions/addBookLogManual";
 import { connect } from "react-redux";
 import Dailylog from "./DailyLog";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 class BookLogMain extends Component {
   state = {
@@ -23,28 +25,47 @@ class BookLogMain extends Component {
   };
 
   renderList() {
-    return this.props.bookLog.map(book => {
-      return (
-        <div className="mainDiv">
-          <div className="headerDiv">
-            <img src={book.imageURL} alt={book.title} />
+    if (!this.props.bookLog) {
+      return "";
+    } else {
+      return this.props.bookLog.map(book => {
 
-            <div className="iconDiv">
-              <IconButton>
-                <EditRounded />
-              </IconButton>
-              <Dailylog title={book.title} author={book.author} />
+        console.log(book.item.bookLog.startDate.toDate());
+        const d = book.item.bookLog.startDate.toDate();
+        const newStartDay = d.toJSON().slice(0, 10);
+        // const newStartDay = "d.toJSON().slice(0, 10)";
+        return (
+          <div className="mainDiv">
+            <div className="headerDiv">
+              <img
+                src={book.item.bookLog.imageURL}
+                alt={book.item.bookLog.title}
+              />
+
+              <div className="iconDiv">
+                <IconButton>
+                  <EditRounded />
+                </IconButton>
+                <Dailylog
+                  title={book.item.bookLog.title}
+                  author={book.item.bookLog.author[0]}
+                />
+              </div>
+            </div>
+            <div className="bodyDiv">
+              <div className="title">{book.item.bookLog.title}</div>
+              <div>{book.item.bookLog.author[0]}</div>
+              <div>
+                {book.item.bookLog.pages
+                  ? `${book.item.bookLog.pages} Pages`
+                  : ""}
+              </div>
+              <div>Started Reading on {newStartDay} </div>
             </div>
           </div>
-          <div className="bodyDiv">
-            <div className="title">{book.title}</div>
-            <div>{book.author}</div>
-            <div>{book.pages} Pages</div>
-            <div>Started Reading on {book.startDate} </div>
-          </div>
-        </div>
-      );
-    });
+        );
+      });
+    }
   }
 
   render() {
@@ -85,13 +106,14 @@ class BookLogMain extends Component {
 
 function mapStateToProps(state) {
   return {
-    bookLog: state.bookLog.bookLog
+    bookLog: state.firestore.ordered.bookLog
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { addBookLogManual }
+export default compose(
+  connect(
+    mapStateToProps,
+    { addBookLogManual }
+  ),
+  firestoreConnect([{ collection: "bookLog" }])
 )(BookLogMain);
-
-// export default BookLogMain;

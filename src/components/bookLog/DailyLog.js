@@ -10,7 +10,7 @@ import {
   // Switch,
   IconButton
 } from "@material-ui/core";
-import {addDailyLog} from "../actions/addDailyLog";
+import { addDailyLog } from "../actions/addDailyLog";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
@@ -68,7 +68,7 @@ class DailyLog extends React.Component {
         dlauthor: this.state.dlauthor,
         pgRead: this.state.pgRead,
         // journal: this.state.journal,
-        logDay: this.state.logDay,
+        logDay: Date.parse(this.state.logDay),
         minutesRead: this.state.minutesRead,
         totalRead: this.state.totalRead,
         totalTime: this.state.totalTime
@@ -102,9 +102,7 @@ class DailyLog extends React.Component {
                 required
                 id="logDay"
                 label="Log Date"
-                // onChange={this.handleStartDateChange.bind(this)}
                 onChange={this.handleChange("logDay")}
-                // value={this.state.dailyLog.startDate}
                 defaultValue={this.state.logDay}
                 InputLabelProps={{
                   shrink: true
@@ -116,9 +114,7 @@ class DailyLog extends React.Component {
                 id="pgRead"
                 label="Pages you read today"
                 type="number"
-                // onChange={this.handlePagesChange.bind(this)}
                 onChange={this.handleChange("pgRead")}
-                // value={this.state.dailyLog.pages}
                 InputProps={{ inputProps: { min: 0 } }}
               />
               <TextField

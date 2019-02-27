@@ -8,6 +8,7 @@ const SearchResultsEach = ({ book, sale, onBookSelect }) => {
   if (!book) {
     return <div>Loading</div>;
   }
+  
 
   return (
     <div onClick={() => onBookSelect(book)}>

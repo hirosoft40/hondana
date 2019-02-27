@@ -19,19 +19,19 @@
   background: -webkit-linear-gradient(to bottom, #ffffff, #fffc00); 
   background: linear-gradient(to bottom, #ffffff, #fffc00); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  background: #9cecfb; /* fallback for old browsers */
+  background: #9cecfb; 
   background: -webkit-linear-gradient(
     to left,
     #0052d4,
     #65c7f7,
     #9cecfb
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  ); 
   background: linear-gradient(
     to left,
     #0052d4,
     #65c7f7,
     #9cecfb
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
 }
 
 .logo {

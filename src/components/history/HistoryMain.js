@@ -21,65 +21,43 @@ ReactChartkick.addAdapter(Chart);
 
 class HistoryMain extends Component {
   renderList() {
-    return (
-      <Table className={leftTable}>
-        <colgroup>
-          <col style={{ width: "25%" }} />
-          <col style={{ width: "2%" }} />
-          <col style={{ width: "2%" }} />
-          <col style={{ width: "46%" }} />
-          <col style={{ width: "25%" }} />
-        </colgroup>
-
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Pages</TableCell>
-            <TableCell>Minutes</TableCell>
-            <TableCell>Title</TableCell>
-            <TableCell>Author</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {!this.props.dailyLog
-            ? ""
-            : this.props.dailyLog.map((item, idx) => (
-                <TableRow key={idx}>
-                  <TableCell component="th" scope="row">
-                    {item.dailyLog.logDay}
-                  </TableCell>
-                  <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
-                  <TableCell align="right">
-                    {item.dailyLog.minutesRead}
-                  </TableCell>
-                  <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
-                  <TableCell align="right">
-                    {item.dailyLog.dlauthor[0]}
-                  </TableCell>
-                </TableRow>
-              ))}
-        </TableBody>
-      </Table>
-    );
+    return !this.props.dailyLog
+      ? ""
+      : this.props.dailyLog.map((item, idx) => {
+          const d = item.dailyLog.logDay.toDate();
+          const newLogDay = d.toJSON().slice(0, 10);
+          return (
+            <TableRow key={idx}>
+              <TableCell component="th" scope="row">
+                {newLogDay}
+              </TableCell>
+              <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
+              <TableCell align="right">{item.dailyLog.minutesRead}</TableCell>
+              <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
+              <TableCell align="right">{item.dailyLog.dlauthor[0]}</TableCell>
+            </TableRow>
+          );
+        });
   }
 
   renderChart() {
     let readTime = new Object(),
       readPage = new Object();
+
     const chartdata = !this.props.dailyLog
       ? ""
       : this.props.dailyLog.map(item => {
-          // console.log("renderChartItem", item);
-          readTime[item.dailyLog.logDay] = item.dailyLog.minutesRead;
-          readPage[item.dailyLog.logDay] = item.dailyLog.pgRead;
+          const d = item.dailyLog.logDay.toDate();
+          const newLogDay = d.toJSON().slice(0, 10);
+          readTime[newLogDay] = item.dailyLog.minutesRead;
+          readPage[newLogDay] = item.dailyLog.pgRead;
         });
 
-
-    const data = [
-      { name: "Minutes Read", data: readTime },
-      { name: "Pages Read", data: readPage }
-    ];
-    return <LineChart data={data} />;
+    // const data = [
+    //   { name: "Minutes Read", data: readTime },
+    //   { name: "Pages Read", data: readPage }
+    // ];
+    // return <LineChart data={data} />;
   }
 
   render() {
@@ -91,7 +69,29 @@ class HistoryMain extends Component {
         className={mainGrid}
       >
         <Grid item xs={7} className={leftTable}>
-          <div>{this.renderList()}</div>
+          <div>
+            {" "}
+            <Table className={leftTable}>
+              <colgroup>
+                <col style={{ width: "25%" }} />
+                <col style={{ width: "2%" }} />
+                <col style={{ width: "2%" }} />
+                <col style={{ width: "46%" }} />
+                <col style={{ width: "25%" }} />
+              </colgroup>
+
+              <TableHead>
+                <TableRow>
+                  <TableCell>Date</TableCell>
+                  <TableCell>Pages</TableCell>
+                  <TableCell>Minutes</TableCell>
+                  <TableCell>Title</TableCell>
+                  <TableCell>Author</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{this.renderList()}</TableBody>
+            </Table>
+          </div>
         </Grid>
         <Grid item xs={5} className={rightChart}>
           <div>
