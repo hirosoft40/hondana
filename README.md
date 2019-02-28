@@ -1,6 +1,6 @@
 ## Hondana
 
-<img src = "screenshot/mainpage.png"
+<img src = "screenshot/mainpage.png">
 
 ### Features
 
