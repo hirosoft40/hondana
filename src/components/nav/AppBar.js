@@ -20,9 +20,7 @@ import {
 } from "@material-ui/icons";
 
 const styles = theme => ({
-  root: {
-    width: "100%"
-  },
+  
   grow: {
     flexGrow: 1
   },
@@ -122,10 +120,10 @@ class PrimarySearchAppBar extends React.Component {
         <AppBar position="static" className="appbar">
           <Toolbar>
             <Typography className="title" variant="h6" color="inherit" noWrap>
-              <FontAwesomeIcon className="logo" icon={faBookOpen} />
               <span>
                 <Link to={"/"} className="brand">
                   Hondana
+                  <FontAwesomeIcon className="logo" icon={faBookOpen} />
                 </Link>
               </span>
             </Typography>
@@ -137,7 +135,7 @@ class PrimarySearchAppBar extends React.Component {
                 </IconButton>
               </Link>
 
-              <IconButton color="inherit">
+              <IconButton className="link white">
                 <Favorite />
               </IconButton>
               <Link to={"/history"} className="link white">
@@ -149,8 +147,7 @@ class PrimarySearchAppBar extends React.Component {
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
-                color="inherit"
-              >
+                className="link white"              >
                 <AccountCircle />
               </IconButton>
             </div>
@@ -158,8 +155,7 @@ class PrimarySearchAppBar extends React.Component {
               <IconButton
                 aria-haspopup="true"
                 onClick={this.handleMobileMenuOpen}
-                color="inherit"
-              >
+                className="link white"              >
                 <MoreIcon />
               </IconButton>
             </div>

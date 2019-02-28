@@ -13,6 +13,7 @@
   border-bottom: 1px solid gray;
   margin: 3px;
 }
+
 .searchBar:focus {
   background-color: none !important;
 }
@@ -21,4 +22,8 @@
 } */
 .MuiFormLabel:focused {
   color: none !important;
+}
+.searchbaricon {
+  background-color: #26a69a !important;
+  color: white!important;
 }

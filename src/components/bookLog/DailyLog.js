@@ -128,17 +128,6 @@ class DailyLog extends React.Component {
                 // value={this.state.dailyLog.pages}
                 InputProps={{ inputProps: { min: 0 } }}
               />
-              {/* <FormControlLabel
-                control={
-                  <Switch
-                    checked={this.state.completed}
-                    onChange={this.handleChange("completed")}
-                    value="completed"
-                    id="completed"
-                  />
-                }
-                label="Finished Reading"
-              /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose} color="primary">

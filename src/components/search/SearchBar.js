@@ -13,7 +13,7 @@ class SearchBar extends Component {
   // === searchQuery
   handleChange = event => {
     this.setState({ searchQuery: event.target.value });
-    };
+  };
 
   handleSubmit = event => {
     //== ok
@@ -36,10 +36,10 @@ class SearchBar extends Component {
           />
           <Fab
             aria-label="Search"
-            color="primary"
             onClick={this.handleSubmit}
+            className="searchbaricon"
           >
-            <SearchIcon />
+            <SearchIcon color="white" />
           </Fab>
         </form>
       </div>

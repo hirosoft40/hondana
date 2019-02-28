@@ -5,21 +5,6 @@ function bookLogReducer(state, action) {
     };
   }
 
-  // const {
-  //   bookid,
-  //   title,
-  //   author,
-  //   category,
-  //   pages,
-  //   journal,
-  //   startDate,
-  //   endDate,
-  //   completed,
-  //   imageURL,
-  //   currency,
-  //   price
-  // } = action.bookLog;
-
   switch (action.type) {
     case "ADD_BOOKLOG_MANUAL":
       return {
@@ -39,6 +24,15 @@ function bookLogReducer(state, action) {
           price: action.bookLog.price
         })
       };
+
+    // case "DELETE_BOOKLOG":
+    //   const updatedArray = state.bookLog.filter(item => {
+    //     return item.bookLog.title !== action.bookLog.title;
+    //   });
+    //   return {
+    //     ...state,
+    //     bookLog: updatedArray
+    //   };
 
     default:
       return state;

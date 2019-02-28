@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import "./HistoryMain.css";
 import { connect } from "react-redux";
-import ReactChartkick, { LineChart } from "react-chartkick";
+import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
 import Chart from "chart.js";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -27,14 +27,14 @@ class HistoryMain extends Component {
           const d = item.dailyLog.logDay.toDate();
           const newLogDay = d.toJSON().slice(0, 10);
           return (
-            <TableRow key={idx}>
+            <TableRow key={idx} className="tablerow">
               <TableCell component="th" scope="row">
                 {newLogDay}
               </TableCell>
               <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
               <TableCell align="right">{item.dailyLog.minutesRead}</TableCell>
               <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
-              <TableCell align="right">{item.dailyLog.dlauthor[0]}</TableCell>
+              <TableCell align="right">{item.dailyLog.dlauthor}</TableCell>
             </TableRow>
           );
         });
@@ -68,9 +68,9 @@ class HistoryMain extends Component {
         justify="space-between"
         className={mainGrid}
       >
-        <Grid item xs={7} className={leftTable}>
+        <Grid item xs={7}>
           <div>
-            {" "}
+            <h3>List of Books You Read</h3>
             <Table className={leftTable}>
               <colgroup>
                 <col style={{ width: "25%" }} />
@@ -80,7 +80,7 @@ class HistoryMain extends Component {
                 <col style={{ width: "25%" }} />
               </colgroup>
 
-              <TableHead>
+              <TableHead style={{ backgroundColor: "#f5f5f5" }}>
                 <TableRow>
                   <TableCell>Date</TableCell>
                   <TableCell>Pages</TableCell>
@@ -93,11 +93,19 @@ class HistoryMain extends Component {
             </Table>
           </div>
         </Grid>
-        <Grid item xs={5} className={rightChart}>
-          <div>
-            <h3>Daily Chart</h3>
+        <Grid item xs={5} className="charts">
+          <div className={rightChart}>
+            <div>
+              <h3>Pages and Minutes you read</h3>
+            </div>
+            {this.renderChart()}
           </div>
-          {this.renderChart()}
+          <div className={rightChart}>
+            <div>
+              <h3>No of books by months</h3>
+            </div>
+            <ColumnChart data={[["May", 54], ["Jun", 90],["Jul", 70], ["Aug", 80], ["Sep", 40],["Oct", 32], ["Nov", 46], ["Dec", 28],["Jan", 32], ["Feb", 46], ["Mar", 28]]} />
+          </div>
         </Grid>
       </Grid>
     );

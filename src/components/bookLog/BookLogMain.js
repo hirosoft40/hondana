@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Grid, Row } from "react-flexbox-grid";
 import "./BookLogMain.css";
-import { AddCircle, Search, EditRounded } from "@material-ui/icons";
+import { AddCircle, Search, EditRounded, Delete } from "@material-ui/icons";
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
 import { Link } from "react-router-dom";
@@ -49,6 +49,9 @@ class BookLogMain extends Component {
                   title={book.item.bookLog.title}
                   author={book.item.bookLog.author[0]}
                 />
+                <IconButton>
+                  <Delete />
+                </IconButton>
               </div>
             </div>
             <div className="bodyDiv">
@@ -73,6 +76,7 @@ class BookLogMain extends Component {
     return (
       <Grid container>
         <Row className="row">
+          {this.renderList()}
           <div className="sample">
             <IconButton
               aria-owns={anchorEl ? "simple-menu" : undefined}
@@ -96,7 +100,6 @@ class BookLogMain extends Component {
               </Link>
             </Menu>
           </div>
-          {this.renderList()}
         </Row>
       </Grid>
     );
