@@ -135,7 +135,7 @@ class PrimarySearchAppBar extends React.Component {
                 </IconButton>
               </Link>
 
-              <IconButton className="link white">
+              <IconButton className="link white" disabled>
                 <Favorite />
               </IconButton>
               <Link to={"/history"} className="link white">
@@ -152,7 +152,7 @@ class PrimarySearchAppBar extends React.Component {
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton
+              <IconButton disabled
                 aria-haspopup="true"
                 onClick={this.handleMobileMenuOpen}
                 className="link white"              >

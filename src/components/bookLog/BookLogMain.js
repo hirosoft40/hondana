@@ -24,6 +24,14 @@ class BookLogMain extends Component {
     this.setState({ anchorEl: null });
   };
 
+  editClick =event=>{
+    alert("EDIT..... THIS FUNCTION IS NOT YET AVAILABLE...Soon....")
+  }
+
+  onClick= event =>{
+    alert("DEEEELEEET..... THIS FUNCTION IS NOT YET AVAIABLE ")
+  };
+
   renderList() {
     if (!this.props.bookLog) {
       return "";
@@ -42,14 +50,14 @@ class BookLogMain extends Component {
               />
 
               <div className="iconDiv">
-                <IconButton>
+                <IconButton onClick={this.editClick}>
                   <EditRounded />
                 </IconButton>
                 <Dailylog
                   title={book.item.bookLog.title}
                   author={book.item.bookLog.author[0]}
                 />
-                <IconButton>
+                <IconButton onClick={this.onClick}>
                   <Delete />
                 </IconButton>
               </div>
