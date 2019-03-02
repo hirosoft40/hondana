@@ -20,6 +20,7 @@ const rightChart = "rightChart";
 ReactChartkick.addAdapter(Chart);
 
 class HistoryMain extends Component {
+  
   renderList() {
     return !this.props.dailyLog
       ? ""
@@ -41,8 +42,8 @@ class HistoryMain extends Component {
   }
 
   renderChart() {
-    let readTime = new Object(),
-      readPage = new Object();
+    let readTime = {},
+      readPage = {};
 
     const chartdata = !this.props.dailyLog
       ? ""
@@ -54,8 +55,8 @@ class HistoryMain extends Component {
         });
 
     const data = [
-      { name: "Minutes Read", data: readTime },
-      { name: "Pages Read", data: readPage }
+      { name: "Minutes Read", data: chartdata.readTime },
+      { name: "Pages Read", data: chartdata.readPage }
     ];
     return <LineChart data={data} />;
   }
@@ -113,10 +114,7 @@ class HistoryMain extends Component {
 }
 
 function mapStateToProps(state) {
-  // console.log("state", state);
-  // console.log("state.firebase", state.firestore.ordered.dailyLog);
   return {
-    // dailyLog: state.dailyLog.dailyLog
     dailyLog: state.firestore.ordered.dailyLog
   };
 }

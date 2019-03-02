@@ -6,9 +6,7 @@ import {
   DialogTitle,
   Button,
   MenuItem,
-  TextField,
-  FormControlLabel,
-  Switch
+  TextField
 } from "@material-ui/core";
 import "./AddBookDialog.css";
 import LibraryAdd from "@material-ui/icons/LibraryAdd";
@@ -21,26 +19,13 @@ const today = `${d.toJSON().slice(0, 10)}`;
 class AddBookDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      open: false,
-      today: "",
-      title: "",
-      author: "",
-      journal: "",
-      startDate: "",
-      endDate: "",
-      imageURL: "",
-      completed: false,
-      pages: 0
-    };
+    this.state = { open: false };
   }
 
   handleClickOpen = () => {
     this.setState({
       open: true,
-      today: today,
-      startDate: today,
-      endDate: today
+      today: today
     });
   };
 
@@ -54,30 +39,16 @@ class AddBookDialog extends React.Component {
     });
   };
 
-  handleCompleted(e) {
-    const comp = !this.state.completed ? true : false;
-    this.setState({
-      completed: comp
-    });
-  }
-
   handleSubmit = event => {
     event.preventDefault();
     this.props.onAddBook({
-      bookLog: {
-        title: this.state.title,
-        author: this.state.author,
-        category: "",
-        pages: this.state.pages,
-        journal: this.state.journal,
-        startDate: new Date(this.state.startDate),
-        endDate: new Date(this.state.endDate),
-        completed: this.state.completed,
-        imageURL:
-          "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
-        currency: "USD",
-        price: 0
-      }
+      ...this.state,
+      imageLinks: {
+        smallThumbnail:
+          "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+      },
+      listPrice: { amount: 0, currencyCode: "USD" },
+      startDate: this.state.today
     });
     this.setState({
       open: false
@@ -118,59 +89,20 @@ class AddBookDialog extends React.Component {
               <TextField
                 autoFocus
                 margin="dense"
-                id="author"
+                id="authors"
                 label="Author"
                 onChange={this.handleChange("author")}
                 fullWidth
               />
+
               <TextField
                 autoFocus
                 margin="dense"
-                id="journal"
-                label="Journal"
-                onChange={this.handleChange("journal")}
-                fullWidth
-              />
-              <div className="short">
-                <TextField
-                  required
-                  id="startdate"
-                  label="Start Date"
-                  onChange={this.handleChange("startDate")}
-                  defaultValue={this.state.today}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  id="enddate"
-                  label="End Date"
-                  onChange={this.handleChange("endDate")}
-                  defaultValue={this.state.today}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="pages"
-                  label="Total Pages"
-                  type="number"
-                  onChange={this.handleChange("pages")}
-                  InputProps={{ inputProps: { min: 0 } }}
-                />
-              </div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={this.state.completed}
-                    onChange={this.handleChange("completed")}
-                    value="completed"
-                    id="completed"
-                  />
-                }
-                label="Finished Reading"
+                id="pageCount"
+                label="Total Pages of this book"
+                type="number"
+                onChange={this.handleChange("pages")}
+                InputProps={{ inputProps: { min: 0 } }}
               />
             </DialogContent>
             <DialogActions>
@@ -187,7 +119,6 @@ class AddBookDialog extends React.Component {
     );
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return {

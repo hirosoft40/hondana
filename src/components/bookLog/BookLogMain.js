@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Grid, Row } from "react-flexbox-grid";
 import "./BookLogMain.css";
 import { AddCircle, Search, EditRounded, Delete } from "@material-ui/icons";
-import { Menu, MenuItem, IconButton } from "@material-ui/core";
+import {
+  Menu,
+  MenuItem,
+  IconButton
+} from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
 import { Link } from "react-router-dom";
 import addBookLogManual from "../actions/addBookLogManual";
@@ -24,29 +28,25 @@ class BookLogMain extends Component {
     this.setState({ anchorEl: null });
   };
 
-  editClick =event=>{
-    alert("EDIT..... THIS FUNCTION IS NOT YET AVAILABLE...Soon....")
-  }
-
-  onClick= event =>{
-    alert("DEEEELEEET..... THIS FUNCTION IS NOT YET AVAIABLE ")
+  editClick = event => {
+    alert("EDIT..... THIS FUNCTION IS NOT YET AVAILABLE...Soon....");
   };
 
-  renderList() {
-    if (!this.props.bookLog) {
+  onClick = event => {
+    alert("DEEEELEEET..... THIS FUNCTION IS NOT YET AVAIABLE ");
+  };
+
+  renderList(books) {
+    if (!books) {
       return "";
     } else {
-      return this.props.bookLog.map(book => {
-        console.log(book.item.bookLog.startDate.toDate());
-        const d = book.item.bookLog.startDate.toDate();
-        const newStartDay = d.toJSON().slice(0, 10);
-        // const newStartDay = "d.toJSON().slice(0, 10)";
+      return books.map((book, idx) => {
         return (
-          <div className="mainDiv">
+          <div className="mainDiv" key={idx} id={book.id}>
             <div className="headerDiv">
               <img
-                src={book.item.bookLog.imageURL}
-                alt={book.item.bookLog.title}
+                src={book.item.imageLinks.smallThumbnail}
+                alt={book.item.title}
               />
 
               <div className="iconDiv">
@@ -54,8 +54,9 @@ class BookLogMain extends Component {
                   <EditRounded />
                 </IconButton>
                 <Dailylog
-                  title={book.item.bookLog.title}
-                  author={book.item.bookLog.author[0]}
+                  dltitle={book.item.title}
+                  dlauthor={book.item.authors}
+                  bookId={book.id}
                 />
                 <IconButton onClick={this.onClick}>
                   <Delete />
@@ -63,14 +64,15 @@ class BookLogMain extends Component {
               </div>
             </div>
             <div className="bodyDiv">
-              <div className="title">{book.item.bookLog.title}</div>
-              <div>{book.item.bookLog.author[0]}</div>
+              <div className="title">{book.item.title}</div>
+              <div>{book.item.authors}</div>
               <div>
-                {book.item.bookLog.pages
-                  ? `${book.item.bookLog.pages} Pages`
-                  : ""}
+                {/* Read "" pages of{" "} */}
+                {book.item.pageCount
+                  ? `${book.item.pageCount} Pages`
+                  : "the book"}
               </div>
-              <div>Started Reading on {newStartDay} </div>
+              {/* <div>Started Reading on {newStartDay} </div> */}
             </div>
           </div>
         );
@@ -82,9 +84,9 @@ class BookLogMain extends Component {
     const { anchorEl } = this.state;
 
     return (
-      <Grid container>
+      <Grid>
         <Row className="row">
-          {this.renderList()}
+          {this.renderList(this.props.bookLog)}
           <div className="sample">
             <IconButton
               aria-owns={anchorEl ? "simple-menu" : undefined}

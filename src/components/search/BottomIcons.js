@@ -7,6 +7,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { connect } from "react-redux";
 import addBookLogManual from "../actions/addBookLogManual";
 import { Link } from "react-router-dom";
+
 class BottomIcons extends React.Component {
   state = {
     anchorEl: null
@@ -20,19 +21,10 @@ class BottomIcons extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  render() {
+  renderList() {
     const { anchorEl } = this.state;
     const { book, sale } = this.props;
-    const img = book.hasOwnProperty("imageLinks")
-      ? book.imageLinks.smallThumbnail
-      : "";
-    const cat = book.categories ? book.categories : "";
-    const pgCount = book.pageCount ? book.pageCount : "";
-    const currencyCode =
-      sale.saleability === "FOR_SALE" ? sale.listPrice : "USD";
-    const amount = sale.saleability === "FOR_SALE" ? sale.listPrice : 0;
-    // const d = new Date();
-    // const today = `${d.toJSON().slice(0, 10)}`;
+    const { saleability, buyLink } = this.props.sale;
 
     return (
       <div className="buttomnav">
@@ -53,25 +45,10 @@ class BottomIcons extends React.Component {
           <MenuItem
             className="popText"
             onClick={() =>
-              this.props.onAddBook(
-                {
-                  bookLog: {
-                    // bookid: this.props.key,
-                    title: this.props.book.title,
-                    author: this.props.book.authors,
-                    category: cat,
-                    pages: pgCount,
-                    journal: "",
-                    startDate: new Date(),
-                    endDate: "",
-                    completed: false,
-                    imageURL: img,
-                    currency: currencyCode,
-                    price: amount
-                  }
-                }
-                // console.log("addFromSearch", bookLog)
-              )
+              this.props.onAddBook({
+                ...book,
+                ...sale
+              })
             }
           >
             <Link to={"/"} className="link">
@@ -83,9 +60,9 @@ class BottomIcons extends React.Component {
             <Favorite className="popIcon" />
             Add to Favorite
           </MenuItem>
-          {typeof this.props.book.previewLink !== "undefined" ? (
+          {typeof book.previewLink !== "undefined" ? (
             <MenuItem
-              href={this.props.book.previewLink}
+              href={book.previewLink}
               target="_blank"
               className="popText"
             >
@@ -95,12 +72,9 @@ class BottomIcons extends React.Component {
           ) : (
             ""
           )}
-          {this.props.sale.saleability === "FOR_SALE" ? (
-            <MenuItem
-              href={this.props.sale.buyLink}
-              target="_blank"
-              className="popText"
-            >
+
+          {saleability === "FOR_SALE" ? (
+            <MenuItem href={buyLink} target="_blank" className="popText">
               <AddShoppingCartIcon className="popIcon" />
               Buy on GooglePlay
             </MenuItem>
@@ -110,6 +84,10 @@ class BottomIcons extends React.Component {
         </Menu>
       </div>
     );
+  }
+
+  render() {
+    return <div>{this.renderList()}</div>;
   }
 }
 function mapDispatchToProps(dispatch) {

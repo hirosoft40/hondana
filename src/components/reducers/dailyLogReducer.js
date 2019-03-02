@@ -9,15 +9,7 @@ function dailyLogReducer(state, action) {
     case "ADD_DAILY_LOG":
       return {
         ...state,
-        dailyLog: state.dailyLog.concat({
-          dltitle: action.dailyLog.dltitle,
-          dlauthor: action.dailyLog.dlauthor,
-          logDay: action.dailyLog.logDay,
-          pgRead: action.dailyLog.pgRead,
-          minutesRead: action.dailyLog.minutesRead,
-          totalRead: action.dailyLog.totalRead,
-          totalTime: action.dailyLog.totalTime
-        })
+        dailyLog: state.dailyLog.concat(action.dailyLog)
       };
     case "ADD_DAILY_LOG_ERROR":
       console.log("create project error");
