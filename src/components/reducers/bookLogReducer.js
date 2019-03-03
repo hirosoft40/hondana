@@ -11,14 +11,28 @@ function bookLogReducer(state, action) {
         ...state,
         bookLog: state.bookLog.concat(action.bookLog)
       };
+    case "UPDATE_FAVORITE":
+      let updatedBookLog = state.bookLog.filter(item => {
+        return state.bookLog.id === action.bookLog.id;
+      });
+      console.log("updatedBooklog", updatedBookLog);
+      return {
+        ...state,
+        bookLog: state.bookLog.concat(updatedBookLog)
+      };
 
+    // case "UPDATE_COMPLETED":
+    //   return {
+    //     ...state,
+    //     bookLog: state.bookLog.concat(action.bookLog)
+    //   };
     case "DELETE_BOOKLOG":
-      const updatedArray = state.bookLog.filter(od => {
+      const afterDelete = state.bookLog.filter(od => {
         return state.bookLog.id !== action.bookLog.id;
       });
       return {
         ...state,
-        bookLog: updatedArray
+        bookLog: afterDelete
       };
     // case "DELETE_BOOKLOG_ERROR":
     //   console.log("delete booklog error");

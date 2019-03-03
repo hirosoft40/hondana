@@ -58,9 +58,7 @@ class AddBookDialog extends React.Component {
       listPrice: { amount: 0, currencyCode: "USD" },
       startDate: this.state.startDate
         ? new Date(this.state.startDate)
-        : new Date(),
-      completed: false,
-      favorite: false
+        : new Date()
     });
     this.setState({
       open: false

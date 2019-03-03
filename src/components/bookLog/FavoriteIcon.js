@@ -2,21 +2,32 @@ import React from "react";
 import { Favorite } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";
 import { connect } from "react-redux";
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
-import updateBookLog from "../actions/updateBookLog";
+import updateFavorite from "../actions/updateFavorite";
 
 class FavoriteIcon extends React.Component {
-  state = {
-    favorite: this.props.favorite,
-    id: this.props.id
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite: false,
+      id: null
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      favorite: false
+    });
+  }
 
   handleChange = event => {
     event.preventDefault();
-    this.setState(prevState => ({
-      favorite: !prevState.favorite
-    }));
+    this.setState({
+      favorite: this.state.favorite ? false : true
+    });
+    this.props.addFavorite({
+      favorite: !this.state.favorite,
+      id: this.props.id
+    });
   };
 
   render() {
@@ -30,16 +41,11 @@ class FavoriteIcon extends React.Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateFav: favStatus => dispatch(updateBookLog(favStatus))
+    addFavorite: data => dispatch(updateFavorite(data))
   };
 }
 
-export default FavoriteIcon;
-
-// export default compose(
-//   connect(
-//     null,
-//     mapDispatchToProps
-//   ),
-//   firestoreConnect([{ collection: "bookLog" }])(FavoriteIcon)
-// );
+export default connect(
+  null,
+  mapDispatchToProps
+)(FavoriteIcon);

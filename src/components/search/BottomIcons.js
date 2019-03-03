@@ -58,8 +58,6 @@ class BottomIcons extends React.Component {
               this.props.onAddBook({
                 ...book,
                 ...sale,
-                completed: false,
-                favorite: false,
                 startDate: new Date()
               })
             }
