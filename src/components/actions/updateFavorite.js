@@ -1,5 +1,5 @@
 const updateFavorite = item => {
-  console.log("I am in action ", item);
+  // console.log("I am in action ", item);
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     firestore

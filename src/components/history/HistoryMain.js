@@ -20,24 +20,24 @@ const rightChart = "rightChart";
 ReactChartkick.addAdapter(Chart);
 
 class HistoryMain extends Component {
-  
   renderList() {
     return !this.props.dailyLog
       ? ""
       : this.props.dailyLog.map((item, idx) => {
-          const d = item.dailyLog.logDay.toDate();
-          const newLogDay = d.toJSON().slice(0, 10);
-          return (
-            <TableRow key={idx} className="tablerow">
-              <TableCell component="th" scope="row">
-                {newLogDay}
-              </TableCell>
-              <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
-              <TableCell align="right">{item.dailyLog.minutesRead}</TableCell>
-              <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
-              <TableCell align="right">{item.dailyLog.dlauthor}</TableCell>
-            </TableRow>
-          );
+          // console.log(item);
+          //   const d = item.dailyLog.logDay.toDate();
+          //   const newLogDay = d.toJSON().slice(0, 10);
+          //   return (
+          //     <TableRow key={idx} className="tablerow">
+          //       <TableCell component="th" scope="row">
+          //         {newLogDay}
+          //       </TableCell>
+          //       <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
+          //       <TableCell align="right">{item.dailyLog.minutesRead}</TableCell>
+          //       <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
+          //       <TableCell align="right">{item.dailyLog.dlauthor}</TableCell>
+          //     </TableRow>
+          //   );
         });
   }
 
@@ -58,7 +58,8 @@ class HistoryMain extends Component {
       { name: "Minutes Read", data: chartdata.readTime },
       { name: "Pages Read", data: chartdata.readPage }
     ];
-    return <LineChart data={data} />;
+    console.log(data)
+    // return <LineChart data={data} />;
   }
 
   render() {
@@ -105,7 +106,21 @@ class HistoryMain extends Component {
             <div>
               <h3>No of books by months</h3>
             </div>
-            <ColumnChart data={[["May", 54], ["Jun", 90],["Jul", 70], ["Aug", 80], ["Sep", 40],["Oct", 32], ["Nov", 46], ["Dec", 28],["Jan", 32], ["Feb", 46], ["Mar", 28]]} />
+            <ColumnChart
+              data={[
+                ["May", 54],
+                ["Jun", 90],
+                ["Jul", 70],
+                ["Aug", 80],
+                ["Sep", 40],
+                ["Oct", 32],
+                ["Nov", 46],
+                ["Dec", 28],
+                ["Jan", 32],
+                ["Feb", 46],
+                ["Mar", 28]
+              ]}
+            />
           </div>
         </Grid>
       </Grid>
@@ -114,6 +129,7 @@ class HistoryMain extends Component {
 }
 
 function mapStateToProps(state) {
+  // console.log("historystate", state);
   return {
     dailyLog: state.firestore.ordered.dailyLog
   };

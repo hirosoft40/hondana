@@ -57,13 +57,7 @@ class DailyLog extends React.Component {
   };
 
   render() {
-    const {
-      open,
-      dltitle,
-      dlauthor,
-      logDay,
-      errorText
-    } = this.state;
+    const { open, dltitle, dlauthor, logDay, errorText } = this.state;
 
     return (
       <div>
@@ -95,7 +89,7 @@ class DailyLog extends React.Component {
                   shrink: true
                 }}
               />
-              <div>
+              <div className="nums">
                 <TextField
                   autoFocus
                   margin="dense"
@@ -121,14 +115,7 @@ class DailyLog extends React.Component {
                   InputProps={{ inputProps: { min: 0 } }}
                 />
               </div>
-              <TextField
-                autoFocus
-                margin="dense"
-                id="journal"
-                label="Journal"
-                onChange={this.handleChange("journal")}
-                fullWidth
-              />
+
               <div className="short">
                 <TextField
                   required
@@ -150,6 +137,17 @@ class DailyLog extends React.Component {
                   }}
                 />
               </div>
+              <TextField
+                autoFocus
+                margin="dense"
+                id="journal"
+                label="Journal"
+                multiline={true}
+                rows={3}
+                rowsMax={4}
+                onChange={this.handleChange("journal")}
+                fullWidth
+              />
             </DialogContent>
 
             <DialogActions>

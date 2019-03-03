@@ -21,21 +21,12 @@ class BottomIcons extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  // handleSubmit = (book, sale) => {
-  //   console.log("book", book, "sale",sale);
-  //   // this.props.onAddBook({
-  //   //   ...book,
-  //   //   ...sale,
-  //   //   completed: false,
-  //   //   favorite: false
-  //   // });
-  // };
-
   renderList() {
     const { anchorEl } = this.state;
-    const { book, sale } = this.props;
+    const { book, sale, id } = this.props;
     const { saleability, buyLink } = this.props.sale;
 
+    // console.log(id);
     return (
       <div className="buttomnav">
         <IconButton

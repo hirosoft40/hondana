@@ -32,8 +32,8 @@ class AddBookDialog extends React.Component {
 
   handleClickOpen = () => {
     this.setState({
-      open: true
-      // startDate: today
+      open: true,
+      startDate: today
     });
   };
 

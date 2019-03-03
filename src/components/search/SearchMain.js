@@ -43,6 +43,7 @@ class SearchMain extends Component {
           }
         })
         .then(response => {
+          // console.log(response);
           if (response.data.totalItems > 0) {
             this.setState({
               books: response.data.items,

@@ -24,6 +24,7 @@ const SearchResultsList = ({ books, onBookSelect }) => {
             className={style.booklist}
             key={book.id}
             onBookSelect={onBookSelect}
+            id={book.id}
             book={book.volumeInfo}
             sale={book.saleInfo}
           />
