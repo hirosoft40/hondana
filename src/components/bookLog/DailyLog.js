@@ -7,23 +7,18 @@ import {
   DialogTitle,
   Button,
   TextField,
-  IconButton,
-  FormControlLabel,
-  Switch
+  IconButton
 } from "@material-ui/core";
 import { addDailyLog } from "../actions/addDailyLog";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import "./DailyLog.css";
-import BookLogMain from "./BookLogMain";
 
 const d = new Date();
 const logDay = `${d.toJSON().slice(0, 10)}`;
 
 class DailyLog extends React.Component {
-  // constructor(props) {
-  //   super(props);
   state = { open: false, completed: false, errorText: "" };
 
   onClickOpen = () => {
@@ -41,13 +36,6 @@ class DailyLog extends React.Component {
   };
 
   handleChange = name => event => {
-    // if((name==="pgRead" || name==="minutesRead") && event.target.value<0)
-    // return this.setState({errorText :"Number must be greater than 0" })
-    // else if(name==='logDay' && typeof event.target.value !==)
-
-    // } else {
-
-    // }
     this.setState({
       [name]: event.target.value
     });
@@ -55,7 +43,6 @@ class DailyLog extends React.Component {
 
   onSubmitDailyLog = event => {
     event.preventDefault();
-
     this.props.onDailyLogAdd({ ...this.state, bookId: this.props.bookId });
     this.setState({
       open: false
@@ -63,10 +50,10 @@ class DailyLog extends React.Component {
   };
 
   handleCompleted = e => {
-    if (this.state.completed) return;
-    this.setState({
-      completed: true
-    });
+    e.preventDefault();
+    this.setState(prevState => ({
+      completed: !prevState.completed
+    }));
   };
 
   render() {
@@ -75,7 +62,6 @@ class DailyLog extends React.Component {
       dltitle,
       dlauthor,
       logDay,
-      completed,
       errorText
     } = this.state;
 
@@ -135,17 +121,6 @@ class DailyLog extends React.Component {
                   InputProps={{ inputProps: { min: 0 } }}
                 />
               </div>
-              <FormControlLabel
-                control={
-                  <Switch
-                    checked={completed}
-                    onChange={this.handleCompleted}
-                    value={completed}
-                    id="completed"
-                  />
-                }
-                label="Finished Reading"
-              />
               <TextField
                 autoFocus
                 margin="dense"

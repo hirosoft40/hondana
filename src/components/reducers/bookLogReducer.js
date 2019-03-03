@@ -12,14 +12,17 @@ function bookLogReducer(state, action) {
         bookLog: state.bookLog.concat(action.bookLog)
       };
 
-    // case "DELETE_BOOKLOG":
-    //   const updatedArray = state.bookLog.filter(item => {
-    //     return item.bookLog.title !== action.bookLog.title;
-    //   });
-    //   return {
-    //     ...state,
-    //     bookLog: updatedArray
-    //   };
+    case "DELETE_BOOKLOG":
+      const updatedArray = state.bookLog.filter(od => {
+        return state.bookLog.id !== action.bookLog.id;
+      });
+      return {
+        ...state,
+        bookLog: updatedArray
+      };
+    // case "DELETE_BOOKLOG_ERROR":
+    //   console.log("delete booklog error");
+    //   return state;
 
     default:
       return state;

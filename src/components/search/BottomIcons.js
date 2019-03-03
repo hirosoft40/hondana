@@ -5,7 +5,7 @@ import { Book, LibraryAdd, Add, Favorite } from "@material-ui/icons";
 import "./BottomIcons.css";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { connect } from "react-redux";
-import addBookLogManual from "../actions/addBookLogManual";
+import { addBookLogManual } from "../actions/addBookLogManual";
 import { Link } from "react-router-dom";
 
 class BottomIcons extends React.Component {
@@ -20,6 +20,16 @@ class BottomIcons extends React.Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  // handleSubmit = (book, sale) => {
+  //   console.log("book", book, "sale",sale);
+  //   // this.props.onAddBook({
+  //   //   ...book,
+  //   //   ...sale,
+  //   //   completed: false,
+  //   //   favorite: false
+  //   // });
+  // };
 
   renderList() {
     const { anchorEl } = this.state;
@@ -47,7 +57,10 @@ class BottomIcons extends React.Component {
             onClick={() =>
               this.props.onAddBook({
                 ...book,
-                ...sale
+                ...sale,
+                completed: false,
+                favorite: false,
+                startDate: new Date()
               })
             }
           >

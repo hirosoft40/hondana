@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,7 @@ import {
 } from "@material-ui/core";
 import "./AddBookDialog.css";
 import LibraryAdd from "@material-ui/icons/LibraryAdd";
-import addBookLogManual from "../actions/addBookLogManual";
+import { addBookLogManual } from "../actions/addBookLogManual";
 import { connect } from "react-redux";
 
 const d = new Date();
@@ -19,13 +20,20 @@ const today = `${d.toJSON().slice(0, 10)}`;
 class AddBookDialog extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { open: false };
+    this.state = {
+      open: false,
+      errorText: "",
+      title: "",
+      author: "",
+      pageCount: 0,
+      startDate: null
+    };
   }
 
   handleClickOpen = () => {
     this.setState({
-      open: true,
-      today: today
+      open: true
+      // startDate: today
     });
   };
 
@@ -48,7 +56,11 @@ class AddBookDialog extends React.Component {
           "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
       },
       listPrice: { amount: 0, currencyCode: "USD" },
-      startDate: this.state.today
+      startDate: this.state.startDate
+        ? new Date(this.state.startDate)
+        : new Date(),
+      completed: false,
+      favorite: false
     });
     this.setState({
       open: false
@@ -73,7 +85,11 @@ class AddBookDialog extends React.Component {
             className="mainDialog"
             aria-labelledby="form-dialog-title"
           >
-            <DialogTitle className="dialogtitle" id="form-dialog-title">
+            <DialogTitle
+              className="dialogtitle"
+              id="form-dialog-title"
+              onClick={this.handleClose}
+            >
               Add Book Information
             </DialogTitle>
             <DialogContent className="dialog">
@@ -94,12 +110,22 @@ class AddBookDialog extends React.Component {
                 onChange={this.handleChange("author")}
                 fullWidth
               />
-
+              <TextField
+                required
+                id="startDate"
+                label="Started Reading on "
+                onChange={this.handleChange("startDate")}
+                defaultValue={today}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <br />
               <TextField
                 autoFocus
                 margin="dense"
                 id="pageCount"
-                label="Total Pages of this book"
+                label="Pages of the book"
                 type="number"
                 onChange={this.handleChange("pages")}
                 InputProps={{ inputProps: { min: 0 } }}
@@ -119,6 +145,12 @@ class AddBookDialog extends React.Component {
     );
   }
 }
+
+AddBookDialog.propTypes = {
+  title: PropTypes.string,
+  authors: PropTypes.string,
+  pageCount: PropTypes.number
+};
 
 function mapDispatchToProps(dispatch) {
   return {

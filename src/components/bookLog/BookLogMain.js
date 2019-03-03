@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import { Grid, Row } from "react-flexbox-grid";
 import "./BookLogMain.css";
-import { AddCircle, Search, EditRounded, Delete } from "@material-ui/icons";
-import {
-  Menu,
-  MenuItem,
-  IconButton
-} from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
-import { Link } from "react-router-dom";
-import addBookLogManual from "../actions/addBookLogManual";
-import { connect } from "react-redux";
 import Dailylog from "./DailyLog";
-import { firestoreConnect } from "react-redux-firebase";
+import FavoriteIcon from "./FavoriteIcon";
+import CompletedIcon from "./CompletedIcon";
+import DeleteIcon from "./DeleteIcon";
+import { addBookLogManual } from "../actions/addBookLogManual";
 import { compose } from "redux";
+import { Link } from "react-router-dom";
+import { Grid, Row } from "react-flexbox-grid";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { AddCircle, Search } from "@material-ui/icons";
+import { Menu, MenuItem, IconButton } from "@material-ui/core";
 
 class BookLogMain extends Component {
   state = {
@@ -28,56 +27,55 @@ class BookLogMain extends Component {
     this.setState({ anchorEl: null });
   };
 
-  editClick = event => {
-    alert("EDIT..... THIS FUNCTION IS NOT YET AVAILABLE...Soon....");
-  };
-
-  onClick = event => {
-    alert("DEEEELEEET..... THIS FUNCTION IS NOT YET AVAIABLE ");
-  };
-
   renderList(books) {
-    if (!books) {
-      return "";
-    } else {
-      return books.map((book, idx) => {
-        return (
-          <div className="mainDiv" key={idx} id={book.id}>
-            <div className="headerDiv">
-              <img
-                src={book.item.imageLinks.smallThumbnail}
-                alt={book.item.title}
-              />
+    if (!books) return;
+    return books.map((book, idx) => {
+      // console.log("book", );
+      // const d = book.startDate;
+      // const newStartDay = d.toJSON().slice(0, 10);
 
-              <div className="iconDiv">
-                <IconButton onClick={this.editClick}>
-                  <EditRounded />
-                </IconButton>
-                <Dailylog
-                  dltitle={book.item.title}
-                  dlauthor={book.item.authors}
-                  bookId={book.id}
-                />
-                <IconButton onClick={this.onClick}>
-                  <Delete />
-                </IconButton>
-              </div>
+      const {
+        title,
+        authors,
+        pageCount,
+        imageLinks,
+        completed,
+        favorite,
+        startDate
+      } = book.item;
+
+      return (
+        <div className="mainDiv" key={idx} id={book.id}>
+          <div className="headerDiv">
+            <div className="leftIcon">
+              <DeleteIcon id={book.id} dltitle={title} dlauthor={authors} />
             </div>
-            <div className="bodyDiv">
-              <div className="title">{book.item.title}</div>
-              <div>{book.item.authors}</div>
-              <div>
-                {/* Read "" pages of{" "} */}
-                {book.item.pageCount
-                  ? `${book.item.pageCount} Pages`
-                  : "the book"}
-              </div>
-              {/* <div>Started Reading on {newStartDay} </div> */}
+            <img src={imageLinks.smallThumbnail} alt={title} />
+            <div className="iconDiv">
+              <Dailylog dltitle={title} dlauthor={authors} bookId={book.id} />
+              <CompletedIcon id={book.id} completed={completed} />
+              <FavoriteIcon id={book.id} favorite={favorite} />
             </div>
           </div>
-        );
-      });
-    }
+
+          <div className="bodyDiv compStatus">
+            <div className="title">{title}</div>
+            <div>{authors}</div>
+            <div>
+              {/* Read "" pages of{" "} */}
+              Total Pages: {pageCount ? `${pageCount} Pages` : " unknown "}
+            </div>
+            <div>
+              Started Reading on{" "}
+              {startDate
+                .toDate()
+                .toJSON()
+                .slice(0, 10)}
+            </div>
+          </div>
+        </div>
+      );
+    });
   }
 
   render() {

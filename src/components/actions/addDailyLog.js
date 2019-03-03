@@ -12,7 +12,8 @@ export const addDailyLog = item => {
         });
       })
       .catch(error => {
-        dispatch({ type: "ADD_DAILY_LOG_ERROR", error });
+        console.log("ADD_DAILY_LOG_ERROR", error);
+        dispatch({ type: "ADD_DAILY_LOG_ERROR" });
       });
   };
 };

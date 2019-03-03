@@ -1,4 +1,4 @@
-const addBookLogManual = item => {
+export const addBookLogManual = item => {
   // console.log("this is book detail",item)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
@@ -14,4 +14,3 @@ const addBookLogManual = item => {
   };
 };
 
-export default addBookLogManual;

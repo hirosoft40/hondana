@@ -20,7 +20,6 @@ import {
 } from "@material-ui/icons";
 
 const styles = theme => ({
-  
   grow: {
     flexGrow: 1
   },
@@ -147,15 +146,18 @@ class PrimarySearchAppBar extends React.Component {
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
-                className="link white"              >
+                className="link white"
+              >
                 <AccountCircle />
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
-              <IconButton disabled
+              <IconButton
+                disabled
                 aria-haspopup="true"
                 onClick={this.handleMobileMenuOpen}
-                className="link white"              >
+                className="link white"
+              >
                 <MoreIcon />
               </IconButton>
             </div>
