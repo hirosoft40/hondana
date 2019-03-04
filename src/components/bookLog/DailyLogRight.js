@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { isLoaded, isEmpty } from "react-redux-firebase";
+import { firestoreConnect,isLoaded, isEmpty } from "react-redux-firebase";
 import { Col } from "react-flexbox-grid";
-import { firestoreConnect } from "react-redux-firebase";
 import "./DailyLogRight.css";
 
 function DailyLogRight({ dailyLog }) {
@@ -57,7 +56,6 @@ export default compose(
     null
   ),
   firestoreConnect(props => {
-    // console.log(props);
     if (!props.id) return [];
     return [
       {
