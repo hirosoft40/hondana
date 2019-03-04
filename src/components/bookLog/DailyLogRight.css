@@ -9,3 +9,7 @@
   text-decoration: underline;
   font-size: 1rem;
 }
+.error {
+  color: orange;
+  font-size: 0.9rem;
+}

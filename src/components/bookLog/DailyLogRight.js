@@ -12,7 +12,7 @@ function DailyLogRight({ dailyLog }) {
   }
 
   if (isEmpty(dailyLog)) {
-    return <div>You have not read this book yet.</div>;
+    return <p className="error">You have not read this book yet.</p>;
   }
 
   const pastRecord = dailyLog.map((item, idx) => {

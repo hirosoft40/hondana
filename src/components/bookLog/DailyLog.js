@@ -135,7 +135,6 @@ class DailyLog extends React.Component {
                       InputProps={{ inputProps: { min: 0 } }}
                     />
                     <TextField
-                      autoFocus
                       margin="dense"
                       id="minutesRead"
                       label="Minutes read"
@@ -146,7 +145,6 @@ class DailyLog extends React.Component {
                     />
 
                     <TextField
-                      autoFocus
                       margin="dense"
                       id="journal"
                       label="Journal"
