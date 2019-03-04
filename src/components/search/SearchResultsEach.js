@@ -32,7 +32,7 @@ const SearchResultsEach = ({ book, sale, id, onBookSelect }) => {
           />
           <Grid item xs className="cardBody">
             <h4>{title}</h4>
-            <span className="author">by {authors}</span>
+            <span className="authors">by {authors}</span>
             <p>
               {categories ? `${categories}` : ""}
               {pageCount ? ` - ${pageCount} pages` : ""}

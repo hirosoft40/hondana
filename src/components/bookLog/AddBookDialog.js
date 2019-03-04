@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 
 const d = new Date();
 const today = `${d.toJSON().slice(0, 10)}`;
+// let errorMsg = "";
 
 class AddBookDialog extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class AddBookDialog extends React.Component {
       open: false,
       errorText: "",
       title: "",
-      author: "",
+      authors: "",
       pageCount: 0,
       startDate: null
     };
@@ -49,6 +50,17 @@ class AddBookDialog extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const { title, authors } = this.state;
+    // error handling
+    if (!title || title.length < 1) {
+      this.setState({ errorText: "Please fill in Title" });
+      return;
+    }
+    if (!authors || authors.length < 1) {
+      this.setState({ errorText: "Please fill in Author" });
+      return;
+    }
+
     this.props.onAddBook({
       ...this.state,
       imageLinks: {
@@ -83,6 +95,8 @@ class AddBookDialog extends React.Component {
             className="mainDialog"
             aria-labelledby="form-dialog-title"
           >
+            <p className="error">{this.state.errorText}</p>
+
             <DialogTitle
               className="dialogtitle"
               id="form-dialog-title"
@@ -101,11 +115,12 @@ class AddBookDialog extends React.Component {
                 fullWidth
               />
               <TextField
+                required
                 autoFocus
                 margin="dense"
                 id="authors"
                 label="Author"
-                onChange={this.handleChange("author")}
+                onChange={this.handleChange("authors")}
                 fullWidth
               />
               <TextField

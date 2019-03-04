@@ -5,7 +5,6 @@ export const addBookLogManual = item => {
       .collection("bookLog")
       .add({ item })
       .then(() => {
-        // console.log("item.id",item.id);
         dispatch({
           type: "ADD_BOOKLOG_MANUAL",
           bookLog: item

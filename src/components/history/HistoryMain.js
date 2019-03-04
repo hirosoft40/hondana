@@ -34,8 +34,8 @@ class HistoryMain extends Component {
           //       </TableCell>
           //       <TableCell align="right">{item.dailyLog.pgRead}</TableCell>
           //       <TableCell align="right">{item.dailyLog.minutesRead}</TableCell>
-          //       <TableCell align="right">{item.dailyLog.dltitle}</TableCell>
-          //       <TableCell align="right">{item.dailyLog.dlauthor}</TableCell>
+          //       <TableCell align="right">{item.dailyLog.title}</TableCell>
+          //       <TableCell align="right">{item.dailyLog.authors}</TableCell>
           //     </TableRow>
           //   );
         });
@@ -58,7 +58,7 @@ class HistoryMain extends Component {
       { name: "Minutes Read", data: chartdata.readTime },
       { name: "Pages Read", data: chartdata.readPage }
     ];
-    console.log(data)
+    console.log(data);
     // return <LineChart data={data} />;
   }
 

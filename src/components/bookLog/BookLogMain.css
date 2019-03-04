@@ -38,7 +38,7 @@
 .mainDiv {
   /* box-sizing: conten-box; */
   border: 1px dotted rgb(175, 175, 175);
-  height: 260px;
+  height: 280px;
   width: 200px;
   display: block;
   /* flex-direction: row;

@@ -1,0 +1,11 @@
+.ulRecord {
+  list-style: none;
+  font-size: 0.9rem;
+}
+.data {
+  text-align: center;
+}
+.data p {
+  text-decoration: underline;
+  font-size: 1rem;
+}

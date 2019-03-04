@@ -30,10 +30,6 @@ class BookLogMain extends Component {
   renderList(books) {
     if (!books) return;
     return books.map((book, idx) => {
-      // console.log("book", );
-      // const d = book.startDate;
-      // const newStartDay = d.toJSON().slice(0, 10);
-
       const {
         title,
         authors,
@@ -44,22 +40,24 @@ class BookLogMain extends Component {
         startDate
       } = book.item;
 
+      let mainDivTitle = title.length < 45 ? title : title.slice(0, 45) + " ...";
+
       return (
         <div className="mainDiv" key={idx} id={book.id}>
           <div className="headerDiv">
             <div className="leftIcon">
-              <DeleteIcon id={book.id} dltitle={title} dlauthor={authors} />
+              <DeleteIcon id={book.id} title={title} authors={authors} />
             </div>
             <img src={imageLinks.smallThumbnail} alt={title} />
             <div className="iconDiv">
-              <Dailylog dltitle={title} dlauthor={authors} bookId={book.id} />
+              <Dailylog title={title} authors={authors} id={book.id} />
               <CompletedIcon id={book.id} completed={completed} />
               <FavoriteIcon id={book.id} favorite={favorite} />
             </div>
           </div>
 
           <div className="bodyDiv compStatus">
-            <div className="title">{title}</div>
+            <div className="title">{mainDivTitle}</div>
             <div>{authors}</div>
             <div>
               {/* Read "" pages of{" "} */}

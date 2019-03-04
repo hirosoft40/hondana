@@ -48,9 +48,9 @@ class DeleteBookLog extends Component {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {this.props.dltitle}
+              {this.props.title}
               <br />
-              by {this.props.dlauthor}
+              by {this.props.authors}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
