@@ -162,11 +162,11 @@ class DailyLog extends React.Component {
               </Row>
               <Row className="lastRow">
                 <DialogActions>
-                  <Button onClick={this.onClose} color="primary">
-                    Cancel
-                  </Button>
                   <Button onClick={this.onSubmitDailyLog} color="primary">
                     Add to Daily Log
+                  </Button>
+                  <Button onClick={this.onClose} color="primary">
+                    Cancel
                   </Button>
                 </DialogActions>
               </Row>
