@@ -26,7 +26,7 @@
 [ Back-end ]
 
 - Axios
-- Thunk
+- Redux Thunk
 
 [ API ]
 Google Book API
