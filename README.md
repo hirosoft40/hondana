@@ -1,4 +1,4 @@
-## Hondana : My Bookshelf
+## My Hondana : My Bookshelf
 
 <img src = "screenshot/mainpage.png">
 
