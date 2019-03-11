@@ -1,6 +1,10 @@
-## Hondana
+## MyHondana: My Bookshelf
 
+<h3> Main Page</h3>
 <img src = "screenshot/mainpage.png">
+
+<h3> Table Page</h3>
+<img src = "screenshot/graph.png">
 
 ### Features
 
@@ -17,6 +21,7 @@
 - Material-ui
 - CSS, FontAwesome
 - Chartkick
+- mui-datatables
 
 [ Back-end ]
 

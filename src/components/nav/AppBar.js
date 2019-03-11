@@ -121,7 +121,7 @@ class PrimarySearchAppBar extends React.Component {
             <Typography className="title" variant="h6" color="inherit" noWrap>
               <span>
                 <Link to={"/"} className="brand">
-                  Hondana
+                  MyHondana
                   <FontAwesomeIcon className="logo" icon={faBookOpen} />
                 </Link>
               </span>
@@ -134,9 +134,9 @@ class PrimarySearchAppBar extends React.Component {
                 </IconButton>
               </Link>
 
-              <IconButton className="link white" disabled>
+              {/* <IconButton className="link white" disabled>
                 <Favorite />
-              </IconButton>
+              </IconButton> */}
               <Link to={"/history"} className="link white">
                 <IconButton color="inherit">
                   <FontAwesomeIcon icon={faBookReader} />

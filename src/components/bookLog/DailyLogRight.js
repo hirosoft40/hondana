@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firestoreConnect,isLoaded, isEmpty } from "react-redux-firebase";
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { Col } from "react-flexbox-grid";
 import "./DailyLogRight.css";
+import moment from "moment";
 
 function DailyLogRight({ dailyLog }) {
   if (!isLoaded(dailyLog)) {
@@ -15,13 +16,9 @@ function DailyLogRight({ dailyLog }) {
   }
 
   const pastRecord = dailyLog.map((item, idx) => {
-    // console.log("item", item);
     const { logDay, pgRead, minutesRead } = item.item;
     const histDay = logDay
-      ? logDay
-          .toDate()
-          .toJSON()
-          .slice(0, 10)
+      ? moment(logDay.toDate().toJSON()).format("YYYY-MM-DD")
       : "";
     const record1 = `${histDay}: ${pgRead} pages(${minutesRead} mins)`;
 

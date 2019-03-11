@@ -34,13 +34,13 @@ class DailyLog extends React.Component {
     });
   };
 
-  isValidDate(dateString) {
-    let regEx = /^\d{4}-\d{2}-\d{2}$/;
-    if (!dateString.match(regEx)) return false; // Invalid format
-    let dt = new Date(dateString);
-    if (Number.isNaN(dt.getTime())) return false; // Invalid date
-    return d.toISOString().slice(0, 10) === dateString;
-  }
+  // isValidDate(dateString) {
+  //   let regEx = /^\d{2}\d{2}-\d{2}$/;
+  //   if (!dateString.match(regEx)) return false; // Invalid format
+  //   let dt = new Date(dateString);
+  //   if (Number.isNaN(dt.getTime())) return false; // Invalid date
+  //   return d.toJSON().slice(0, 10) === dateString;
+  // }
 
   onClose = () => {
     this.setState({ open: false });
@@ -61,17 +61,19 @@ class DailyLog extends React.Component {
       });
       return;
     }
-    if (!this.isValidDate(this.state.logDay)) {
-      this.setState({
-        errorText: "Invalid Log Date. Format should be YYYY-MM-DD"
-      });
-      return;
-    }
+    // if (!this.isValidDate(this.state.logDay)) {
+    //   this.setState({
+    //     errorText: "Invalid Log Date."
+    //   });
+    //   return;
+    // }
 
     this.props.onDailyLogAdd({
       ...this.state,
       logDay: new Date(this.state.logDay),
-      bookId: this.props.id
+      bookId: this.props.id,
+      pgRead: parseInt(this.state.pgRead),
+      minutesRead: parseInt(this.state.minutesRead)
     });
     this.setState({
       open: false
@@ -117,6 +119,7 @@ class DailyLog extends React.Component {
                       required
                       id="logDay"
                       label="Log Date"
+                      type="Date"
                       onChange={this.handleChange("logDay")}
                       defaultValue={logDay}
                       InputLabelProps={{

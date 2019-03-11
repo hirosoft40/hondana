@@ -13,6 +13,8 @@ import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
 import Chart from "chart.js";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
+import moment from "moment";
+import MUIDataTable from "mui-datatables";
 
 const mainGrid = "mainGrid";
 const leftTable = "leftTable";
@@ -29,6 +31,12 @@ function HistoryMain({ dailyLog }) {
     return <p className="error">No Data Available</p>;
   }
 
+  // For Data Table
+  let dataArray = [];
+  const columns = ["Date", "Pages", "Minutes", "Title", "Author"];
+  // const options = { resizableColumns: true };
+
+  // === creating data for data Table
   const renderList = dailyLog.map((item, idx) => {
     const { logDay, title, authors, pgRead, minutesRead } = item.item;
     const newLogDay = logDay
@@ -37,20 +45,7 @@ function HistoryMain({ dailyLog }) {
           .toJSON()
           .slice(0, 10)
       : "";
-
-    // if (chartType === "table") {
-    return (
-      <TableRow key={idx} className="tablerow">
-        <TableCell component="th" scope="row">
-          {newLogDay}
-        </TableCell>
-        <TableCell align="right">{pgRead}</TableCell>
-        <TableCell align="right">{minutesRead}</TableCell>
-        <TableCell align="right">{title}</TableCell>
-        <TableCell align="right">{authors}</TableCell>
-      </TableRow>
-    );
-    // }
+    dataArray.push([newLogDay, pgRead, minutesRead, title, authors]);
   });
 
   const renderChart = () => {
@@ -76,7 +71,7 @@ function HistoryMain({ dailyLog }) {
       { name: "Pages Read", data: readPage }
     ];
 
-    console.log("data", data);
+    // console.log("data", data);
     return <LineChart data={data} />;
   };
 
@@ -89,27 +84,13 @@ function HistoryMain({ dailyLog }) {
     >
       <Grid item xs={7}>
         <div>
-          <h3>List of Books You Read</h3>
-          <Table className={leftTable}>
-            <colgroup>
-              <col style={{ width: "25%" }} />
-              <col style={{ width: "2%" }} />
-              <col style={{ width: "2%" }} />
-              <col style={{ width: "46%" }} />
-              <col style={{ width: "25%" }} />
-            </colgroup>
-
-            <TableHead style={{ backgroundColor: "#f5f5f5" }}>
-              <TableRow>
-                <TableCell>Date</TableCell>
-                <TableCell>Pages</TableCell>
-                <TableCell>Minutes</TableCell>
-                <TableCell>Title</TableCell>
-                <TableCell>Author</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{renderList}</TableBody>
-          </Table>
+          {/* <h3>List of Books You Read</h3> */}
+          <MUIDataTable
+            title={"List of Book Read"}
+            data={dataArray}
+            columns={columns}
+            // options={options}
+          />
         </div>
       </Grid>
       <Grid item xs={5} className="charts">
@@ -145,6 +126,7 @@ function HistoryMain({ dailyLog }) {
 }
 
 function mapStateToProps(state) {
+  // console.log(state);
   return {
     dailyLog: state.firestore.ordered.dailyLog
       ? state.firestore.ordered.dailyLog
@@ -162,7 +144,8 @@ export default compose(
     return [
       {
         collection: "dailyLog",
-        queryParams: ["orderByChild=item.logDay.seconds"]
+        // orderBy: [["logDay",'desc']]
+        queryParams: ["orderByChild=logDay"]
       }
     ];
   })

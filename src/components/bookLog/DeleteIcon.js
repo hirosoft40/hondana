@@ -25,7 +25,7 @@ class DeleteBookLog extends Component {
 
   onDeleteRequest = event => {
     event.preventDefault();
-    console.log(this.props.id);
+    // console.log(this.props.id);
     this.props.onDeleteBookLog({ id: this.props.id });
     this.setState({ open: false });
   };
