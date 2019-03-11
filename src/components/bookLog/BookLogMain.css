@@ -8,7 +8,7 @@
 .sample {
   /* box-sizing: conten-box; */
   border: 2px dotted rgb(175, 175, 175);
-  height: 260px;
+  height: 280px;
   width: 200px;
   margin: 1.6vh;
   display: inline-flex;
@@ -38,22 +38,34 @@
 .mainDiv {
   /* box-sizing: conten-box; */
   border: 1px dotted rgb(175, 175, 175);
-  height: 260px;
+  height: 280px;
   width: 200px;
   display: block;
+  /* flex-direction: row;
+  justify-content: flex-end; */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   margin-left: 3vw;
   margin: 2vh;
   background-color: white;
   border-radius: 10px;
 }
+.left {
+  width: 152px;
+  height: 250px;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+  margin-top: 10px;
+}
 .headerDiv {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+}
+.headerDiv img {
   margin-top: 10px;
 }
-
 .iconDiv {
   display: flex;
   flex-direction: column;
@@ -61,21 +73,29 @@
   padding: 0;
   float: right;
 }
-.addBookSearch {
-  border: 1px dotted rgb(175, 175, 175);
+/* .leftIcon {
+  display: flex;
+  justify-content: flex-start;
+} */
+.leftIcon button {
+  /* /* padding: 0; */
+  padding-top: 7px;
+  font-size: 10px;
+}
+
+.left img {
   height: 150px;
   width: 111px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  margin: 3px;
+  margin-left: 10px;
 }
 .bodyDiv {
   font-size: 0.8rem;
   padding: 10px;
   line-height: 1.3rem;
-
 }
 .title {
   font-weight: bold;
+}
+.compleTrue {
+  color: blue;
 }

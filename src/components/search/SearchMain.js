@@ -22,21 +22,18 @@ const nothappy = {
 class SearchMain extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      books: [],
-      isLoading: true,
-      errorMsg: "",
-      error: false,
-      bookSelected: null,
-      totalItems: 0
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     this.onSearchStart("");
   }
+  // == not implemented yet
+  onBookSelect = book => {
+    this.setState({ bookSelected: book });
+  };
 
+  // ==== axios connecting to GOOGLE BOOK API
   onSearchStart = async searchQuery => {
     if (searchQuery.length > 0) {
       await googleBooks
@@ -46,6 +43,7 @@ class SearchMain extends Component {
           }
         })
         .then(response => {
+          // console.log(response);
           if (response.data.totalItems > 0) {
             this.setState({
               books: response.data.items,
@@ -68,12 +66,13 @@ class SearchMain extends Component {
     }
   };
 
-  renderList() {
-    if (!this.state.error && this.state.totalItems > 0) {
+  renderList(res) {
+    if (!res.error && res.totalItems > 0) {
       return (
+        // showing search results
         <div>
           <SearchResultsList
-            books={this.state.books}
+            books={res.books}
             onBookSelect={this.onBookSelect}
           />
 
@@ -83,10 +82,12 @@ class SearchMain extends Component {
           </div>
         </div>
       );
-    } else if (this.state.error) {
+
+      // for no search results
+    } else if (res.error) {
       return (
         <h3 className="error" style={err}>
-          {this.state.errorMsg}
+          {res.errorMsg}
           <br />
           <br />
           Or.... type in Book Detail manually.
@@ -95,10 +96,6 @@ class SearchMain extends Component {
       );
     }
   }
-
-  onBookSelect = book => {
-    this.setState({ bookSelected: book });
-  };
 
   render() {
     return (
@@ -109,7 +106,7 @@ class SearchMain extends Component {
         alignItems="center"
       >
         <SearchBar handleSubmit={this.onSearchStart} />
-        {this.renderList()}
+        {this.renderList(this.state)}
       </Grid>
     );
   }

@@ -1,15 +1,18 @@
 import React, { Component } from "react";
-import { Grid, Row } from "react-flexbox-grid";
 import "./BookLogMain.css";
-import { AddCircle, Search, EditRounded, Delete } from "@material-ui/icons";
-import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import AddBookDialog from "./AddBookDialog";
-import { Link } from "react-router-dom";
-import addBookLogManual from "../actions/addBookLogManual";
-import { connect } from "react-redux";
 import Dailylog from "./DailyLog";
-import { firestoreConnect } from "react-redux-firebase";
+import FavoriteIcon from "./FavoriteIcon";
+import CompletedIcon from "./CompletedIcon";
+import DeleteIcon from "./DeleteIcon";
+import { addBookLogManual } from "../actions/addBookLogManual";
 import { compose } from "redux";
+import { Link } from "react-router-dom";
+import { Grid, Row } from "react-flexbox-grid";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { AddCircle, Search } from "@material-ui/icons";
+import { Menu, MenuItem, IconButton } from "@material-ui/core";
 
 class BookLogMain extends Component {
   state = {
@@ -24,67 +27,62 @@ class BookLogMain extends Component {
     this.setState({ anchorEl: null });
   };
 
-  editClick =event=>{
-    alert("EDIT..... THIS FUNCTION IS NOT YET AVAILABLE...Soon....")
-  }
+  renderList(books) {
+    if (!books) return;
+    return books.map((book, idx) => {
+      const {
+        title,
+        authors,
+        pageCount,
+        imageLinks,
+        completed,
+        favorite,
+        startDate
+      } = book.item;
 
-  onClick= event =>{
-    alert("DEEEELEEET..... THIS FUNCTION IS NOT YET AVAIABLE ")
-  };
+      let mainDivTitle = title.length < 45 ? title : title.slice(0, 45) + " ...";
 
-  renderList() {
-    if (!this.props.bookLog) {
-      return "";
-    } else {
-      return this.props.bookLog.map(book => {
-        console.log(book.item.bookLog.startDate.toDate());
-        const d = book.item.bookLog.startDate.toDate();
-        const newStartDay = d.toJSON().slice(0, 10);
-        // const newStartDay = "d.toJSON().slice(0, 10)";
-        return (
-          <div className="mainDiv">
-            <div className="headerDiv">
-              <img
-                src={book.item.bookLog.imageURL}
-                alt={book.item.bookLog.title}
-              />
-
-              <div className="iconDiv">
-                <IconButton onClick={this.editClick}>
-                  <EditRounded />
-                </IconButton>
-                <Dailylog
-                  title={book.item.bookLog.title}
-                  author={book.item.bookLog.author[0]}
-                />
-                <IconButton onClick={this.onClick}>
-                  <Delete />
-                </IconButton>
-              </div>
+      return (
+        <div className="mainDiv" key={idx} id={book.id}>
+          <div className="headerDiv">
+            <div className="leftIcon">
+              <DeleteIcon id={book.id} title={title} authors={authors} />
             </div>
-            <div className="bodyDiv">
-              <div className="title">{book.item.bookLog.title}</div>
-              <div>{book.item.bookLog.author[0]}</div>
-              <div>
-                {book.item.bookLog.pages
-                  ? `${book.item.bookLog.pages} Pages`
-                  : ""}
-              </div>
-              <div>Started Reading on {newStartDay} </div>
+            <img src={imageLinks.smallThumbnail} alt={title} />
+            <div className="iconDiv">
+              <Dailylog title={title} authors={authors} id={book.id} />
+              <CompletedIcon id={book.id} completed={completed} />
+              <FavoriteIcon id={book.id} favorite={favorite} />
             </div>
           </div>
-        );
-      });
-    }
+
+          <div className="bodyDiv compStatus">
+            <div className="title">{mainDivTitle}</div>
+            <div>{authors}</div>
+            <div>
+              {/* Read "" pages of{" "} */}
+              Total Pages: {pageCount ? `${pageCount} Pages` : " unknown "}
+            </div>
+            <div>
+              Started Reading on{" "}
+              {startDate
+                .toDate()
+                .toJSON()
+                .slice(0, 10)}
+            </div>
+          </div>
+        </div>
+      );
+    });
   }
 
   render() {
     const { anchorEl } = this.state;
 
     return (
-      <Grid container>
+      <Grid>
         <Row className="row">
-          {this.renderList()}
+          {this.renderList(this.props.bookLog)}
           <div className="sample">
             <IconButton
               aria-owns={anchorEl ? "simple-menu" : undefined}

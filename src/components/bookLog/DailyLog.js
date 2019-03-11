@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+import DailyLogRight from "./DailyLogRight";
 import {
   Dialog,
   DialogContent,
@@ -6,42 +8,39 @@ import {
   DialogTitle,
   Button,
   TextField,
-  // FormControlLabel,
-  // Switch,
-  IconButton
+  IconButton,
+  Grid
 } from "@material-ui/core";
 import { addDailyLog } from "../actions/addDailyLog";
 import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBook } from "@fortawesome/free-solid-svg-icons";
 import "./DailyLog.css";
+import { Row, Col } from "react-flexbox-grid";
+
+const d = new Date();
+const logDay = `${d.toJSON().slice(0, 10)}`;
 
 class DailyLog extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      open: false,
-      dltitle: "",
-      dlauthor: "",
-      logDay: "",
-      pgRead: 0,
-      minutesRead: 0,
-      totalRead: 0,
-      totalTime: 0
-    };
-  }
+  state = { open: false, completed: false, errorText: "" };
 
   onClickOpen = () => {
-    const d = new Date();
-    const today = `${d.toJSON().slice(0, 10)}`;
+    const { title, authors } = this.props;
     this.setState({
       open: true,
-      logDay: today,
-      dltitle: this.props.title,
-      dlauthor: this.props.author
+      logDay,
+      title,
+      authors
     });
   };
+
+  // isValidDate(dateString) {
+  //   let regEx = /^\d{2}\d{2}-\d{2}$/;
+  //   if (!dateString.match(regEx)) return false; // Invalid format
+  //   let dt = new Date(dateString);
+  //   if (Number.isNaN(dt.getTime())) return false; // Invalid date
+  //   return d.toJSON().slice(0, 10) === dateString;
+  // }
 
   onClose = () => {
     this.setState({ open: false });
@@ -53,33 +52,44 @@ class DailyLog extends React.Component {
     });
   };
 
-  // handleCompleted(e) {
-  //   const comp = !this.state.completed ? true : false;
-  //   this.setState({
-  //     completed: comp
-  //   });
-  // }
-
   onSubmitDailyLog = event => {
     event.preventDefault();
+    // error handling
+    if (!this.state.logDay || this.state.logDay === "") {
+      this.setState({
+        errorText: "Please fill in Log Date."
+      });
+      return;
+    }
+    // if (!this.isValidDate(this.state.logDay)) {
+    //   this.setState({
+    //     errorText: "Invalid Log Date."
+    //   });
+    //   return;
+    // }
+
     this.props.onDailyLogAdd({
-      dailyLog: {
-        dltitle: this.state.dltitle,
-        dlauthor: this.state.dlauthor,
-        pgRead: this.state.pgRead,
-        // journal: this.state.journal,
-        logDay: new Date(this.state.logDay),
-        minutesRead: this.state.minutesRead,
-        totalRead: this.state.totalRead,
-        totalTime: this.state.totalTime
-      }
+      ...this.state,
+      logDay: new Date(this.state.logDay),
+      bookId: this.props.id,
+      pgRead: parseInt(this.state.pgRead),
+      minutesRead: parseInt(this.state.minutesRead)
     });
     this.setState({
       open: false
     });
   };
 
+  handleCompleted = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      completed: !prevState.completed
+    }));
+  };
+
   render() {
+    const { open, title, authors, logDay } = this.state;
+
     return (
       <div>
         <IconButton onClick={this.onClickOpen}>
@@ -87,62 +97,93 @@ class DailyLog extends React.Component {
         </IconButton>
         <form>
           <Dialog
-            open={this.state.open}
+            open={open}
             onClose={this.onClose}
             className="mainDialog_daily"
-            aria-labelledby="form-dialog-dltitle"
+            aria-labelledby="form-dialog-title"
           >
-            <DialogTitle className="dialogtitle" id="form-dialog-dltitle">
-              {this.state.dltitle}
-              <br />
-              by {this.state.dlauthor}
-            </DialogTitle>
-            <DialogContent className="dialog_daily">
-              <TextField
-                required
-                id="logDay"
-                label="Log Date"
-                onChange={this.handleChange("logDay")}
-                defaultValue={this.state.logDay}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="pgRead"
-                label="Pages you read today"
-                type="number"
-                onChange={this.handleChange("pgRead")}
-                InputProps={{ inputProps: { min: 0 } }}
-              />
-              <TextField
-                autoFocus
-                margin="dense"
-                id="minutes"
-                label="Minutes you read today"
-                type="number"
-                // onChange={this.handlePagesChange.bind(this)}
-                onChange={this.handleChange("minutesRead")}
-                // value={this.state.dailyLog.pages}
-                InputProps={{ inputProps: { min: 0 } }}
-              />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={this.onSubmitDailyLog} color="primary">
-                Add to Daily Log
-              </Button>
-            </DialogActions>
+            <p className="error">{this.state.errorText}</p>
+
+            <Grid>
+              <Row className="firstRow">
+                <DialogTitle className="dialogtitle" id="form-dialog-title">
+                  {title}
+                  <br />
+                  by {authors}
+                </DialogTitle>
+              </Row>
+              <Row className="midRow">
+                <Col className="leftCol">
+                  <DialogContent className="dialog_daily">
+                    <TextField
+                      required
+                      id="logDay"
+                      label="Log Date"
+                      type="Date"
+                      onChange={this.handleChange("logDay")}
+                      defaultValue={logDay}
+                      InputLabelProps={{
+                        shrink: true
+                      }}
+                    />
+
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      id="pgRead"
+                      label="Pages read "
+                      type="number"
+                      defaultValue={0}
+                      onChange={this.handleChange("pgRead")}
+                      InputProps={{ inputProps: { min: 0 } }}
+                    />
+                    <TextField
+                      margin="dense"
+                      id="minutesRead"
+                      label="Minutes read"
+                      type="number"
+                      defaultValue={0}
+                      onChange={this.handleChange("minutesRead")}
+                      InputProps={{ inputProps: { min: 0 } }}
+                    />
+
+                    <TextField
+                      margin="dense"
+                      id="journal"
+                      label="Journal"
+                      multiline={true}
+                      rows={5}
+                      rowsMax={7}
+                      onChange={this.handleChange("journal")}
+                      fullWidth
+                    />
+                  </DialogContent>
+                </Col>
+                <DailyLogRight id={this.props.id} className="rightCol" />
+              </Row>
+              <Row className="lastRow">
+                <DialogActions>
+                  <Button onClick={this.onSubmitDailyLog} color="primary">
+                    Add to Daily Log
+                  </Button>
+                  <Button onClick={this.onClose} color="primary">
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </Row>
+            </Grid>
           </Dialog>
         </form>
       </div>
     );
   }
 }
+
+DailyLog.propTypes = {
+  logDay: PropTypes.instanceOf(Date),
+  pgRead: PropTypes.number,
+  minutesRead: PropTypes.number
+};
 
 function mapDispatchToProps(dispatch) {
   return {

@@ -39,7 +39,7 @@ class SearchBar extends Component {
             onClick={this.handleSubmit}
             className="searchbaricon"
           >
-            <SearchIcon color="white" />
+            <SearchIcon className="white" />
           </Fab>
         </form>
       </div>

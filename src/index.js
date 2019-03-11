@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import SearchMain from "./components/search/SearchMain";
+import FavoritesLists from "./components/bookLog/FavoritesLists";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./components/reducers";
@@ -17,7 +18,6 @@ import fbConfig from "../src/config/fbConfig";
 
 const store = createStore(
   rootReducer,
-  // composeWithDevTools(applyMiddleware(thunk))
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(fbConfig),
@@ -31,13 +31,14 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      main: "#82b1ff"
-      
+      main: "#26a69a",
+      ligth: "#64d8cb",
+      dark: "#00766c"
     },
     secondary: {
-      main: "#ffff00",
-      light: "#ffff5a",
-      dark: "#fdd835"
+      main: "#ffee58",
+      light: "#ffff8b",
+      dark: "#c9bc1f"
     }
   }
 });
@@ -50,6 +51,7 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route path="/search" component={SearchMain} />
             <Route path="/history" component={HistoryMain} />
+            {/* <Route path="/favorites" component={FavoritesLists} /> */}
           </Switch>
         </BaseLayout>
       </MuiThemeProvider>

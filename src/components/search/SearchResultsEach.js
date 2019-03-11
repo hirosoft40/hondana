@@ -4,11 +4,13 @@ import { Grid } from "@material-ui/core";
 import BottomIcons from "./BottomIcons";
 import "./SearchResultsEach.css";
 
-const SearchResultsEach = ({ book, sale, onBookSelect }) => {
+const SearchResultsEach = ({ book, sale, id, onBookSelect }) => {
+  let { title, authors, categories, pageCount, imageLinks } = book;
+  let { saleability, listPrice } = sale;
+
   if (!book) {
     return <div>Loading</div>;
   }
-  
 
   return (
     <div onClick={() => onBookSelect(book)}>
@@ -21,29 +23,26 @@ const SearchResultsEach = ({ book, sale, onBookSelect }) => {
           alignItems="flex-start"
         >
           <img
-            alt={book.title}
+            alt={title}
             component="img"
             src={
-              book.hasOwnProperty("imageLinks")
-                ? book.imageLinks.smallThumbnail
-                : ""
+              book.hasOwnProperty("imageLinks") ? imageLinks.smallThumbnail : ""
             }
-            title={book.title}
+            title={title}
           />
           <Grid item xs className="cardBody">
-            <h4>{book.title}</h4>
-            <span className="author">by {book.authors}</span>
+            <h4>{title}</h4>
+            <span className="authors">by {authors}</span>
             <p>
-              {book.categories ? `${book.categories}` : ""}
-              {book.pageCount ? ` - ${book.pageCount} pages` : ""}
-              {sale.saleability === "FOR_SALE"
-                ? ` - ${sale.listPrice.currencyCode}  ${sale.listPrice.amount} `
+              {categories ? `${categories}` : ""}
+              {pageCount ? ` - ${pageCount} pages` : ""}
+              {saleability === "FOR_SALE"
+                ? ` - ${listPrice.currencyCode}  ${listPrice.amount} `
                 : ""}
             </p>
           </Grid>
           <Grid item xs={1}>
-            <BottomIcons book={book} sale={sale} />
-
+            <BottomIcons book={book} sale={sale} id={id} />
           </Grid>
         </Grid>
       </Card>

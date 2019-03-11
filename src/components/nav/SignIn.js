@@ -81,7 +81,7 @@ function SignIn(props) {
             type="submit"
             fullWidth
             variant="contained"
-            color="#ffff00"
+            color="primary"
             className={classes.submit}
           >
             Sign in

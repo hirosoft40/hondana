@@ -1,4 +1,6 @@
 function bookLogReducer(state, action) {
+  // console.log("state", state);
+  // console.log("action", action);
   if (state === undefined) {
     return {
       bookLog: []
@@ -9,30 +11,41 @@ function bookLogReducer(state, action) {
     case "ADD_BOOKLOG_MANUAL":
       return {
         ...state,
-        bookLog: state.bookLog.concat({
-          // bookid: action.bookLog.bookid,
-          title: action.bookLog.title,
-          author: action.bookLog.author,
-          category: action.bookLog.category,
-          pages: action.bookLog.pages,
-          journal: action.bookLog.journal,
-          startDate: action.bookLog.startDate,
-          endDate: action.bookLog.endDate,
-          completed: action.bookLog.completed,
-          imageURL: action.bookLog.imageURL,
-          currency: action.bookLog.currency,
-          price: action.bookLog.price
-        })
+        bookLog: state.bookLog.concat(action.bookLog)
       };
+    // case "UPDATE_FAVORITE":
+    //   // const addFav = state.bookLog.filter(item => {
+    //   //   return state.bookLog.id === action.bookLog.id;
+    //   // });
 
-    // case "DELETE_BOOKLOG":
-    //   const updatedArray = state.bookLog.filter(item => {
-    //     return item.bookLog.title !== action.bookLog.title;
-    //   });
     //   return {
     //     ...state,
-    //     bookLog: updatedArray
+    //     bookLog: state.bookLog.concat({
+          
+    //       favorite: action.favorite
+    //     })
     //   };
+
+    // case "UPDATE_COMPLETED":
+    //   return {
+    //     ...state,
+    //     id: action.id,
+    //     bookLog: state.bookLog.concat({
+    //       completed: action.completed,
+    //       endDate: action.endDate
+    //     })
+    //   };
+    case "DELETE_BOOKLOG":
+      const afterDelete = state.bookLog.filter(od => {
+        return state.bookLog.id !== action.bookLog.id;
+      });
+      return {
+        ...state,
+        bookLog: afterDelete
+      };
+    // case "DELETE_BOOKLOG_ERROR":
+    //   console.log("delete booklog error");
+    //   return state;
 
     default:
       return state;
