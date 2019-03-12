@@ -34,7 +34,7 @@ Google Book API
 [ Database]
 Firebase
 
-## My biggest challenge
+## My Challenge
 
 This project was difficult to start with due to lack of my knowledge especially on Redux. Luckily, I was able to find many websites which shows same project in React/Redux. So I started learning by looking at those references. On the second day, I found myself that I was just copying those code and not understanding Redux.
 
