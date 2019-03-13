@@ -15,6 +15,8 @@ import HistoryMain from "./components/history/HistoryMain";
 import { getFirestore, reduxFirestore } from "redux-firestore";
 import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
 import fbConfig from "../src/config/fbConfig";
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 
 const store = createStore(
   rootReducer,
@@ -51,6 +53,9 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route path="/search" component={SearchMain} />
             <Route path="/history" component={HistoryMain} />
+            <Route path="/signin" component={SignIn} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/signout" component={SignUp} />
             {/* <Route path="/favorites" component={FavoritesLists} /> */}
           </Switch>
         </BaseLayout>

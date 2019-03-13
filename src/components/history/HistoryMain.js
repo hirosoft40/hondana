@@ -1,11 +1,6 @@
 import React from "react";
 import {
   Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
 } from "@material-ui/core";
 import "./HistoryMain.css";
 import { connect } from "react-redux";
@@ -13,15 +8,13 @@ import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
 import Chart from "chart.js";
 import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
-import moment from "moment";
 import MUIDataTable from "mui-datatables";
 
 const mainGrid = "mainGrid";
-const leftTable = "leftTable";
+// const leftTable = "leftTable";
 const rightChart = "rightChart";
 ReactChartkick.addAdapter(Chart);
 
-// class HistoryMain extends Component {
 function HistoryMain({ dailyLog }) {
   if (!isLoaded(dailyLog)) {
     return <div>Loading...</div>;
@@ -41,11 +34,12 @@ function HistoryMain({ dailyLog }) {
     const { logDay, title, authors, pgRead, minutesRead } = item.item;
     const newLogDay = logDay
       ? logDay
-          .toDate()
-          .toJSON()
-          .slice(0, 10)
+        .toDate()
+        .toJSON()
+        .slice(0, 10)
       : "";
     dataArray.push([newLogDay, pgRead, minutesRead, title, authors]);
+    // return dataArray
   });
 
   const renderChart = () => {
@@ -55,16 +49,16 @@ function HistoryMain({ dailyLog }) {
     const chartData = !dailyLog
       ? ""
       : dailyLog.map(item => {
-          const { logDay, pgRead, minutesRead } = item.item;
-          const newLogDay = logDay
-            ? logDay
-                .toDate()
-                .toJSON()
-                .slice(0, 10)
-            : "";
-          readTime[newLogDay] = minutesRead;
-          readPage[newLogDay] = pgRead;
-        });
+        const { logDay, pgRead, minutesRead } = item.item;
+        const newLogDay = logDay
+          ? logDay
+            .toDate()
+            .toJSON()
+            .slice(0, 10)
+          : "";
+        readTime[newLogDay] = minutesRead;
+        readPage[newLogDay] = pgRead;
+      });
 
     const data = [
       { name: "Minutes Read", data: readTime },
@@ -89,7 +83,7 @@ function HistoryMain({ dailyLog }) {
             title={"List of Book Read"}
             data={dataArray}
             columns={columns}
-            // options={options}
+          // options={options}
           />
         </div>
       </Grid>
