@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import "./AppBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faBookReader, faUserPlus, faSignOutAlt, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faBookReader, faUserPlus, faSignInAlt, faSignOutAlt, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import {
   SearchRounded,
   // Favorite,
@@ -75,14 +75,14 @@ class PrimarySearchAppBar extends React.Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, auth } = this.props;
+    const { classes, auth, profile } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const links = !auth.uid ?
       <MenuItem onClick={this.handleMenuClose}>
         <Link to={"/signin"} style={{ textDecoration: "none" }}>
-          SignIn
+          SignIn <FontAwesomeIcon icon={faSignInAlt} style={{ marginLeft: "5" }} />
         </Link>
       </MenuItem>
       :
@@ -156,7 +156,7 @@ class PrimarySearchAppBar extends React.Component {
             <Typography className="title" variant="h6" color="inherit" noWrap>
               <span>
                 <Link to={"/"} className="brand">
-                  MyHondana
+                  MyHondana: Bookshelf
                   <FontAwesomeIcon className="logo" icon={faBookOpen} />
                 </Link>
               </span>
@@ -175,7 +175,7 @@ class PrimarySearchAppBar extends React.Component {
                 onClick={this.handleProfileMenuOpen}
                 className="link white"
               >
-                {auth.uid ? <Avatar style={{ fontSize: "0.7rem" }} /> : <AccountCircle />}
+                {auth.uid ? <Avatar className='avatar'>{profile.initials}</Avatar> : <AccountCircle />}
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -201,7 +201,6 @@ const mapStateToProps = state => {
   return {
     auth: state.firebase.auth,
     profile: state.firebase.profile
-
   }
 }
 
