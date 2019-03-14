@@ -112,6 +112,7 @@ function HistoryMain({ dailyLog, auth }) {
         <div className={rightChart}>
           <div>
             <h3>No of books by months</h3>
+            
           </div>
           <ColumnChart
             data={[

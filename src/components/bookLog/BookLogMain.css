@@ -1,7 +1,6 @@
 .main{
   display: flex;
   flex-direction: row;
-  justify-content: center;
 }
 .row {
   margin: 20px 0;
