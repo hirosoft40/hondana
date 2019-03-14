@@ -30,7 +30,8 @@ class DailyLog extends React.Component {
       open: true,
       logDay,
       title,
-      authors
+      authors,
+      minutesRead: 0
     });
   };
 

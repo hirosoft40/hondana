@@ -23,7 +23,7 @@ class BottomIcons extends React.Component {
 
   renderList() {
     const { anchorEl } = this.state;
-    const { book, sale, id } = this.props;
+    const { book, sale } = this.props;
     const { saleability, buyLink } = this.props.sale;
 
     // console.log(id);

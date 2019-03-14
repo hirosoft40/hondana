@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import BottomIcons from "./BottomIcons";
 import "./SearchResultsEach.css";
 
-const SearchResultsEach = ({ book, sale, id, onBookSelect }) => {
+const SearchResultsEach = ({ book, sale, onBookSelect }) => {
   let { title, authors, categories, pageCount, imageLinks } = book;
   let { saleability, listPrice } = sale;
 
@@ -42,7 +42,7 @@ const SearchResultsEach = ({ book, sale, id, onBookSelect }) => {
             </p>
           </Grid>
           <Grid item xs={1}>
-            <BottomIcons book={book} sale={sale} id={id} />
+            <BottomIcons book={book} sale={sale}  />
           </Grid>
         </Grid>
       </Card>

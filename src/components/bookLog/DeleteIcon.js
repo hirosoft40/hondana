@@ -1,3 +1,7 @@
+//===========
+// Component to handle delete books
+//===========
+
 import React, { Component } from "react";
 import { deleteBookLog } from "../actions/deleteBookLog";
 import { connect } from "react-redux";

@@ -1,3 +1,7 @@
+.main{
+  display: flex;
+  flex-direction: row;
+}
 .row {
   margin: 20px 0;
   display: flex;
@@ -39,7 +43,7 @@
   /* box-sizing: conten-box; */
   border: 1px dotted rgb(175, 175, 175);
   height: 280px;
-  width: 200px;
+  width: 201px;
   display: block;
   /* flex-direction: row;
   justify-content: flex-end; */

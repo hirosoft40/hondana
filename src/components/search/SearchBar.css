@@ -2,8 +2,12 @@
   margin-top: 5px;
   text-align: center;
   width: 100%;
-  margin-bottom: 10px;
 }
+.search h1{
+  font-family: 'Baloo Chettan', cursive !important;
+  margin-bottom: 20px;
+}
+
 .searchBar {
   width: 300px;
   height: 15px;

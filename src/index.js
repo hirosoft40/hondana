@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./components/App";
 import SearchMain from "./components/search/SearchMain";
-import FavoritesLists from "./components/bookLog/FavoritesLists";
+// import FavoritesLists from "./components/bookLog/FavoritesLists";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./components/reducers";
@@ -15,13 +15,19 @@ import HistoryMain from "./components/history/HistoryMain";
 import { getFirestore, reduxFirestore } from "redux-firestore";
 import { getFirebase, reactReduxFirebase } from "react-redux-firebase";
 import fbConfig from "../src/config/fbConfig";
+import SignIn from './components/auth/SignIn';
+import SignUp from './components/auth/SignUp';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
     reduxFirestore(fbConfig),
-    reactReduxFirebase(fbConfig)
+    reactReduxFirebase(fbConfig, {
+      useFirestoreForProfile: true,
+      userProfile: 'users',
+      attachAuthIsReady: true
+    })
   )
 );
 
@@ -42,20 +48,27 @@ const theme = createMuiTheme({
     }
   }
 });
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <BaseLayout>
-          <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/search" component={SearchMain} />
-            <Route path="/history" component={HistoryMain} />
-            {/* <Route path="/favorites" component={FavoritesLists} /> */}
-          </Switch>
-        </BaseLayout>
-      </MuiThemeProvider>
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById("root")
-);
+
+
+store.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <MuiThemeProvider theme={theme}>
+          <BaseLayout>
+            <Switch>
+              <Route exact path="/" component={App} />
+              <Route path="/search" component={SearchMain} />
+              <Route path="/history" component={HistoryMain} />
+              <Route path="/signin" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signout" component={SignUp} />
+              {/* <Route path="/favorites" component={FavoritesLists} /> */}
+            </Switch>
+          </BaseLayout>
+        </MuiThemeProvider>
+      </BrowserRouter>
+    </Provider>,
+    document.getElementById("root")
+  );
+})

@@ -1,3 +1,6 @@
+//=============
+//  This component is used when user add book manually
+//=============
 import React from "react";
 import PropTypes from "prop-types";
 import {
@@ -71,6 +74,7 @@ class AddBookDialog extends React.Component {
       startDate: this.state.startDate
         ? new Date(this.state.startDate)
         : new Date()
+
     });
     this.setState({
       open: false

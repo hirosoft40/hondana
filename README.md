@@ -47,6 +47,7 @@ My other challenge was Material-ui. I like their Icon buttons and I enjoyed read
 ## Remaining Tasks
 
 - Delete Function (DailyLog)
-- Edit Function (DailyLog)
+- Edit Function (Booklog and DailyLog)
+- Sort by Date
 - Monthly graph
-- Authentication (Login, Logout)
+- Favorite
