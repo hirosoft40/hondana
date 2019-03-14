@@ -6,12 +6,12 @@ import { withStyles } from "@material-ui/core/styles";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import "./AppBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBookOpen, faBookReader, faUserPlus, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBookOpen, faBookReader, faUserPlus, faSignOutAlt, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import {
   SearchRounded,
-  Favorite,
+  // Favorite,
   Search,
-  AccountCircle
+  AccountCircle,
 } from "@material-ui/icons";
 import { connect } from 'react-redux';
 import { signOut } from '../actions/authActions'
@@ -34,7 +34,8 @@ const styles = theme => ({
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
-      display: "flex"
+      display: "flex",
+      alignItems: 'center'
     }
   },
   sectionMobile: {
@@ -77,7 +78,7 @@ class PrimarySearchAppBar extends React.Component {
     const { classes, auth } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-    console.log(auth)
+
     const links = !auth.uid ?
       <MenuItem onClick={this.handleMenuClose}>
         <Link to={"/signin"} style={{ textDecoration: "none" }}>
@@ -98,9 +99,6 @@ class PrimarySearchAppBar extends React.Component {
         onClose={this.handleMenuClose}
       >
         {links}
-
-        {/* <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>My account</MenuItem> */}
       </Menu>
     );
 
@@ -118,7 +116,7 @@ class PrimarySearchAppBar extends React.Component {
             <p>Search Books</p>
           </IconButton>
           <IconButton color="inherit">
-            <FontAwesomeIcon icon={faBookReader} />
+            <FontAwesomeIcon icon={faChartLine} />
             <p>My Book List</p>
           </IconButton>
           <IconButton color="inherit">
@@ -129,8 +127,30 @@ class PrimarySearchAppBar extends React.Component {
       </Menu>
     );
 
+    const showIconsWhenLoggedIn = auth.uid ?
+      (<React.Fragment>
+        <Link to={"/"} className="link white">
+          <IconButton color="inherit">
+            <FontAwesomeIcon icon={faBookReader} />
+          </IconButton>
+        </Link>
+        {/* <IconButton className="link white" disabled>
+                <Favorite />
+              </IconButton> */}
+        <Link to={"/history"} className="link white">
+          <IconButton color="inherit">
+            <FontAwesomeIcon icon={faChartLine} />
+          </IconButton>
+        </Link>
+      </React.Fragment>) : (<Link to={"/signup"} className="link white">
+        <IconButton color="inherit">
+          <FontAwesomeIcon style={{ fontSize: "1.4rem" }} icon={faUserPlus} />
+        </IconButton>
+      </Link>)
+
+
     return (
-      <div className={classes.root}>
+      <div className={classes.root} >
         <AppBar position="static" className="appbar">
           <Toolbar>
             <Typography className="title" variant="h6" color="inherit" noWrap>
@@ -148,35 +168,14 @@ class PrimarySearchAppBar extends React.Component {
                   <Search />
                 </IconButton>
               </Link>
-
-              {/* <IconButton className="link white" disabled>
-                <Favorite />
-              </IconButton> */}
-              <Link to={"/history"} className="link white">
-                <IconButton color="inherit">
-                  <FontAwesomeIcon icon={faBookReader} />
-                </IconButton>
-              </Link>
-              <Link to={"/signup"} className="link white">
-                <IconButton color="inherit">
-                  <FontAwesomeIcon icon={faUserPlus} />
-                </IconButton>
-              </Link>
-              {/* <Link to={"/signin"} className="link white">
-                <Avatar color="primary">HR</Avatar>
-              </Link> */}
-              {/* <Link to={"/signout"} className="link white">
-                <IconButton color="inherit">
-                  <FontAwesomeIcon icon={faBookReader} />
-                </IconButton>
-              </Link> */}
+              {showIconsWhenLoggedIn}
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
                 onClick={this.handleProfileMenuOpen}
                 className="link white"
               >
-                <AccountCircle />
+                {auth.uid ? <Avatar style={{ fontSize: "0.7rem" }} /> : <AccountCircle />}
               </IconButton>
             </div>
             <div className={classes.sectionMobile}>
@@ -200,7 +199,9 @@ class PrimarySearchAppBar extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+
   }
 }
 

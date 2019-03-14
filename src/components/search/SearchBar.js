@@ -24,7 +24,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="search">
-        <h1>Search books </h1>
+        <h1>Search Books</h1>
         <form onSubmit={this.handleSubmit}>
           <InputBase
             className="searchBar"

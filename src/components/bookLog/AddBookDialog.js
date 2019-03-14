@@ -1,3 +1,6 @@
+//=============
+//  This component is used when user add book manually
+//=============
 import React from "react";
 import PropTypes from "prop-types";
 import {

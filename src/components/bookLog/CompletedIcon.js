@@ -1,3 +1,7 @@
+//=============
+// Component to handle user completed reading the book
+//=============
+
 import React, { Component } from "react";
 import { Done } from "@material-ui/icons";
 import { IconButton } from "@material-ui/core";

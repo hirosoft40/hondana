@@ -7,7 +7,7 @@ import CompletedIcon from "./CompletedIcon";
 import DeleteIcon from "./DeleteIcon";
 import { addBookLogManual } from "../actions/addBookLogManual";
 import { compose } from "redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Grid, Row } from "react-flexbox-grid";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -40,7 +40,8 @@ class BookLogMain extends Component {
         startDate
       } = book.item;
 
-      let mainDivTitle = title.length < 45 ? title : title.slice(0, 45) + " ...";
+      let mainDivTitle =
+        title.length < 46 ? title : title.slice(0, 46) + " ...";
 
       return (
         <div className="mainDiv" key={idx} id={book.id}>
@@ -78,9 +79,13 @@ class BookLogMain extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    const { auth } = this.props;
+
+    // check login status
+    if (!auth.uid) return <Redirect to="signin" />;
 
     return (
-      <Grid>
+      <Grid className="main">
         <Row className="row">
           {this.renderList(this.props.bookLog)}
           <div className="sample">
@@ -114,7 +119,8 @@ class BookLogMain extends Component {
 
 function mapStateToProps(state) {
   return {
-    bookLog: state.firestore.ordered.bookLog
+    bookLog: state.firestore.ordered.bookLog,
+    auth: state.firebase.auth
   };
 }
 

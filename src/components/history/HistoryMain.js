@@ -1,21 +1,23 @@
 import React from "react";
-import {
-  Grid,
-} from "@material-ui/core";
 import "./HistoryMain.css";
-import { connect } from "react-redux";
-import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
-import Chart from "chart.js";
-import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import MUIDataTable from "mui-datatables";
+import { Redirect } from "react-router-dom";
+import { Grid } from "@material-ui/core";
+import Chart from "chart.js";
+import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
 
 const mainGrid = "mainGrid";
 // const leftTable = "leftTable";
 const rightChart = "rightChart";
 ReactChartkick.addAdapter(Chart);
 
-function HistoryMain({ dailyLog }) {
+function HistoryMain({ dailyLog, auth }) {
+  // firebase auth to check login info
+  if (!auth.uid) return <Redirect to="signin" />;
+
   if (!isLoaded(dailyLog)) {
     return <div>Loading...</div>;
   }
@@ -30,7 +32,7 @@ function HistoryMain({ dailyLog }) {
   // const options = { resizableColumns: true };
 
   // === creating data for data Table
-  const renderList = dailyLog.map((item, idx) => {
+  dailyLog.forEach((item, idx) => {
     const { logDay, title, authors, pgRead, minutesRead } = item.item;
     const newLogDay = logDay
       ? logDay
@@ -45,10 +47,8 @@ function HistoryMain({ dailyLog }) {
   const renderChart = () => {
     let readTime = {},
       readPage = {};
-
-    const chartData = !dailyLog
-      ? ""
-      : dailyLog.map(item => {
+    if (dailyLog) {
+      dailyLog.forEach(item => {
         const { logDay, pgRead, minutesRead } = item.item;
         const newLogDay = logDay
           ? logDay
@@ -59,6 +59,20 @@ function HistoryMain({ dailyLog }) {
         readTime[newLogDay] = minutesRead;
         readPage[newLogDay] = pgRead;
       });
+    } else return;
+    // const chartData = !dailyLog
+    //   ? ""
+    //   : dailyLog.forEach(item => {
+    //       const { logDay, pgRead, minutesRead } = item.item;
+    //       const newLogDay = logDay
+    //         ? logDay
+    //             .toDate()
+    //             .toJSON()
+    //             .slice(0, 10)
+    //         : "";
+    //       readTime[newLogDay] = minutesRead;
+    //       readPage[newLogDay] = pgRead;
+    //     });
 
     const data = [
       { name: "Minutes Read", data: readTime },
@@ -124,7 +138,8 @@ function mapStateToProps(state) {
   return {
     dailyLog: state.firestore.ordered.dailyLog
       ? state.firestore.ordered.dailyLog
-      : []
+      : [],
+    auth: state.firebase.auth
   };
 }
 

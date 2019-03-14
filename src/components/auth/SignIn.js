@@ -1,20 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Input from "@material-ui/core/Input";
-import InputLabel from "@material-ui/core/InputLabel";
+import { Redirect } from 'react-router-dom'
+import { connect } from "react-redux";
+import { Avatar, Button, CssBaseline, FormControl, FormControlLabel, Checkbox, Input, InputLabel, Paper, Typography } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
-import { connect } from 'react-redux';
-import { signIn } from '../actions/authActions'
-
+import { signIn } from "../actions/authActions";
 
 const styles = theme => ({
   main: {
@@ -46,10 +37,6 @@ const styles = theme => ({
   },
   submit: {
     marginTop: theme.spacing.unit * 3
-  },
-  error: {
-    color: "red",
-    textAlign: "center"
   }
 });
 
@@ -57,21 +44,23 @@ class SignIn extends React.Component {
   state = {
     email: "",
     password: ""
-  }
-  handleChange = (e) => {
+  };
+  handleChange = e => {
     this.setState({
       [e.target.id]: e.target.value
-    })
-  }
+    });
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
-    this.props.signIn(this.state)
-
-  }
+    this.props.signIn(this.state);
+  };
 
   render() {
-    const { classes, authError } = this.props;
+    const { classes, authError, auth } = this.props;
+
+    // if logged in redirect to homepage
+    if (auth.uid) return <Redirect to='/' />;
 
     return (
       <main className={classes.main}>
@@ -82,14 +71,20 @@ class SignIn extends React.Component {
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign In
-        </Typography>
-          <div className={classes.error}>
-            {authError ? <h2>{authError}</h2> : null}
-          </div>
+          </Typography>
+          <Typography component="h1" variant="h6" color="error" style={{ marginTop: "10px" }}>
+            {authError ? authError : null}
+          </Typography>
           <form className={classes.form} onSubmit={this.handleSubmit}>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="email">Email Address</InputLabel>
-              <Input id="email" name="email" autoComplete="email" onChange={this.handleChange} autoFocus />
+              <Input
+                id="email"
+                name="email"
+                autoComplete="email"
+                onChange={this.handleChange}
+                autoFocus
+              />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="password">Password</InputLabel>
@@ -113,8 +108,7 @@ class SignIn extends React.Component {
               className={classes.submit}
             >
               Sign in
-          </Button>
-
+            </Button>
           </form>
         </Paper>
       </main>
@@ -122,20 +116,24 @@ class SignIn extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    authError: state.auth.authError
-  }
-}
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  };
+};
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     signIn: creds => dispatch(signIn(creds))
-  }
-}
+  };
+};
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignIn));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(SignIn));
