@@ -129,5 +129,14 @@ export default compose(
     mapStateToProps,
     { addBookLogManual }
   ),
-  firestoreConnect([{ collection: "bookLog" }])
+  firestoreConnect(props => {
+    if (!props.auth.uid) return [];
+    return [
+      {
+        collection: "bookLog",
+         where: [[`userId`, "==", props.auth.uid]]
+
+      }
+    ]
+  })
 )(BookLogMain);

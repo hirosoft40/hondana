@@ -16,7 +16,7 @@ ReactChartkick.addAdapter(Chart);
 
 function HistoryMain({ dailyLog, auth }) {
   // firebase auth to check login info
-  if (!auth.uid) return <Redirect to="signin" />;
+  if (!auth.uid) return <Redirect to="/signin" />;
 
   if (!isLoaded(dailyLog)) {
     return <div>Loading...</div>;
@@ -84,6 +84,7 @@ function HistoryMain({ dailyLog, auth }) {
   };
 
   return (
+
     <Grid
       container
       direction="row"
@@ -153,7 +154,7 @@ export default compose(
     return [
       {
         collection: "dailyLog",
-        // orderBy: [["logDay",'desc']]
+        where: [[`userId`, "==", props.auth.uid]],
         queryParams: ["orderByChild=logDay"]
       }
     ];

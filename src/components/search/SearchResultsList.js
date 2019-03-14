@@ -9,11 +9,11 @@ const style = () => ({
 });
 
 const SearchResultsList = ({ books, onBookSelect }) => {
-  const bookList = books.map(book => {
+  const bookList = books.map((book, idx) => {
     return (
       <Grid
         container
-        key={book.id}
+        key={idx}
         spacing={16}
         direction="row"
         justify="space-around"

@@ -74,6 +74,7 @@ class AddBookDialog extends React.Component {
       startDate: this.state.startDate
         ? new Date(this.state.startDate)
         : new Date()
+
     });
     this.setState({
       open: false

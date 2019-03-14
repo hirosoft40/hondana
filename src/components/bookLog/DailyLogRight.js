@@ -16,11 +16,12 @@ function DailyLogRight({ dailyLog }) {
   }
 
   const pastRecord = dailyLog.map((item, idx) => {
-    const { logDay, pgRead, minutesRead } = item.item;
+    const { logDay, pgRead } = item.item;
+    const minutesRead = item.item.minutesRead ? `(${item.item.minutesRead} mins)` : "";
     const histDay = logDay
       ? moment(logDay.toDate().toJSON()).format("YYYY-MM-DD")
       : "";
-    const record1 = `${histDay}: ${pgRead} pages(${minutesRead} mins)`;
+    const record1 = `${histDay}: ${pgRead} pages ${minutesRead}`;
 
     return (
       <div key={idx}>
@@ -53,6 +54,7 @@ export default compose(
     null
   ),
   firestoreConnect(props => {
+    console.log(props)
     if (!props.id) return [];
     return [
       {
