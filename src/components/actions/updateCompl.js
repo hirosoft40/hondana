@@ -5,7 +5,7 @@ const updateCompl = item => {
     firestore
       .collection("bookLog")
       .doc(item.id)
-      .update({ completed: item.completed, "item.endDate": item.endDate })
+      .update({ completed: item.completed, endDate: item.endDate })
       .then(() => {
         dispatch({
           type: "UPDATE_COMPLETED",

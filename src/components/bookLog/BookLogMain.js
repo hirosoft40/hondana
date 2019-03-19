@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./BookLogMain.css";
 import AddBookDialog from "./AddBookDialog";
 import Dailylog from "./DailyLog";
-import FavoriteIcon from "./FavoriteIcon";
+// import FavoriteIcon from "./FavoriteIcon";
 import CompletedIcon from "./CompletedIcon";
 import DeleteIcon from "./DeleteIcon";
 import { addBookLogManual } from "../actions/addBookLogManual";
@@ -35,14 +35,11 @@ class BookLogMain extends Component {
         authors,
         pageCount,
         imageLinks,
-        completed,
-        favorite,
         startDate
       } = book.item;
-
+      const { completed, favorite } = book
       let mainDivTitle =
         title.length < 46 ? title : title.slice(0, 46) + " ...";
-
       return (
         <div className="mainDiv" key={idx} id={book.id}>
           <div className="headerDiv">
@@ -53,7 +50,7 @@ class BookLogMain extends Component {
             <div className="iconDiv">
               <Dailylog title={title} authors={authors} id={book.id} />
               <CompletedIcon id={book.id} completed={completed} />
-              <FavoriteIcon id={book.id} favorite={favorite} />
+              {/* <FavoriteIcon id={book.id} favorite={favorite} /> */}
             </div>
           </div>
 
@@ -134,7 +131,7 @@ export default compose(
     return [
       {
         collection: "bookLog",
-         where: [[`userId`, "==", props.auth.uid]]
+        where: [[`userId`, "==", props.auth.uid]]
 
       }
     ]

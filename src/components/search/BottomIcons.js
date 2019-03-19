@@ -25,8 +25,6 @@ class BottomIcons extends React.Component {
     const { anchorEl } = this.state;
     const { book, sale } = this.props;
     const { saleability, buyLink } = this.props.sale;
-
-    // console.log(id);
     return (
       <div className="buttomnav">
         <IconButton
@@ -64,25 +62,31 @@ class BottomIcons extends React.Component {
           </MenuItem>
           {typeof book.previewLink !== "undefined" ? (
             <MenuItem
-              href={book.previewLink}
-              target="_blank"
               className="popText"
             >
-              <Book className="popIcon" />
-              Preview the Book
+              <a href={book.previewLink}
+                rel="noopener noreferrer"
+                target="_blank">
+                <Book className="popIcon" />
+                Preview the Book
+              </a>
             </MenuItem>
           ) : (
-            ""
-          )}
+              ""
+            )}
 
           {saleability === "FOR_SALE" ? (
             <MenuItem href={buyLink} target="_blank" className="popText">
-              <AddShoppingCartIcon className="popIcon" />
-              Buy on GooglePlay
+              <a href={buyLink}
+                rel="noopener noreferrer"
+                target="_blank">
+                <AddShoppingCartIcon className="popIcon" />
+                Buy on GooglePlay
+              </a>
             </MenuItem>
           ) : (
-            ""
-          )}
+              ""
+            )}
         </Menu>
       </div>
     );

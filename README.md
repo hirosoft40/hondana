@@ -1,5 +1,7 @@
 ## MyHondana: My Bookshelf
 
+This application keeps track of you and your child's reading progress. 
+
 <h3> Main Page</h3>
 <img src = "screenshot/mainpage.png">
 

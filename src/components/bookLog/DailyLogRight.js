@@ -54,7 +54,7 @@ export default compose(
     null
   ),
   firestoreConnect(props => {
-    console.log(props)
+    // console.log(props)
     if (!props.id) return [];
     return [
       {
