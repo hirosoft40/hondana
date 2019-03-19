@@ -12,7 +12,7 @@ class CompletedIcon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      completed: false,
+      completed: !this.props.completed ? false : this.props.completed,
       id: this.props.id
     };
   }
@@ -38,6 +38,7 @@ class CompletedIcon extends Component {
     );
   }
 }
+
 
 function mapDispatchToProps(dispatch) {
   return {

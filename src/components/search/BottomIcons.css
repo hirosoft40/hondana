@@ -6,7 +6,10 @@
   font-size: 16px;
   margin: 2px;
 }
-
+a, a:visited, a:hover{
+  text-decoration: none;
+  color:inherit;
+}
 .popText {
   font-size: 14px !important;
 }

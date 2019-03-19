@@ -1,10 +1,8 @@
 ## MyHondana: Bookshelf
 
-<h3> Main Page</h3>
-<img src = "screenshot/mainpage.png">
+This application keeps track of you reading progress and display them as graph.
 
-<h3> Table Page</h3>
-<img src = "screenshot/graph.png">
+<img src = "screenshot/hondana.gif">
 
 ### Features
 
@@ -34,7 +32,7 @@ Google Book API
 [ Database]
 Firebase
 
-## My Challenge
+## My challenges
 
 This project was difficult to start with due to lack of my knowledge especially on Redux. Luckily, I was able to find many websites which shows same project in React/Redux. So I started learning by looking at those references. On the second day, I found myself that I was just copying those code and not understanding Redux.
 
@@ -44,10 +42,22 @@ I was not clear on "mapStateToProps" and "mapDispatchToProps" at first. After sp
 
 My other challenge was Material-ui. I like their Icon buttons and I enjoyed reading their samples code as I was able to learn about defining classNames first on top to make it easier when re-using components. However, it was more complecated and I ended up stying with CSS a lot as I like it and I am familiar with it.
 
+## Each Screens
+<h3> Sign In</h3>
+<img src = "screenshot/signin.png">
+
+<h3> Sign Up</h3>
+<img src = "screenshot/signup.png">
+
+<h3> Main Page</h3>
+<img src = "screenshot/main.png">
+
+<h3> Table Page</h3>
+<img src = "screenshot/graph.png">
+
 ## Remaining Tasks
 
 - Delete Function (DailyLog)
 - Edit Function (Booklog and DailyLog)
-- Sort by Date
 - Monthly graph
 - Favorite

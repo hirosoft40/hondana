@@ -35,13 +35,6 @@ class DailyLog extends React.Component {
     });
   };
 
-  // isValidDate(dateString) {
-  //   let regEx = /^\d{2}\d{2}-\d{2}$/;
-  //   if (!dateString.match(regEx)) return false; // Invalid format
-  //   let dt = new Date(dateString);
-  //   if (Number.isNaN(dt.getTime())) return false; // Invalid date
-  //   return d.toJSON().slice(0, 10) === dateString;
-  // }
 
   onClose = () => {
     this.setState({ open: false });
