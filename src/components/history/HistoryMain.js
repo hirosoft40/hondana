@@ -36,9 +36,9 @@ function HistoryMain({ dailyLog, auth }) {
     const { logDay, title, authors, pgRead, minutesRead } = item.item;
     const newLogDay = logDay
       ? logDay
-        .toDate()
-        .toJSON()
-        .slice(0, 10)
+          .toDate()
+          .toJSON()
+          .slice(0, 10)
       : "";
     dataArray.push([newLogDay, pgRead, minutesRead, title, authors]);
     // return dataArray
@@ -52,9 +52,9 @@ function HistoryMain({ dailyLog, auth }) {
         const { logDay, pgRead, minutesRead } = item.item;
         const newLogDay = logDay
           ? logDay
-            .toDate()
-            .toJSON()
-            .slice(0, 10)
+              .toDate()
+              .toJSON()
+              .slice(0, 10)
           : "";
         readTime[newLogDay] = minutesRead;
         readPage[newLogDay] = pgRead;
@@ -84,7 +84,6 @@ function HistoryMain({ dailyLog, auth }) {
   };
 
   return (
-
     <Grid
       container
       direction="row"
@@ -98,7 +97,7 @@ function HistoryMain({ dailyLog, auth }) {
             title={"List of Book Read"}
             data={dataArray}
             columns={columns}
-          // options={options}
+            // options={options}
           />
         </div>
       </Grid>
@@ -109,7 +108,7 @@ function HistoryMain({ dailyLog, auth }) {
           </div>
           {renderChart()}
         </div>
-        <div className={rightChart}>
+        {/* <div className={rightChart}>
           <div>
             <h3>No of books by months</h3>
             
@@ -129,7 +128,7 @@ function HistoryMain({ dailyLog, auth }) {
               ["Mar", 28]
             ]}
           />
-        </div>
+        </div> */}
       </Grid>
     </Grid>
   );
@@ -151,7 +150,7 @@ export default compose(
     null
   ),
   firestoreConnect(props => {
-    if (!props) return [];
+    if (!props.auth.uid) return [];
     return [
       {
         collection: "dailyLog",
