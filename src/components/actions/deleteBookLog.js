@@ -1,6 +1,5 @@
 export const deleteBookLog = id => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
-    console.log("id", id);
     const firestore = getFirestore();
     firestore
       .collection("bookLog")
@@ -9,7 +8,8 @@ export const deleteBookLog = id => {
       .then(() => {
         dispatch({
           type: "DELETE_BOOKLOG",
-          dailyLog: id.id
+          // dailyLog: id.id
+          dailyLog: id
         });
       })
       .catch(error => {
