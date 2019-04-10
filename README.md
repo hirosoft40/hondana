@@ -1,6 +1,7 @@
-## MyHondana: My Bookshelf
+## <a href="https://myhondana.firebaseapp.com/">MyHondana: Bookshelf</a>
 
 This application keeps track of you reading progress and display them as graph.
+Click <a href="https://myhondana.firebaseapp.com/">here</a> to go to Live Site.
 
 <img src = "screenshot/hondana.gif">
 
@@ -24,7 +25,7 @@ This application keeps track of you reading progress and display them as graph.
 [ Back-end ]
 
 - Axios
-- Thunk
+- Redux Thunk
 
 [ API ]
 Google Book API
