@@ -1,7 +1,7 @@
-## <a href="https://books-232403.firebaseapp.com/">MyHondana: Bookshelf</a>
+## <a href="https://myhondana.firebaseapp.com/">MyHondana: Bookshelf</a>
 
 This application keeps track of you reading progress and display them as graph.
-Click <a href="https://books-232403.firebaseapp.com/">here</a> to go to Live Site.
+Click <a href="https://myhondana.firebaseapp.com/">here</a> to go to Live Site.
 
 <img src = "screenshot/hondana.gif">
 
