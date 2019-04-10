@@ -1,7 +1,15 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write;
+    match /bookLog/{bookLog} {
+      allow read, write, update, delete: if request.auth.uid != null
+    }
+      match /dailyLog/{dailyLog} {
+      allow read, write, update, delete: if request.auth.uid != null
+    }
+    match /users/{userId}{
+       allow create
+       allow read: if request.auth.uid != null
+       allow write: if request.auth.uid == userId
     }
   }
 }

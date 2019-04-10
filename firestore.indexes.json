@@ -1,33 +1,4 @@
 {
-  "indexes": [
-    {
-      "collectionGroup": "dailyLog",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "title",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "logDay",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "bookLog",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "startDate",
-          "order": "DESCENDING"
-        },
-        {
-          "fieldPath": "title",
-          "order": "ASCENDING"
-        }
-      ]
-    }
-  ],
+  "indexes": [],
   "fieldOverrides": []
 }
