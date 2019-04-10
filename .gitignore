@@ -12,6 +12,8 @@
 /build
 /dist
 .firebase
+.firebaserc
+firestore.rules
 
 
 # misc
