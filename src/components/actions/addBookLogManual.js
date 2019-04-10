@@ -1,5 +1,5 @@
 export const addBookLogManual = item => {
-  console.log(item)
+  // console.log(item)
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firestore = getFirestore();
     const userId = getState().firebase.auth.uid;
