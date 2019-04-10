@@ -1,0 +1,26 @@
+.card {
+  display: flex;
+  height: 150px;
+  width: 500px;
+  margin: 5px;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+}
+.cardBody {
+  padding-left: 5px;
+  margin: 0;
+}
+h4 {
+  margin: 0;
+  padding-top: 10px;
+}
+p,
+.authors {
+  font-size: 14px;
+}
+img {
+  height: 150px;
+  width: 111px;
+}
