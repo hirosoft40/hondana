@@ -83,6 +83,10 @@ function HistoryMain({ dailyLog, auth }) {
     return <LineChart data={data} />;
   };
 
+  const options = {
+    responsive: "scroll"
+  };
+
   return (
     <Grid
       container
@@ -90,18 +94,18 @@ function HistoryMain({ dailyLog, auth }) {
       justify="space-between"
       className={mainGrid}
     >
-      <Grid item xs={7}>
-        <div>
-          {/* <h3>List of Books You Read</h3> */}
+      <Grid item xs={12} md={6}>
+          <h3>List of Books you read </h3>
+          <div>
           <MUIDataTable
             title={"List of Book Read"}
             data={dataArray}
             columns={columns}
-            // options={options}
+            options={options}
           />
         </div>
       </Grid>
-      <Grid item xs={5} className="charts">
+      <Grid item xs={12} md={6} className="charts">
         <div className={rightChart}>
           <div>
             <h3>Pages and Minutes you read</h3>
