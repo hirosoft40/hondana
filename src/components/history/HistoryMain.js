@@ -7,7 +7,8 @@ import MUIDataTable from "mui-datatables";
 import { Redirect } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Chart from "chart.js";
-import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
+import ReactChartkick, { LineChart } from "react-chartkick";
+// import { ColumnChart } from "react-chartkick";
 
 const mainGrid = "mainGrid";
 // const leftTable = "leftTable";
@@ -83,6 +84,10 @@ function HistoryMain({ dailyLog, auth }) {
     return <LineChart data={data} />;
   };
 
+  const options = {
+    responsive: "scroll"
+  };
+
   return (
     <Grid
       container
@@ -90,18 +95,18 @@ function HistoryMain({ dailyLog, auth }) {
       justify="space-between"
       className={mainGrid}
     >
-      <Grid item xs={7}>
+      <Grid item xs={12} md={6}>
         <div>
-          {/* <h3>List of Books You Read</h3> */}
+          <h3>List of Books You Read</h3>
           <MUIDataTable
             title={"List of Book Read"}
             data={dataArray}
             columns={columns}
-            // options={options}
+            options={options}
           />
         </div>
       </Grid>
-      <Grid item xs={5} className="charts">
+      <Grid item xs={12} md={6} className="charts">
         <div className={rightChart}>
           <div>
             <h3>Pages and Minutes you read</h3>

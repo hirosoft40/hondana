@@ -30,14 +30,9 @@ class BookLogMain extends Component {
   renderList(books) {
     if (!books) return;
     return books.map((book, idx) => {
-      const {
-        title,
-        authors,
-        pageCount,
-        imageLinks,
-        startDate
-      } = book.item;
-      const { completed, favorite } = book
+      const { title, authors, pageCount, imageLinks, startDate } = book.item;
+      const { completed } = book;
+      // const { favorite } = book
       let mainDivTitle =
         title.length < 46 ? title : title.slice(0, 46) + " ...";
       return (
@@ -132,8 +127,7 @@ export default compose(
       {
         collection: "bookLog",
         where: [[`userId`, "==", props.auth.uid]]
-
       }
-    ]
+    ];
   })
 )(BookLogMain);
