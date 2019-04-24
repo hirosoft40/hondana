@@ -30,7 +30,6 @@ function HistoryMain({ dailyLog, auth }) {
   // For Data Table
   let dataArray = [];
   const columns = ["Date", "Pages", "Minutes", "Title", "Author"];
-  // const options = { resizableColumns: true };
 
   // === creating data for data Table
   dailyLog.forEach((item, idx) => {
@@ -42,7 +41,6 @@ function HistoryMain({ dailyLog, auth }) {
           .slice(0, 10)
       : "";
     dataArray.push([newLogDay, pgRead, minutesRead, title, authors]);
-    // return dataArray
   });
 
   const renderChart = () => {
@@ -61,19 +59,6 @@ function HistoryMain({ dailyLog, auth }) {
         readPage[newLogDay] = pgRead;
       });
     } else return;
-    // const chartData = !dailyLog
-    //   ? ""
-    //   : dailyLog.forEach(item => {
-    //       const { logDay, pgRead, minutesRead } = item.item;
-    //       const newLogDay = logDay
-    //         ? logDay
-    //             .toDate()
-    //             .toJSON()
-    //             .slice(0, 10)
-    //         : "";
-    //       readTime[newLogDay] = minutesRead;
-    //       readPage[newLogDay] = pgRead;
-    //     });
 
     const data = [
       { name: "Minutes Read", data: readTime },
@@ -86,6 +71,7 @@ function HistoryMain({ dailyLog, auth }) {
 
   const options = {
     responsive: "scroll"
+    // resizableColumns: true
   };
 
   return (

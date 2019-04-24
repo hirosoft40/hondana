@@ -21,7 +21,7 @@ function bookLogReducer(state, action) {
     //   return {
     //     ...state,
     //     bookLog: state.bookLog.concat({
-          
+
     //       favorite: action.favorite
     //     })
     //   };
@@ -36,8 +36,8 @@ function bookLogReducer(state, action) {
     //     })
     //   };
     case "DELETE_BOOKLOG":
-      const afterDelete = state.bookLog.filter(od => {
-        return state.bookLog.id !== action.bookLog.id;
+      const afterDelete = state.bookLog.filter(item => {
+        return item.id !== action.bookLog.id;
       });
       return {
         ...state,

@@ -78,7 +78,7 @@ class SignUp extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            New Account 
           </Typography>
           <Typography component="h1" variant="h6" color="error" style={{ marginTop: "10px" }}>
             {authError ? authError : null}

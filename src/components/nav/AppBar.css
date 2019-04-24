@@ -1,32 +1,41 @@
 .brand {
-  font-family: 'Baloo Chettan', cursive !important;
-  margin-left: 10px;
-  font-size: 35px;
+  font-family: "Baloo Chettan", cursive !important;
+  margin-left: 5px;
+  font-size: 2em;
   /* font-weight: bold; */
-  color: #ffee58!important;
-  font-stretch: expanded;
+  color: #ffee58 !important;
+  /* font-stretch: expanded; */
   text-decoration: none !important;
 }
+@media all and (max-width: 420px) {
+  /* .brand, .logo, .brand:visited {
+    font-size: 1.3rem;
+  } */
+  .brand,
+  .brand:visited {
+    display: none;
+  }
+}
+
 .brand:visited {
-  color: #ffee58!important;
+  color: #ffee58 !important;
   text-decoration: none !important;
 }
 .appbar {
   text-decoration: none !important;
   margin: 0;
   /* background: #eeff41 */
-  background: #26a69a!important;
+  background: #26a69a !important;
 }
-.avatar{
-  background: #ffee58!important;
-  color: #26a69a!important;
+.avatar {
+  background: #ffee58 !important;
+  color: #26a69a !important;
   font-weight: bold;
-
 }
 .logo {
-  font-size: 30px;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #ffee58!important;
+  color: #ffee58 !important;
   margin-left: 12px;
 }
 .link {
@@ -37,4 +46,8 @@
 }
 .white {
   color: white !important;
+}
+.mobileLinks {
+  text-decoration: none !important;
+  margin: auto 10px;
 }
