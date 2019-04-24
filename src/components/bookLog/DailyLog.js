@@ -35,7 +35,6 @@ class DailyLog extends React.Component {
     });
   };
 
-
   onClose = () => {
     this.setState({ open: false });
   };
@@ -55,12 +54,6 @@ class DailyLog extends React.Component {
       });
       return;
     }
-    // if (!this.isValidDate(this.state.logDay)) {
-    //   this.setState({
-    //     errorText: "Invalid Log Date."
-    //   });
-    //   return;
-    // }
 
     this.props.onDailyLogAdd({
       ...this.state,
@@ -68,9 +61,6 @@ class DailyLog extends React.Component {
       bookId: this.props.id,
       pgRead: parseInt(this.state.pgRead),
       minutesRead: parseInt(this.state.minutesRead)
-    });
-    this.setState({
-      open: false
     });
   };
 
@@ -153,7 +143,9 @@ class DailyLog extends React.Component {
                     />
                   </DialogContent>
                 </Col>
-                <DailyLogRight id={this.props.id} className="rightCol" />
+                <Col className="rightCol">
+                  <DailyLogRight id={this.props.id} />
+                </Col>
               </Row>
               <Row className="lastRow">
                 <DialogActions>
@@ -161,7 +153,7 @@ class DailyLog extends React.Component {
                     Add to Daily Log
                   </Button>
                   <Button onClick={this.onClose} color="primary">
-                    Cancel
+                    Close
                   </Button>
                 </DialogActions>
               </Row>

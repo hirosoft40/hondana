@@ -32,7 +32,7 @@ function HistoryMain({ dailyLog, auth }) {
   const columns = ["Date", "Pages", "Minutes", "Title", "Author"];
 
   // === creating data for data Table
-  dailyLog.forEach((item, idx) => {
+  dailyLog.forEach((item) => {
     const { logDay, title, authors, pgRead, minutesRead } = item.item;
     const newLogDay = logDay
       ? logDay
@@ -69,9 +69,11 @@ function HistoryMain({ dailyLog, auth }) {
     return <LineChart data={data} />;
   };
 
+  // const rowDelete
+
   const options = {
     responsive: "scroll"
-    // resizableColumns: true
+    ,selectableRows: "none"
   };
 
   return (
