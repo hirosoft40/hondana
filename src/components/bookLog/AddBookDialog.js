@@ -17,8 +17,8 @@ import LibraryAdd from "@material-ui/icons/LibraryAdd";
 import { addBookLogManual } from "../actions/addBookLogManual";
 import { connect } from "react-redux";
 
-const d = new Date();
-const today = `${d.toJSON().slice(0, 10)}`;
+// const d = new Date();
+// const today = `${d.toJSON().slice(0, 10)}`;
 // let errorMsg = "";
 
 class AddBookDialog extends React.Component {
@@ -29,15 +29,15 @@ class AddBookDialog extends React.Component {
       errorText: "",
       title: "",
       authors: "",
-      pageCount: 0,
-      startDate: null
+      pageCount: 0
+      // ,startDate: null
     };
   }
 
   handleClickOpen = () => {
     this.setState({
-      open: true,
-      startDate: today
+      open: true
+      // ,startDate: today
     });
   };
 
@@ -70,10 +70,10 @@ class AddBookDialog extends React.Component {
         smallThumbnail:
           "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
       },
-      listPrice: { amount: 0, currencyCode: "USD" },
-      startDate: this.state.startDate
-        ? new Date(this.state.startDate)
-        : new Date()
+      listPrice: { amount: 0, currencyCode: "USD" }
+      // ,startDate: this.state.startDate
+      //   ? new Date(this.state.startDate)
+      //   : new Date()
 
     });
     this.setState({
@@ -127,7 +127,7 @@ class AddBookDialog extends React.Component {
                 onChange={this.handleChange("authors")}
                 fullWidth
               />
-              <TextField
+              {/* <TextField
                 required
                 id="startDate"
                 label="Started Reading on "
@@ -136,7 +136,7 @@ class AddBookDialog extends React.Component {
                 InputLabelProps={{
                   shrink: true
                 }}
-              />
+              /> */}
               <br />
               <TextField
                 autoFocus

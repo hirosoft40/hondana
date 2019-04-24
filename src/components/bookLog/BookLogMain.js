@@ -30,7 +30,8 @@ class BookLogMain extends Component {
   renderList(books) {
     if (!books) return;
     return books.map((book, idx) => {
-      const { title, authors, pageCount, imageLinks, startDate } = book.item;
+      const { title, authors, pageCount, imageLinks } = book.item;
+      // const {startDate} = book.item
       const { completed } = book;
       // const { favorite } = book
       let mainDivTitle =
@@ -56,13 +57,13 @@ class BookLogMain extends Component {
               {/* Read "" pages of{" "} */}
               Total Pages: {pageCount ? `${pageCount} Pages` : " unknown "}
             </div>
-            <div>
+            {/* <div>
               Started Reading on{" "}
               {startDate
                 .toDate()
                 .toJSON()
                 .slice(0, 10)}
-            </div>
+            </div> */}
           </div>
         </div>
       );

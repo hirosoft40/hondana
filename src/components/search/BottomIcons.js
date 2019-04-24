@@ -46,8 +46,8 @@ class BottomIcons extends React.Component {
             onClick={() =>
               this.props.onAddBook({
                 ...book,
-                ...sale,
-                startDate: new Date()
+                ...sale
+                // ,startDate: new Date()
               })
             }
           >

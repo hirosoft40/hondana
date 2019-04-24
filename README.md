@@ -44,6 +44,7 @@ I was not clear on "mapStateToProps" and "mapDispatchToProps" at first. After sp
 My other challenge was Material-ui. I like their Icon buttons and I enjoyed reading their samples code as I was able to learn about defining classNames first on top to make it easier when re-using components. However, it was more complecated and I ended up stying with CSS a lot as I like it and I am familiar with it.
 
 ## Each Screens
+
 <h3> Sign In</h3>
 <img src = "screenshot/signin.png">
 
@@ -61,3 +62,4 @@ My other challenge was Material-ui. I like their Icon buttons and I enjoyed read
 - Edit Function (Booklog and DailyLog)
 - Monthly graph
 - Favorite
+- Show/hide completed books

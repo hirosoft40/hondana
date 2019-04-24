@@ -23,7 +23,7 @@ const logDay = `${d.toJSON().slice(0, 10)}`;
 
 class DailyLog extends React.Component {
   state = { open: false, completed: false, errorText: "" };
-
+  
   onClickOpen = () => {
     const { title, authors } = this.props;
     this.setState({
@@ -31,6 +31,7 @@ class DailyLog extends React.Component {
       logDay,
       title,
       authors,
+      pgRead:0,
       minutesRead: 0
     });
   };
