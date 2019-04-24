@@ -8,13 +8,11 @@ export const deleteBookLog = id => {
       .then(() => {
         dispatch({
           type: "DELETE_BOOKLOG",
-          // dailyLog: id.id
-          dailyLog: id
+          bookLog: id
         });
       })
       .catch(error => {
         console.log("DELETE_BOOKLOG_ERROR", error);
-        // dispatch({ type: "DELETE_BOOKLOG_ERROR" });
       });
   };
 };

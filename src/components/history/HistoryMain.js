@@ -7,7 +7,8 @@ import MUIDataTable from "mui-datatables";
 import { Redirect } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import Chart from "chart.js";
-import ReactChartkick, { LineChart, ColumnChart } from "react-chartkick";
+import ReactChartkick, { LineChart } from "react-chartkick";
+// import { ColumnChart } from "react-chartkick";
 
 const mainGrid = "mainGrid";
 // const leftTable = "leftTable";
@@ -29,7 +30,6 @@ function HistoryMain({ dailyLog, auth }) {
   // For Data Table
   let dataArray = [];
   const columns = ["Date", "Pages", "Minutes", "Title", "Author"];
-  // const options = { resizableColumns: true };
 
   // === creating data for data Table
   dailyLog.forEach((item, idx) => {
@@ -41,7 +41,6 @@ function HistoryMain({ dailyLog, auth }) {
           .slice(0, 10)
       : "";
     dataArray.push([newLogDay, pgRead, minutesRead, title, authors]);
-    // return dataArray
   });
 
   const renderChart = () => {
@@ -60,19 +59,6 @@ function HistoryMain({ dailyLog, auth }) {
         readPage[newLogDay] = pgRead;
       });
     } else return;
-    // const chartData = !dailyLog
-    //   ? ""
-    //   : dailyLog.forEach(item => {
-    //       const { logDay, pgRead, minutesRead } = item.item;
-    //       const newLogDay = logDay
-    //         ? logDay
-    //             .toDate()
-    //             .toJSON()
-    //             .slice(0, 10)
-    //         : "";
-    //       readTime[newLogDay] = minutesRead;
-    //       readPage[newLogDay] = pgRead;
-    //     });
 
     const data = [
       { name: "Minutes Read", data: readTime },
@@ -85,6 +71,7 @@ function HistoryMain({ dailyLog, auth }) {
 
   const options = {
     responsive: "scroll"
+    // resizableColumns: true
   };
 
   return (
@@ -95,8 +82,8 @@ function HistoryMain({ dailyLog, auth }) {
       className={mainGrid}
     >
       <Grid item xs={12} md={6}>
-          <h3>List of Books you read </h3>
-          <div>
+        <div>
+          <h3>List of Books You Read</h3>
           <MUIDataTable
             title={"List of Book Read"}
             data={dataArray}
