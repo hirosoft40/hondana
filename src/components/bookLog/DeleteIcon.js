@@ -1,9 +1,11 @@
 //===========
 // Component to handle delete books
+// PropType : <DeleteIcon id={book.id} title={title} authors={authors} logType="BookLog"/>
+
 //===========
 
 import React, { Component } from "react";
-import { deleteBookLog } from "../actions/deleteBookLog";
+import { deleteBookLog, deleteDailyLog } from "../actions/deleteBookLog";
 import { connect } from "react-redux";
 import {
   IconButton,
@@ -34,9 +36,42 @@ class DeleteBookLog extends Component {
     this.setState({ open: false });
   };
 
+  onDeleteDLRequest = event => {
+    event.preventDefault();
+    // console.log(this.props.id);
+    this.props.onDeleteDailyLog({ id: this.props.id });
+    this.setState({ open: false });
+  };
+
+  logTypeToDelete = logType => {
+    if (logType === "DailyLog") {
+      const { record1 } = this.props;
+      return (
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {record1}
+          </DialogContentText>
+        </DialogContent>
+      );
+    } else {
+      const { title, authors } = this.props;
+      return (
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {title}
+            <br />
+            by {authors}
+          </DialogContentText>
+        </DialogContent>
+      );
+    }
+  };
+
   render() {
+    const { logType } = this.props;
+
     return (
-      <div>
+      <>
         <IconButton onClick={this.handleClickOpen}>
           <HighlightOffOutlined size="small" />
         </IconButton>
@@ -48,18 +83,19 @@ class DeleteBookLog extends Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"Are you sure you want to delete this book?"}
+            {"Are you sure you want to delete?"}
           </DialogTitle>
+
           <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              {this.props.title}
-              <br />
-              by {this.props.authors}
-            </DialogContentText>
+            {this.logTypeToDelete(logType)}
           </DialogContent>
           <DialogActions>
             <Button
-              onClick={this.onDeleteRequest}
+              onClick={
+                logType === "DailyLog"
+                  ? this.onDeleteDLRequest
+                  : this.onDeleteRequest
+              }
               // variant="contained"
               color="primary"
               autoFocus
@@ -75,14 +111,15 @@ class DeleteBookLog extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    onDeleteBookLog: bookID => dispatch(deleteBookLog(bookID))
+    onDeleteBookLog: bookID => dispatch(deleteBookLog(bookID)),
+    onDeleteDailyLog: logID => dispatch(deleteDailyLog(logID))
   };
 }
 

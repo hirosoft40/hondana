@@ -12,8 +12,16 @@ function dailyLogReducer(state, action) {
         dailyLog: state.dailyLog.concat(action.dailyLog)
       };
     case "ADD_DAILY_LOG_ERROR":
-      console.log("create project error");
+      console.log("Add daily log error");
       return state;
+    case "DELETE_DAILYLOG":
+      const afterDelete = state.dailyLog.filter(item => {
+        return item.id !== action.dailyLog.id;
+      });
+      return {
+        ...state,
+        dailyLog: afterDelete
+      };
     default:
       return state;
   }

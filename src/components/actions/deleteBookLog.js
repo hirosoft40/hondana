@@ -16,3 +16,22 @@ export const deleteBookLog = id => {
       });
   };
 };
+
+export const deleteDailyLog = id => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    const firestore = getFirestore();
+    firestore
+      .collection("dailyLog")
+      .doc(id.id)
+      .delete()
+      .then(() => {
+        dispatch({
+          type: "DELETE_DAILYLOG",
+          dailyLog: id
+        });
+      })
+      .catch(error => {
+        console.log("DELETE_DAILYLOG_ERROR", error);
+      });
+  };
+};

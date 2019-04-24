@@ -1,7 +1,10 @@
 .ulRecord {
   list-style: none;
   font-size: 0.9rem;
+  margin: 0;
+  text-align: left;
 }
+
 .data {
   text-align: center;
 }
@@ -12,4 +15,7 @@
 .error {
   color: orange;
   font-size: 0.9rem;
+}
+.record {
+  display: block;
 }

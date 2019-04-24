@@ -39,7 +39,7 @@ class BookLogMain extends Component {
         <div className="mainDiv" key={idx} id={book.id}>
           <div className="headerDiv">
             <div className="leftIcon">
-              <DeleteIcon id={book.id} title={title} authors={authors} />
+              <DeleteIcon id={book.id} title={title} authors={authors} logType="BookLog"/>
             </div>
             <img src={imageLinks.smallThumbnail} alt={title} />
             <div className="iconDiv">

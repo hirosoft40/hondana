@@ -5,6 +5,7 @@ import { firestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { Col } from "react-flexbox-grid";
 import "./DailyLogRight.css";
 import moment from "moment";
+import DeleteIcon from "./DeleteIcon";
 
 function DailyLogRight({ dailyLog }) {
   if (!isLoaded(dailyLog)) {
@@ -17,16 +18,23 @@ function DailyLogRight({ dailyLog }) {
 
   const pastRecord = dailyLog.map((item, idx) => {
     const { logDay, pgRead } = item.item;
-    const minutesRead = item.item.minutesRead ? `(${item.item.minutesRead} mins)` : "";
+    const minutesRead = item.item.minutesRead
+      ? `(${item.item.minutesRead} mins)`
+      : "";
     const histDay = logDay
       ? moment(logDay.toDate().toJSON()).format("YYYY-MM-DD")
       : "";
-    const record1 = `${histDay}: ${pgRead} pages ${minutesRead}`;
+    const record1 = `${histDay} / ${pgRead} pages ${minutesRead}`;
 
     return (
       <div key={idx}>
         <ul key={idx} className="ulRecord">
-          <li key={idx}>{record1}</li>
+          {/* <div className='record'> */}
+          <li key={idx}>
+            {record1}{" "}
+          <DeleteIcon id={item.id} record1={record1} logType="DailyLog" />
+          </li>
+          {/* </div> */}
         </ul>
       </div>
     );
