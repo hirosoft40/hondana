@@ -61,3 +61,4 @@ My other challenge was Material-ui. I like their Icon buttons and I enjoyed read
 - Edit Function (Booklog and DailyLog)
 - Monthly graph
 - Favorite
+- Show/hide completed books
